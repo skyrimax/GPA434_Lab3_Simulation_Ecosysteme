@@ -155,6 +155,7 @@
     <ClInclude Include="ClassesSimulateur\Terrain.h" />
     <ClInclude Include="ClassesSimulateur\Velocite.h" />
     <ClInclude Include="ClassesSimulateur\Vivant.h" />
+    <ClInclude Include="constantes.h" />
     <QtMoc Include="SimulationMainWindow.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

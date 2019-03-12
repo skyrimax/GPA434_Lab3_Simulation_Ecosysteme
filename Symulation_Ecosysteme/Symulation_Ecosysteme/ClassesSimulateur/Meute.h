@@ -6,12 +6,16 @@
 #ifndef _MEUTE_H
 #define _MEUTE_H
 
-#include "QGraphicsItemGroup.h"
+#include <QGraphicsItemGroup>
 
 
 class Meute: public QGraphicsItemGroup {
+public:
+
+	void simulation();
+
 private: 
-    list<Animal*> membres;
+    std::list<Animal*> membres;
     bool attacked;
     bool faim;
 };

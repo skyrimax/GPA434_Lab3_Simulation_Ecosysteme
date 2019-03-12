@@ -2,6 +2,7 @@
  * Project Untitled
  */
 
+#include "stdafx.h"
 
 #include "Environement.h"
 
@@ -14,117 +15,167 @@
  * @param Herbivore *herbivore
  * @return void
  */
-void Environement::addHerbivore(void Herbivore *herbivore) {
-    return;
+void Environnement::addHerbivore(Herbivore *herbivore) {
+	m_herbivores.push_back(herbivore);
 }
 
 /**
  * @param Meute *meuteHerbivores
  * @return void
  */
-void Environement::addHerbivorePack(void Meute *meuteHerbivores) {
-    return;
+void Environnement::addHerbivorePack(Meute *meuteHerbivores) {
+	m_meutesHerbivores.push_back(meuteHerbivores);
 }
 
 /**
  * @param Carnivore *carnivore
  * @return void
  */
-void Environement::addCarnivore(void Carnivore *carnivore) {
-    return;
+void Environnement::addCarnivore(Carnivore *carnivore) {
+	m_carnivores.push_back(carnivore);
 }
 
 /**
  * @param Meute *meuteCarnivores
  * @return void
  */
-void Environement::addCarnivorePack(void Meute *meuteCarnivores) {
-    return;
+void Environnement::addCarnivorePack(Meute *meuteCarnivores) {
+	m_meutesCarnivores.push_back(meuteCarnivores);
 }
 
 /**
  * @param Carnivore *charognard
  * @return void
  */
-void Environement::addCharognards(void Carnivore *charognard) {
-    return;
+void Environnement::addCharognards(Carnivore *charognard) {
+	m_charognards.push_back(charognard);
 }
 
 /**
  * @param Meute *meuteCharognards
  * @return void
  */
-void Environement::addCharogardsPack(void Meute *meuteCharognards) {
-    return;
+void Environnement::addCharogardsPack(Meute *meuteCharognards) {
+	m_meutesCharognards.push_back(meuteCharognards);
 }
 
 /**
  * @param Plante *plante
  * @return void
  */
-void Environement::addPlante(void Plante *plante) {
-    return;
+void Environnement::addPlante(Plante *plante) {
+	m_plantes.push_back(plante);
 }
 
 /**
  * @return list<Plante*>
  */
-list<Plante*> Environement::getPlantes() {
-    return null;
+std::list<Plante*> Environnement::getPlantes() const {
+    return m_plantes;
 }
 
 /**
  * @return list<Meute*>
  */
-list<Meute*> Environement::getMeutesHerbivores() {
-    return null;
+std::list<Meute*> Environnement::getMeutesHerbivores() const{
+    return m_meutesHerbivores;
 }
 
 /**
- * @return list<Herbivores*>
+ * @return list<Herbivore*>
  */
-list<Herbivores*> Environement::getHerbivores() {
-    return null;
-}
-
-/**
- * @return list<Meutes*>
- */
-list<Meutes*> Environement::getMeutesCarnivores() {
-    return null;
-}
-
-/**
- * @return list<Carnivores*>
- */
-list<Carnivores*> Environement::getCarnivores() {
-    return null;
+std::list<Herbivore*> Environnement::getHerbivores() const{
+    return m_herbivores;
 }
 
 /**
  * @return list<Meute*>
  */
-list<Meute*> Environement::getMeutesCharognards() {
-    return null;
+std::list<Meute*> Environnement::getMeutesCarnivores() const{
+    return m_meutesCarnivores;
 }
 
 /**
  * @return list<Carnivore*>
  */
-list<Carnivore*> Environement::getCharognards() {
-    return null;
+std::list<Carnivore*> Environnement::getCarnivores() const{
+    return m_carnivores;
+}
+
+/**
+ * @return list<Meute*>
+ */
+std::list<Meute*> Environnement::getMeutesCharognards() const{
+    return m_meutesCharognards;
+}
+
+/**
+ * @return list<Carnivore*>
+ */
+std::list<Carnivore*> Environnement::getCharognards() const{
+    return m_charognards;
+}
+
+/**
+* @return list<Charogne*>
+*/
+std::list<Charogne*> Environnement::getCharognes() const {
+	return m_charognes;
 }
 
 /**
  * @return void
  */
-void Environement::simulation() {
-    return;
+QGraphicsItemGroup Environnement::simulation() {
+    
+	// Cycle de simulation des plantes
+	for (auto const & plante : m_plantes)
+	{
+		plante->simulation();
+	}
+
+	// Cycle de simulation des meutes d'herbivores
+	for (auto const & meuteHerbivores : m_meutesHerbivores)
+	{
+		meuteHerbivores->simulation();
+	}
+
+	// Cycle de simulation des herbivore pas en meute
+	for (auto const & herbivore : m_herbivores)
+	{
+		herbivore->simulation();
+	}
+
+	// Cycle de simulation des meutes de carnivores
+	for (auto const & meuteCarnivores : m_meutesCarnivores)
+	{
+		meuteCarnivores->simulation();
+	}
+	
+	// Cycle de simulation des carnivores pas en meute
+	for (auto const & carnivore : m_carnivores)
+	{
+		carnivore->simulation();
+	}
+
+	// Cycle de simulation des meutes de charognards
+	for (auto const & meuteCharognards : m_meutesCharognards)
+	{
+		meuteCharognards->simulation();
+	}
+
+	// Cycle de simulation des charognards pas en meute
+	for (auto const & charognard : m_charognards)
+	{
+		charognard->simulation();
+	}
+	
+	return this->retourAnimaux();
 }
 
 /**
  * @return QGraphicsItemGroup
  */
-QGraphicsItemGroup Environement::retourAnimaux() {
-    return null;
+QGraphicsItemGroup Environnement::retourAnimaux() {
+    return QGraphicsItemGroup();
 }
