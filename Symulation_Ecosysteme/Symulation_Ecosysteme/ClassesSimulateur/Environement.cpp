@@ -14,7 +14,7 @@
  * @param Herbivore *herbivore
  * @return void
  */
-void Environement::addHerbivore(void Herbivore *herbivore) {
+void Environnement::addHerbivore(void Herbivore *herbivore) {
     return;
 }
 
@@ -22,7 +22,7 @@ void Environement::addHerbivore(void Herbivore *herbivore) {
  * @param Meute *meuteHerbivores
  * @return void
  */
-void Environement::addHerbivorePack(void Meute *meuteHerbivores) {
+void Environnement::addHerbivorePack(void Meute *meuteHerbivores) {
     return;
 }
 
@@ -30,7 +30,7 @@ void Environement::addHerbivorePack(void Meute *meuteHerbivores) {
  * @param Carnivore *carnivore
  * @return void
  */
-void Environement::addCarnivore(void Carnivore *carnivore) {
+void Environnement::addCarnivore(void Carnivore *carnivore) {
     return;
 }
 
@@ -38,7 +38,7 @@ void Environement::addCarnivore(void Carnivore *carnivore) {
  * @param Meute *meuteCarnivores
  * @return void
  */
-void Environement::addCarnivorePack(void Meute *meuteCarnivores) {
+void Environnement::addCarnivorePack(void Meute *meuteCarnivores) {
     return;
 }
 
@@ -46,7 +46,7 @@ void Environement::addCarnivorePack(void Meute *meuteCarnivores) {
  * @param Carnivore *charognard
  * @return void
  */
-void Environement::addCharognards(void Carnivore *charognard) {
+void Environnement::addCharognards(void Carnivore *charognard) {
     return;
 }
 
@@ -54,7 +54,7 @@ void Environement::addCharognards(void Carnivore *charognard) {
  * @param Meute *meuteCharognards
  * @return void
  */
-void Environement::addCharogardsPack(void Meute *meuteCharognards) {
+void Environnement::addCharogardsPack(void Meute *meuteCharognards) {
     return;
 }
 
@@ -62,69 +62,69 @@ void Environement::addCharogardsPack(void Meute *meuteCharognards) {
  * @param Plante *plante
  * @return void
  */
-void Environement::addPlante(void Plante *plante) {
+void Environnement::addPlante(void Plante *plante) {
     return;
 }
 
 /**
  * @return list<Plante*>
  */
-list<Plante*> Environement::getPlantes() {
+list<Plante*> Environnement::getPlantes() {
     return null;
 }
 
 /**
  * @return list<Meute*>
  */
-list<Meute*> Environement::getMeutesHerbivores() {
+list<Meute*> Environnement::getMeutesHerbivores() {
     return null;
 }
 
 /**
  * @return list<Herbivores*>
  */
-list<Herbivores*> Environement::getHerbivores() {
+list<Herbivores*> Environnement::getHerbivores() {
     return null;
 }
 
 /**
  * @return list<Meutes*>
  */
-list<Meutes*> Environement::getMeutesCarnivores() {
+list<Meutes*> Environnement::getMeutesCarnivores() {
     return null;
 }
 
 /**
  * @return list<Carnivores*>
  */
-list<Carnivores*> Environement::getCarnivores() {
+list<Carnivores*> Environnement::getCarnivores() {
     return null;
 }
 
 /**
  * @return list<Meute*>
  */
-list<Meute*> Environement::getMeutesCharognards() {
+list<Meute*> Environnement::getMeutesCharognards() {
     return null;
 }
 
 /**
  * @return list<Carnivore*>
  */
-list<Carnivore*> Environement::getCharognards() {
+list<Carnivore*> Environnement::getCharognards() {
     return null;
 }
 
 /**
  * @return void
  */
-void Environement::simulation() {
+void Environnement::simulation() {
     return;
 }
 
 /**
  * @return QGraphicsItemGroup
  */
-QGraphicsItemGroup Environement::retourAnimaux() {
+QGraphicsItemGroup Environnement::retourAnimaux() {
     return null;
 }

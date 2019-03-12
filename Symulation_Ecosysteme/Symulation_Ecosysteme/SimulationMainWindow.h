@@ -12,4 +12,12 @@ public:
 
 private:
 	Ui::SimulationMainWindowClass ui;
+
+
+private slots:
+	//Slots pour afficher le "À propos" du programme de simullation
+	void showAPropos();
+
+	//Slots pour aller définir les paramètre de simulation
+	void on_parameterButton_clicked();
 };

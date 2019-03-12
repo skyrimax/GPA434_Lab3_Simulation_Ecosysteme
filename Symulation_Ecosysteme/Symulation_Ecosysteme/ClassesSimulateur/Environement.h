@@ -6,7 +6,7 @@
 #ifndef _ENVIRONEMENT_H
 #define _ENVIRONEMENT_H
 
-class Environement {
+class Environnement {
 public: 
     
 /**
