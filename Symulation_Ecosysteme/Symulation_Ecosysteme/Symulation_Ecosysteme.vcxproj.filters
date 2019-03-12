@@ -34,6 +34,24 @@
     <Filter Include="Source Files\Classes simulateur">
       <UniqueIdentifier>{c0ba47a6-4c85-4cb0-a6d6-3b1965771855}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Classes simulateur\Environnement">
+      <UniqueIdentifier>{6ed98477-010a-4a26-895b-fd58131ba86b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes simulateur\Environnement">
+      <UniqueIdentifier>{154bcefd-a080-4196-8b13-533f206c79c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes simulateur\Vivants">
+      <UniqueIdentifier>{aa4dfb20-9e7f-4865-8309-142a1bfd797e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes simulateur\Vivants">
+      <UniqueIdentifier>{6f3a548d-03e6-499e-b052-d835a42dbe86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes simulateur\Vivants\Animal">
+      <UniqueIdentifier>{4f524460-6938-41ab-a932-7b57db72514c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes simulateur\Vivants\Animal">
+      <UniqueIdentifier>{442c4da0-cb17-4e4e-a857-a144a12cdf0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,10 +63,88 @@
     <ClCompile Include="SimulationMainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Environement.cpp">
+      <Filter>Source Files\Classes simulateur\Environnement</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Grid.cpp">
+      <Filter>Source Files\Classes simulateur\Environnement</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Terrain.cpp">
+      <Filter>Source Files\Classes simulateur\Environnement</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Vivant.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Coordonne.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Plante.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Animal.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Carnivore.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Charogne.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Herbivore.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Meute.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Omnivore.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Velocite.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Environement.h">
+      <Filter>Header Files\Classes simulateur\Environnement</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Grid.h">
+      <Filter>Header Files\Classes simulateur\Environnement</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Terrain.h">
+      <Filter>Header Files\Classes simulateur\Environnement</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Vivant.h">
+      <Filter>Header Files\Classes simulateur\Vivants</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Coordonne.h">
+      <Filter>Header Files\Classes simulateur\Vivants</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Plante.h">
+      <Filter>Header Files\Classes simulateur\Vivants</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Animal.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Carnivore.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Charogne.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Herbivore.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Meute.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Omnivore.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Velocite.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

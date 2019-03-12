@@ -6,7 +6,6 @@
 #ifndef _TYPETERRAIN_H
 #define _TYPETERRAIN_H
 
-class typeTerrain {
-};
+enum TypeTerrain { Eau, Terre, Gazon, Frontiere };
 
 #endif //_TYPETERRAIN_H
