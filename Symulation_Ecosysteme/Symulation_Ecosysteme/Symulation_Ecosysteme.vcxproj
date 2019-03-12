@@ -121,6 +121,19 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClassesSimulateur\Animal.cpp" />
+    <ClCompile Include="ClassesSimulateur\Carnivore.cpp" />
+    <ClCompile Include="ClassesSimulateur\Charogne.cpp" />
+    <ClCompile Include="ClassesSimulateur\Coordonne.cpp" />
+    <ClCompile Include="ClassesSimulateur\Environement.cpp" />
+    <ClCompile Include="ClassesSimulateur\Grid.cpp" />
+    <ClCompile Include="ClassesSimulateur\Herbivore.cpp" />
+    <ClCompile Include="ClassesSimulateur\Meute.cpp" />
+    <ClCompile Include="ClassesSimulateur\Omnivore.cpp" />
+    <ClCompile Include="ClassesSimulateur\Plante.cpp" />
+    <ClCompile Include="ClassesSimulateur\Terrain.cpp" />
+    <ClCompile Include="ClassesSimulateur\Velocite.cpp" />
+    <ClCompile Include="ClassesSimulateur\Vivant.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimulationMainWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -129,6 +142,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassesSimulateur\Animal.h" />
+    <ClInclude Include="ClassesSimulateur\Carnivore.h" />
+    <ClInclude Include="ClassesSimulateur\Charogne.h" />
+    <ClInclude Include="ClassesSimulateur\Coordonne.h" />
+    <ClInclude Include="ClassesSimulateur\Environement.h" />
+    <ClInclude Include="ClassesSimulateur\Grid.h" />
+    <ClInclude Include="ClassesSimulateur\Herbivore.h" />
+    <ClInclude Include="ClassesSimulateur\Meute.h" />
+    <ClInclude Include="ClassesSimulateur\Omnivore.h" />
+    <ClInclude Include="ClassesSimulateur\Plante.h" />
+    <ClInclude Include="ClassesSimulateur\Terrain.h" />
+    <ClInclude Include="ClassesSimulateur\Velocite.h" />
+    <ClInclude Include="ClassesSimulateur\Vivant.h" />
     <QtMoc Include="SimulationMainWindow.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
