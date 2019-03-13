@@ -10,6 +10,9 @@
 #include "Terrain.h"
 #include "constantes.h"
 
+class Terrain;
+enum class TypeTerrain;
+
 class Grid {
 public: 
     
@@ -18,6 +21,8 @@ public:
 	void genererTerrain();
     
 	void updateTerrain();
+
+	Terrain::TypeTerrain type(int x, int y);
 private: 
 	Terrain *grid[LARGEUR_GRILLE][HAUTEUR_GRILLE];
 };

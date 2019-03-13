@@ -27,3 +27,8 @@ void Grid::genererTerrain() {
 void Grid::updateTerrain() {
     return;
 }
+
+Terrain::TypeTerrain Grid::type(int x, int y)
+{
+	return Terrain::TypeTerrain();
+}

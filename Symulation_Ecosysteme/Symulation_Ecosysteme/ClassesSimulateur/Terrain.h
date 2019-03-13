@@ -6,17 +6,35 @@
 #ifndef _TERRAIN_H
 #define _TERRAIN_H
 
+ // Header files du simulateur
+#include "Grid.h"
+#include "constantes.h"
+
+// Déclaration anticipée
+class Grid;
+
 class Terrain {
 public: 
     
 	enum class TypeTerrain { Eau = 0, Terre = 1, Gazon = 2, Frontiere = 3 };
 
-void reprendreRessources();
-void perdreRessources(int nbRessources);
+	// Constructeur
+	Terrain(Grid* grilleProprietaire, int x, int y, TypeTerrain type);
+
+	// Fontions membres
+	void reprendreRessources();
+	void perdreRessources(int nbRessources);
+	void setType(TypeTerrain type);
+
+	// Accesseurs
+	TypeTerrain getType();
 
 private: 
-    int Resource;
-    TypeTerrain type;
+    int m_resource;
+    TypeTerrain m_type;
+	Grid *m_grilleProprietaire;
+	int m_x;
+	int m_y;
 };
 
 #endif //_TERRAIN_H
