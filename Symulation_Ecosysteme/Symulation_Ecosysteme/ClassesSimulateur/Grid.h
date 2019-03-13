@@ -11,7 +11,6 @@
 #include "constantes.h"
 
 class Terrain;
-enum class TypeTerrain;
 
 class Grid {
 public: 
@@ -22,7 +21,7 @@ public:
     
 	void updateTerrain();
 
-	Terrain::TypeTerrain type(int x, int y);
+	Terrain* getTerrain(int x, int y);
 private: 
 	Terrain *grid[LARGEUR_GRILLE][HAUTEUR_GRILLE];
 };

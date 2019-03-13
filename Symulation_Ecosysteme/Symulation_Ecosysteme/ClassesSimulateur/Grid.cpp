@@ -28,7 +28,7 @@ void Grid::updateTerrain() {
     return;
 }
 
-Terrain::TypeTerrain Grid::type(int x, int y)
+Terrain * Grid::getTerrain(int x, int y)
 {
-	return Terrain::TypeTerrain();
+	return nullptr;
 }

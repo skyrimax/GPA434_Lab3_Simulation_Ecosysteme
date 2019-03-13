@@ -20,10 +20,14 @@ public:
 
 	// Constructeur
 	Terrain(Grid* grilleProprietaire, int x, int y, TypeTerrain type);
+	// Destructeur par défault, on a pas à détruire la grille
+	Terrain() = default;
 
 	// Fontions membres
 	void reprendreRessources();
 	void perdreRessources(int nbRessources);
+
+	// Mutateurs
 	void setType(TypeTerrain type);
 
 	// Accesseurs

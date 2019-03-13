@@ -41,10 +41,10 @@ void Terrain::reprendreRessources() {
 	switch (m_type)
 	{
 	case TypeTerrain::Eau:
-		if (m_grilleProprietaire->type(m_x + 1, m_y) == TypeTerrain::Eau ||
-			m_grilleProprietaire->type(m_x - 1, m_y) == TypeTerrain::Eau ||
-			m_grilleProprietaire->type(m_x, m_y + 1) == TypeTerrain::Eau ||
-			m_grilleProprietaire->type(m_x, m_y - 1) == TypeTerrain::Eau)
+		if (m_grilleProprietaire->getTerrain(m_x + 1, m_y)->getType() == TypeTerrain::Eau ||
+			m_grilleProprietaire->getTerrain(m_x - 1, m_y)->getType() == TypeTerrain::Eau ||
+			m_grilleProprietaire->getTerrain(m_x, m_y + 1)->getType() == TypeTerrain::Eau ||
+			m_grilleProprietaire->getTerrain(m_x, m_y - 1)->getType() == TypeTerrain::Eau)
 		{
 			m_resource = RESSOURCES_EAU;
 		}
