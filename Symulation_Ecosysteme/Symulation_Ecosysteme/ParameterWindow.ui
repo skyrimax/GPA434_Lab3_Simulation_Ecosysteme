@@ -266,6 +266,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>showAide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>167</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAide()</slot>

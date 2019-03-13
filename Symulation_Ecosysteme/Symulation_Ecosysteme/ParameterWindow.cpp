@@ -17,26 +17,12 @@ void ParameterWindow::showAide()
 {
 	//Créer le message
 	QString aide{ \
-	u8R"---(Choisisez le prédateur et l'herbivore désiré parmis les choix proposés dans la liste déroulante. Entrez le nombre de chaque esèce avec laquelle démarrer la simulation.
-
-Dans la zone "Option de simulation", ce sont des ajouts possibles 
-à la simulation, tel que :
-	-Présence de charognards permettra la présence de ceux-ci afin
-	de modifier la simulation, car ceux-ci vont manger les proies 
-	qu'ils n'ont pas tués eux-même. Une fois la case coché, choisisez
-	l'expèce désiré et le nombre de spéciment à incorporer dans la 
-	simulation au départ.
-	-Ajout de saison permettra un changement de climat, comportement
-	 animalier au fil du temps.
-	-Ajout de maladies ajoutera la possiblité de maladies, virus et
-	 contamination. Cela se fera soit par des plantes toxiques, viande
-	 en décomposition ou autres.
-
-Une fois vos choix finaliser, appuyez sur le bouton "Done" pour fermer
- la fenêtre et revenir à la fenêtre de simulation.)---" };
+	u8R"---(Tout d'abord, déterminez le nombre de départ pour les lapins, chevreuils et loups.
+	La quantité maximale est fixée à 100 pour chaques espèces. Ensuite, déterminez le nombre
+	 de hordes de chevreuils désirées ainsi que le nombre de meutes de loup. Le nombre maximale
+	de regroupement d'animaux est fixé à 10 pour chacune des espèces.)---" };
 
 	//Afficher le message
-
 	QMessageBox::about(this, u8R"(Aide aux paramètres)", aide);
 }
 
