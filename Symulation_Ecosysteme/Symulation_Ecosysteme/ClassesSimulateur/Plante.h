@@ -6,13 +6,16 @@
 #ifndef _PLANTE_H
 #define _PLANTE_H
 
+ // Librairies standard
+#include <list>
+
 #include "Vivant.h"
 
 
 class Plante: public Vivant {
 private: 
     int fruits;
-    list<Herbivore*> isEatenBy;
+    std::list<Herbivore*> isEatenBy;
     bool isBeingEaten;
 };
 

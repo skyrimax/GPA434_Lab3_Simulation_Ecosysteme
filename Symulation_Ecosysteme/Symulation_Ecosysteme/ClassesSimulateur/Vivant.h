@@ -6,7 +6,10 @@
 #ifndef _VIVANT_H
 #define _VIVANT_H
 
-#include "QGraphicsItem.h"
+ // Librairies standard
+#include <list>
+
+#include <qgraphicsitem>
 
 
 class Vivant: public QGraphicsItem {
@@ -24,7 +27,7 @@ virtual virtual void mourrir() = 0;
     
 virtual virtual bool estMort() = 0;
 private: 
-    string espece;
+    std::string espece;
     int hp;
     int hpMax;
     int energy;

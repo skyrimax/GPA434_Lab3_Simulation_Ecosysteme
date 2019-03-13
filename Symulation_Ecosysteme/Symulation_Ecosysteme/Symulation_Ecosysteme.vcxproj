@@ -156,6 +156,7 @@
     <ClInclude Include="ClassesSimulateur\Terrain.h" />
     <ClInclude Include="ClassesSimulateur\Velocite.h" />
     <ClInclude Include="ClassesSimulateur\Vivant.h" />
+    <ClInclude Include="constantes.h" />
     <QtMoc Include="SimulationMainWindow.h" />
     <QtMoc Include="ParameterWindow.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>

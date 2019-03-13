@@ -10,6 +10,10 @@
  */
 
 
+Grid::Grid()
+{
+}
+
 /**
  * @return void
  */
@@ -22,4 +26,9 @@ void Grid::genererTerrain() {
  */
 void Grid::updateTerrain() {
     return;
+}
+
+Terrain * Grid::getTerrain(int x, int y)
+{
+	return nullptr;
 }

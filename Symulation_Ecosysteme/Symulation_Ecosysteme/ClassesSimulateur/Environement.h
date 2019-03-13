@@ -2,75 +2,60 @@
  * Project Untitled
  */
 
-
 #ifndef _ENVIRONEMENT_H
 #define _ENVIRONEMENT_H
+
+// Librairies standard
+#include <list>
+
+// Librairie Qt
+#include <qgraphicsitem.h>
+
+// Header files du simulateur
+#include "Plante.h"
+#include "Herbivore.h"
+#include "Carnivore.h"
+#include "Charogne.h"
+#include "Meute.h"
+#include "Grid.h"
+
 
 class Environnement {
 public: 
     
-/**
- * @param Herbivore *herbivore
- */
-void addHerbivore(void Herbivore *herbivore);
+// Fonctions membres pour ajouter des éléments au listes
+	void addHerbivore(Herbivore *herbivore);
+	void addHerbivorePack(Meute *meuteHerbivores);
+	void addCarnivore(Carnivore *carnivore);
+	void addCarnivorePack(Meute *meuteCarnivores);
+	void addCharognards(Carnivore *charognard);
+	void addCharogardsPack(Meute *meuteCharognards);
+	void addPlante(Plante *plante);
     
-/**
- * @param Meute *meuteHerbivores
- */
-void addHerbivorePack(void Meute *meuteHerbivores);
+// Accesseur des listes d'éléments
+	std::list<Plante*> getPlantes() const;
+	std::list<Meute*> getMeutesHerbivores() const;
+	std::list<Herbivore*> getHerbivores() const;
+	std::list<Meute*> getMeutesCarnivores() const;
+	std::list<Carnivore*> getCarnivores() const;
+	std::list<Meute*> getMeutesCharognards() const;
+	std::list<Carnivore*> getCharognards() const;
+	std::list<Charogne*> getCharognes() const;
+
+// Fonction commendant 
+	QGraphicsItemGroup simulation();
     
-/**
- * @param Carnivore *carnivore
- */
-void addCarnivore(void Carnivore *carnivore);
-    
-/**
- * @param Meute *meuteCarnivores
- */
-void addCarnivorePack(void Meute *meuteCarnivores);
-    
-/**
- * @param Carnivore *charognard
- */
-void addCharognards(void Carnivore *charognard);
-    
-/**
- * @param Meute *meuteCharognards
- */
-void addCharogardsPack(void Meute *meuteCharognards);
-    
-/**
- * @param Plante *plante
- */
-void addPlante(void Plante *plante);
-    
-list<Plante*> getPlantes();
-    
-list<Meute*> getMeutesHerbivores();
-    
-list<Herbivores*> getHerbivores();
-    
-list<Meutes*> getMeutesCarnivores();
-    
-list<Carnivores*> getCarnivores();
-    
-list<Meute*> getMeutesCharognards();
-    
-list<Carnivore*> getCharognards();
-    
-void simulation();
-    
-QGraphicsItemGroup retourAnimaux();
+	QGraphicsItemGroup retourAnimaux();
 private: 
-    list<Plante*> plantes;
-    list<Meute*> meutesHerbivores;
-    list<Herbivore*> herbivores;
-    list<Meute*> meutesCarnivores;
-    list<Carnivore*> carnivores;
-    list<Meute*> meutesCharognards;
-    list<Charognards*> charognards;
-    list<Charogne*> charognes;
-    Grid grille;
+    std::list<Plante*> m_plantes;
+    std::list<Meute*> m_meutesHerbivores;
+    std::list<Herbivore*> m_herbivores;
+    std::list<Meute*> m_meutesCarnivores;
+    std::list<Carnivore*> m_carnivores;
+    std::list<Meute*> m_meutesCharognards;
+    std::list<Carnivore*> m_charognards;
+    std::list<Charogne*> m_charognes;
+    Grid m_grille;
 };
 
 #endif //_ENVIRONEMENT_H

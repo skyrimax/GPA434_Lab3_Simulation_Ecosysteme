@@ -6,6 +6,9 @@
 #ifndef _ANIMAL_H
 #define _ANIMAL_H
 
+ // Librairies standard
+#include <list>
+
 #include "Vivant.h"
 
 
@@ -35,7 +38,7 @@ private:
     bool isSprinting;
     Sex sex;
     bool aEnfant;
-    list<Animal*> predateurs;
+    std::list<Animal*> predateurs;
     Velocite velocite;
     int timerMort;
 };
