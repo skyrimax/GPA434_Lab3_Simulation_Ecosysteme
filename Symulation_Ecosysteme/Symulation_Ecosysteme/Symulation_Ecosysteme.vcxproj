@@ -135,6 +135,7 @@
     <ClCompile Include="ClassesSimulateur\Velocite.cpp" />
     <ClCompile Include="ClassesSimulateur\Vivant.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PerlinNoiseGenerator.cpp" />
     <ClCompile Include="SimulationMainWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -157,6 +158,7 @@
     <ClInclude Include="ClassesSimulateur\Vivant.h" />
     <ClInclude Include="constantes.h" />
     <QtMoc Include="SimulationMainWindow.h" />
+    <ClInclude Include="PerlinNoiseGenerator.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
