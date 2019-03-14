@@ -26,6 +26,7 @@ public:
 	// Fontions membres
 	void reprendreRessources();
 	void perdreRessources(int nbRessources);
+	void update();
 
 	// Mutateurs
 	void setType(TypeTerrain type);

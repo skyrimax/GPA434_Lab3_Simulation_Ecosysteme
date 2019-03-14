@@ -1,9 +1,22 @@
 #pragma once
 
+// Constantes relatant à la taille de la grille
 #define HAUTEUR_GRILLE 500
 #define LARGEUR_GRILLE 500
+
+// Constantes relatant au ressource d'une parcelle de terrain
 #define RESSOURCES_EAU 100
 #define RESSOURCES_TERRE 0
 #define RESSOURCES_GAZON 1000
 #define RATE_GAZON 100
 #define RESSOURCES_FRONTIERE 0
+
+// Constantes relantant à la génération du terrain
+#define THRESHOLD_EAU 0.1
+#define THRESHOLD_TERRE 0.3
+#define THRESHOLD_GAZON 0.5
+#define THRESHOLD_PLANTE 0.85
+
+// Constraintes relatant à la fonction de bruit pour la génération du terrain
+#define OCTAVES 6
+#define PERSISTENCE 0.2

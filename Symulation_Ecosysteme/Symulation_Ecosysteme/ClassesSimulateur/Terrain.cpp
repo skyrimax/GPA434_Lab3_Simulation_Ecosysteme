@@ -76,6 +76,14 @@ void Terrain::perdreRessources(int nbRessources)
 		m_resource = 0;
 }
 
+void Terrain::update()
+{
+	if (m_resource <= 0)
+		m_type = TypeTerrain::Terre;
+
+	this->reprendreRessources();
+}
+
 void Terrain::setType(TypeTerrain type)
 {
 	m_type = type;
