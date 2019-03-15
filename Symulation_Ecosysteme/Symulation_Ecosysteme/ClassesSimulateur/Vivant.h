@@ -14,10 +14,8 @@
 
 // Header files du simulateur
 #include "Coordonne.h"
-#include "Environement.h"
 
 // Déclaration anticipée
-class Coordonne;
 class Environnement;
 
 class Vivant: public QGraphicsItem {
@@ -56,7 +54,7 @@ public:
 	virtual void dying() = 0;
 	virtual bool isDead() = 0;
 
-private: 
+protected: 
     std::string m_espece;
     int m_hp;
     int m_hpMax;

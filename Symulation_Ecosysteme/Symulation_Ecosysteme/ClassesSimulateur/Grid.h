@@ -9,9 +9,10 @@
 // Header files du simulateur
 #include "Terrain.h"
 #include "constantes.h"
-#include "Environement.h"
+#include "Plante.h"
 
-class Terrain;
+// Déclarations anticipées
+class Environnement;
 
 class Grid {
 public: 

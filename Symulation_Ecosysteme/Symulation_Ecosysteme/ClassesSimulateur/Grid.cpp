@@ -5,6 +5,7 @@
 
 #include "Grid.h"
 #include "PerlinNoiseGenerator.h"
+#include "Environement.h"
 
 /**
  * Grid implementation

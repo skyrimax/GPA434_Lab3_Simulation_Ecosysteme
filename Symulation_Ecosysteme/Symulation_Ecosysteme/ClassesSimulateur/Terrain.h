@@ -7,7 +7,7 @@
 #define _TERRAIN_H
 
  // Header files du simulateur
-#include "Grid.h"
+//#include "Grid.h"
 #include "constantes.h"
 
 // Déclaration anticipée

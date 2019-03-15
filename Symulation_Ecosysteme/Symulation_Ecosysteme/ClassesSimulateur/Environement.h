@@ -20,12 +20,6 @@
 #include "Grid.h"
 
 // Déclaration enticipée
-class Plante;
-class Herbivore;
-class Carnivore;
-class Meute;
-class Charogne;
-class Grid;
 
 class Environnement {
 public: 

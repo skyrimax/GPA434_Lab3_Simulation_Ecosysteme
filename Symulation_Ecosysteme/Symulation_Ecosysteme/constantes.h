@@ -20,3 +20,7 @@
 // Constraintes relatant à la fonction de bruit pour la génération du terrain
 #define OCTAVES 6
 #define PERSISTENCE 0.2
+
+// Constantes relatant aux plantes
+#define ENERGY_REGEN_PLANTE 10
+#define ENERGY_MAX_PLANTE 2000

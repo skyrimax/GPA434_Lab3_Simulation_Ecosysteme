@@ -5,6 +5,7 @@
 #include "stdafx.h"
 
 #include "Terrain.h"
+#include "Grid.h"
 
 /**
  * Terrain implementation
