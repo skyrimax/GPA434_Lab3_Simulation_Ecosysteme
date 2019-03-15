@@ -6,6 +6,8 @@
 *normes de code de l'équipe. Le code original est écrit en C# *
 **************************************************************/
 
+#include "stdafx.h"
+
 #include "PerlinNoiseGenerator.h"
 
 PerlinNoiseGenerator::PerlinNoiseGenerator(int repeat = -1)

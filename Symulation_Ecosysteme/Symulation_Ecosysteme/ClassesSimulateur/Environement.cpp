@@ -11,6 +11,44 @@
  */
 
 
+Environnement::~Environnement()
+{
+	for (auto p : m_plantes) {
+		delete p;
+		p = nullptr;
+	}
+
+	for (auto mh : m_meutesHerbivores) {
+		delete mh;
+		mh = nullptr;
+	}
+
+	for (auto h : m_herbivores) {
+		delete h;
+		h = nullptr;
+	}
+
+	for (auto mc : m_meutesCarnivores) {
+		delete mc;
+		mc = nullptr;
+	}
+
+	for (auto c : m_carnivores) {
+		delete c;
+		c = nullptr;
+	}
+
+	for (auto mc : m_meutesCharognards) {
+		delete mc;
+		mc = nullptr;
+	}
+
+	for (auto c : m_charognards) {
+		delete c;
+		c = nullptr;
+	}
+}
+
 /**
  * @param Herbivore *herbivore
  * @return void

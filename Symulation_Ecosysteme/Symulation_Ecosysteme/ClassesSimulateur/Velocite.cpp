@@ -1,7 +1,7 @@
 /**
  * Project Untitled
  */
-
+#include "stdafx.h"
 
 #include "Velocite.h"
 

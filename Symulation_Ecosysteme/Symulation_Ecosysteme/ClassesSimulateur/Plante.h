@@ -10,9 +10,13 @@
 #include <list>
 
 #include "Vivant.h"
+#include "Herbivore.h"
 
 
 class Plante: public Vivant {
+
+
+
 private: 
     int fruits;
     std::list<Herbivore*> isEatenBy;

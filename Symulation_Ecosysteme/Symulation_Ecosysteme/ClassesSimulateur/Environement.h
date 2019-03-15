@@ -19,18 +19,30 @@
 #include "Meute.h"
 #include "Grid.h"
 
+// Déclaration enticipée
+class Plante;
+class Herbivore;
+class Carnivore;
+class Meute;
+class Charogne;
+class Grid;
 
 class Environnement {
 public: 
+
+	// Constructeur
+	Environnement()=default;
+	// Destructeur
+	~Environnement();
     
 // Fonctions membres pour ajouter des éléments au listes
+	void addPlante(Plante *plante);
 	void addHerbivore(Herbivore *herbivore);
 	void addHerbivorePack(Meute *meuteHerbivores);
 	void addCarnivore(Carnivore *carnivore);
 	void addCarnivorePack(Meute *meuteCarnivores);
 	void addCharognards(Carnivore *charognard);
 	void addCharogardsPack(Meute *meuteCharognards);
-	void addPlante(Plante *plante);
     
 // Accesseur des listes d'éléments
 	std::list<Plante*> getPlantes() const;

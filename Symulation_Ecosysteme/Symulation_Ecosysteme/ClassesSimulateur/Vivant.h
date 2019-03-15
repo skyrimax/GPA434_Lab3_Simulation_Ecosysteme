@@ -16,9 +16,17 @@
 #include "Coordonne.h"
 #include "Environement.h"
 
+// Déclaration anticipée
+class Coordonne;
+class Environnement;
 
 class Vivant: public QGraphicsItem {
 public: 
+
+	// Constructeur
+	Vivant() = default;
+	// Destructeur
+	~Vivant()=default;
 
 // Accesseurs
 	int getHp() const;
@@ -37,8 +45,8 @@ public:
 	void setEnergyMax(int energyMax);
 	void setAge(int age);
 	void setAgeMax(int ageMax);
-	void setEspece(std::string &espece);
-	void setCoordonne(Coordonne &coordonne);
+	void setEspece(std::string & espece);
+	void setCoordonne(Coordonne & coordonne);
     
 // Fonctions membres purement virtuelles
 	virtual void replenishEnergy() = 0;
@@ -46,7 +54,7 @@ public:
 	virtual void reproduction() = 0;
 	virtual void simulation() = 0;
 	virtual void dying() = 0;
-	virtual virtual bool isDead() = 0;
+	virtual bool isDead() = 0;
 
 private: 
     std::string m_espece;
