@@ -23,6 +23,8 @@ public:
 
 	// Constructeur
 	Vivant() = default;
+	Vivant(Environnement* environnement, std::string espece, int hp,
+		int energy, int ageAdulte, int ageMax, int x, int y);
 	// Destructeur
 	~Vivant()=default;
 
@@ -32,6 +34,7 @@ public:
 	int getEnergy() const;
 	int getEnergyMax() const;
 	int getAge() const;
+	int getAgeAdulte() const;
 	int getAgeMax() const;
 	std::string getEspece() const;
 	Coordonne getCoordonne() const;
@@ -42,6 +45,7 @@ public:
 	void setEnergy(int energy);
 	void setEnergyMax(int energyMax);
 	void setAge(int age);
+	void setAgeAdulte(int ageAdulte);
 	void setAgeMax(int ageMax);
 	void setEspece(std::string & espece);
 	void setCoordonne(Coordonne & coordonne);
@@ -49,6 +53,7 @@ public:
 // Fonctions membres purement virtuelles
 	virtual void replenishEnergy() = 0;
 	virtual void seekEnergy() = 0;
+	virtual bool healing() = 0;
 	virtual void reproduction() = 0;
 	virtual void simulation() = 0;
 	virtual void dying() = 0;
@@ -61,6 +66,7 @@ protected:
     int m_energy;
     int m_energyMax;
     int m_age;
+	int m_ageAdulte;
     int m_ageMax;
     Coordonne m_coordonne;
     Environnement* m_environnement;

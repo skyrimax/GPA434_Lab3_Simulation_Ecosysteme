@@ -48,6 +48,9 @@ public:
 	std::list<Carnivore*> getCharognards() const;
 	std::list<Charogne*> getCharognes() const;
 
+// Accesseurs d'éléments de la grille
+	Terrain* getTerrain(int x, int y);
+
 // Fonction commendant 
 	QGraphicsItemGroup simulation();
     

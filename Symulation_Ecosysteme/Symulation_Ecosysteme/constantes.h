@@ -24,3 +24,6 @@
 // Constantes relatant aux plantes
 #define ENERGY_REGEN_PLANTE 10
 #define ENERGY_MAX_PLANTE 2000
+#define ODDS_GAZON 2
+#define ODDS_TERRE 1024
+#define RESSOURCES_MIN_PLANTE 100

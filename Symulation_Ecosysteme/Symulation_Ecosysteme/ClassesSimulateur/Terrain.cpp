@@ -85,6 +85,11 @@ void Terrain::update()
 	this->reprendreRessources();
 }
 
+bool Terrain::hasPlante()
+{
+	return m_hasPlante;
+}
+
 void Terrain::setType(TypeTerrain type)
 {
 	m_type = type;
@@ -92,7 +97,17 @@ void Terrain::setType(TypeTerrain type)
 	this->reprendreRessources();
 }
 
+void Terrain::setHasPlante(bool hasPlante)
+{
+	m_hasPlante = hasPlante;
+}
+
 Terrain::TypeTerrain Terrain::getType()
 {
 	return m_type;
+}
+
+int Terrain::getRessources()
+{
+	return m_resource;
 }

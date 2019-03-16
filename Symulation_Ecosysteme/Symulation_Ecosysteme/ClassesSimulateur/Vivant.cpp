@@ -4,6 +4,16 @@
 #include "stdafx.h"
 
 #include "Vivant.h"
+#include "Environement.h"
+
+Vivant::Vivant(Environnement * environnement, std::string espece, int hp,
+	int energy, int ageAdulte, int ageMax,
+	int x, int y)
+	:m_environnement(environnement), m_espece(espece), m_hp(hp), m_hpMax(hp),
+	m_energy(energy), m_energyMax(energy), m_age(0), m_ageAdulte(ageAdulte), m_ageMax(ageMax),
+	m_coordonne(x, y)
+{
+}
 
 int Vivant::getHp() const
 {
@@ -28,6 +38,11 @@ int Vivant::getEnergyMax() const
 int Vivant::getAge() const
 {
 	return m_age;
+}
+
+int Vivant::getAgeAdulte() const
+{
+	return m_ageAdulte;
 }
 
 int Vivant::getAgeMax() const
@@ -68,6 +83,11 @@ void Vivant::setEnergyMax(int energyMax)
 void Vivant::setAge(int age)
 {
 	m_age = age;
+}
+
+void Vivant::setAgeAdulte(int ageAdulte)
+{
+	m_ageAdulte = ageAdulte;
 }
 
 void Vivant::setAgeMax(int ageMax)
