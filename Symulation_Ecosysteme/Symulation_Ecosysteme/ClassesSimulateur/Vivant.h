@@ -53,11 +53,13 @@ public:
 // Fonctions membres purement virtuelles
 	virtual void replenishEnergy() = 0;
 	virtual void seekEnergy() = 0;
-	virtual bool healing() = 0;
+	virtual void healing() = 0;
+	virtual void receiveDamages(int nbDamage) = 0;
 	virtual void reproduction() = 0;
 	virtual void simulation() = 0;
 	virtual void dying() = 0;
 	virtual bool isDead() = 0;
+	virtual bool isDamaged() = 0;
 
 protected: 
     std::string m_espece;

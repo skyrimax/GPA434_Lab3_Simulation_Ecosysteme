@@ -19,7 +19,7 @@ class Herbivore;
 class Plante: public Vivant {
 public:
 	// Cosntructeur
-	Plante();
+	Plante()=default;
 	Plante(Environnement* environnement, std::string espece, int hp,
 		int energy, int ageAdulte, int ageMax, int x, int y,
 		int timeToReproduction);
@@ -33,11 +33,13 @@ public:
 	// Fonctions membres virtuelles héritées de Vivant
 	virtual void replenishEnergy() override;
 	virtual void seekEnergy() override;
-	virtual bool healing() override;
+	virtual void healing() override;
+	virtual void receiveDamages(int nbDamage);
 	virtual void reproduction() override;
 	virtual void simulation() override;
 	virtual void dying() override;
 	virtual bool isDead() override;
+	virtual bool isDamaged();
 
 	// Fonctions membres propre au plantes
 

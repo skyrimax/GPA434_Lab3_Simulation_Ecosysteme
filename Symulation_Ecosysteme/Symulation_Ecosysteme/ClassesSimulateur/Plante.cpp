@@ -12,6 +12,22 @@
  * Plante implementation
  */
 
+Plante::Plante(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y,
+	int timeToReproduction)
+	:Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
+	m_timeToReproduction(timeToReproduction), m_timer(timeToReproduction), m_fruits(0), m_isBeingEaten(false)
+{
+}
+
+QRectF Plante::boundingRect() const
+{
+	return QRectF();
+}
+
+void Plante::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
+}
+
 void Plante::replenishEnergy()
 {
 	m_energy += ENERGY_REGEN_PLANTE;
@@ -24,9 +40,25 @@ void Plante::seekEnergy()
 	// Plants passively receive energy
 }
 
-bool Plante::healing()
+void Plante::healing()
 {
-	return false;
+	if (m_hpMax - m_hp >= RATE_GUERISON)
+	{
+		if (m_energy > COUT_GUERISON*RATE_GUERISON) {
+			m_energy -= COUT_GUERISON * RATE_GUERISON;
+			m_hp += RATE_GUERISON;
+		}
+	}
+	else {
+		if (m_energy > (m_hpMax - m_hp)*COUT_GUERISON) {
+			m_energy -= (m_hpMax - m_hp)*COUT_GUERISON;
+			m_hp = m_hpMax;
+		}
+	}
+}
+
+void Plante::receiveDamages(int nbDamage)
+{
 }
 
 void Plante::reproduction()
@@ -72,7 +104,7 @@ void Plante::reproduction()
 				chance = dist(mt);
 
 				// Détermination du succès de la reproduction
-				if (caseAdjacente->getType == Terrain::TypeTerrain::Gazon && chance % ODDS_GAZON == 0) {
+				if (caseAdjacente->getType() == Terrain::TypeTerrain::Gazon && chance % ODDS_GAZON == 0) {
 					if (caseAdjacente->getRessources() > RESSOURCES_MIN_PLANTE) {
 						caseAdjacente->perdreRessources(RESSOURCES_MIN_PLANTE);
 						caseAdjacente->setHasPlante(true);
@@ -84,7 +116,7 @@ void Plante::reproduction()
 						hasReproduced = true;
 					}
 				}
-				else if (caseAdjacente->getType == Terrain::TypeTerrain::Terre && chance % ODDS_TERRE == 0) {
+				else if (caseAdjacente->getType() == Terrain::TypeTerrain::Terre && chance % ODDS_TERRE == 0) {
 					caseAdjacente->setType(Terrain::TypeTerrain::Gazon);
 					caseAdjacente->reprendreRessources();
 					
@@ -109,12 +141,12 @@ void Plante::simulation()
 	if (!this->isDead()) {
 		this->replenishEnergy();
 
-		if (!this->m_isBeingEaten) {
+		if (!this->m_isBeingEaten && this->isDamaged()) {
 			this->healing();
-
 		}
-
-		this->reproduction();
+		else {
+			this->reproduction();
+		}
 	}
 	else
 	{
@@ -130,4 +162,9 @@ void Plante::dying()
 bool Plante::isDead()
 {
 	return (m_hp <= 0 || (m_age < m_ageAdulte && m_isBeingEaten) || m_age >= m_ageMax);
+}
+
+bool Plante::isDamaged()
+{
+	return m_hp<m_hpMax;
 }
