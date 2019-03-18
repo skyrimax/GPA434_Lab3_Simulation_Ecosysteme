@@ -134,6 +134,8 @@ void Plante::reproduction()
 
 		} while (m_fruits>0 && !hasReproduced);
 	}
+
+	m_timer = m_timeToReproduction;
 }
 
 void Plante::simulation()
@@ -152,11 +154,14 @@ void Plante::simulation()
 	{
 		this->dying();
 	}
+
+	m_timer--;
 }
 
 void Plante::dying()
 {
-	// Rien à faire à la mort d'une plante
+	m_environnement->getTerrain(m_coordonne.getX(), m_coordonne.getY())->
+		gainRessources(m_hp*HP_TO_RESSOURCE_RATE + m_energy * COUT_GUERISON*HP_TO_RESSOURCE_RATE);
 }
 
 bool Plante::isDead()
