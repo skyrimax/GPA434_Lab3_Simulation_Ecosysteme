@@ -10,6 +10,8 @@
 #include <list>
 
 #include "Vivant.h"
+#include "Sex.h"
+#include "Velocite.h"
 
 
 class Animal: public Vivant {
@@ -27,20 +29,20 @@ void flee();
     
 void wander();
     
-virtual virtual void chooseTarget() = 0;
+virtual void chooseTarget() = 0;
     
-virtual virtual void trackTarget() = 0;
+virtual void trackTarget() = 0;
     class Class1 {
     };
 private: 
-    double vitesse;
-    double sprint;
-    bool isSprinting;
-    Sex sex;
-    bool aEnfant;
-    std::list<Animal*> predateurs;
-    Velocite velocite;
-    int timerMort;
+    double m_vitesse;
+    double m_sprint;
+    bool m_isSprinting;
+    Sex m_sex;
+    bool m_aEnfant;
+    std::list<Animal*> m_predateurs;
+    Velocite m_velocite;
+    int m_timerMort;
 };
 
 #endif //_ANIMAL_H

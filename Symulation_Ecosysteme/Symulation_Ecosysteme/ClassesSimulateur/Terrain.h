@@ -7,7 +7,7 @@
 #define _TERRAIN_H
 
  // Header files du simulateur
-#include "Grid.h"
+//#include "Grid.h"
 #include "constantes.h"
 
 // Déclaration anticipée
@@ -26,12 +26,16 @@ public:
 	// Fontions membres
 	void reprendreRessources();
 	void perdreRessources(int nbRessources);
+	void update();
+	bool hasPlante();
 
 	// Mutateurs
 	void setType(TypeTerrain type);
+	void setHasPlante(bool hasPlante);
 
 	// Accesseurs
 	TypeTerrain getType();
+	int getRessources();
 
 private: 
     int m_resource;
@@ -39,6 +43,7 @@ private:
 	Grid *m_grilleProprietaire;
 	int m_x;
 	int m_y;
+	bool m_hasPlante;
 };
 
 #endif //_TERRAIN_H

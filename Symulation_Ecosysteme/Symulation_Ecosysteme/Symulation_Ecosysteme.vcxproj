@@ -135,6 +135,7 @@
     <ClCompile Include="ClassesSimulateur\Velocite.cpp" />
     <ClCompile Include="ClassesSimulateur\Vivant.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PerlinNoiseGenerator.cpp" />
     <ClCompile Include="ParameterWindow.cpp" />
     <ClCompile Include="SimulationMainWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +163,7 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
     </QtMoc>
+    <ClInclude Include="PerlinNoiseGenerator.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

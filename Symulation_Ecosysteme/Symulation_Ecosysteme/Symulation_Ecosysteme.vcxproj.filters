@@ -105,6 +105,9 @@
     <ClCompile Include="ClassesSimulateur\Velocite.cpp">
       <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
+    <ClCompile Include="PerlinNoiseGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="SimulationMainWindow.cpp">
       <Filter>Source Files\Classes Qt</Filter>
     </ClCompile>
@@ -156,6 +159,9 @@
       <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
     <ClInclude Include="constantes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoiseGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

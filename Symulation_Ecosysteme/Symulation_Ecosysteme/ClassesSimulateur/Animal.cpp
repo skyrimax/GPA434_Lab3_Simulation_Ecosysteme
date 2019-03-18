@@ -1,7 +1,7 @@
 /**
  * Project Untitled
  */
-
+#include "stdafx.h"
 
 #include "Animal.h"
 
@@ -55,15 +55,15 @@ void Animal::wander() {
 /**
  * @return virtual void
  */
-virtual virtual void Animal::chooseTarget() {
-    return null;
+void Animal::chooseTarget() {
+    return;
 }
 
 /**
  * @return virtual void
  */
-virtual virtual void Animal::trackTarget() {
-    return null;
+void Animal::trackTarget() {
+    return;
 }
 /**
  * Class1 implementation

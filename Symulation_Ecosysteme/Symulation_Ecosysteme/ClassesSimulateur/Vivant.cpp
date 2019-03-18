@@ -1,53 +1,106 @@
 /**
  * Project Untitled
  */
-
+#include "stdafx.h"
 
 #include "Vivant.h"
+#include "Environement.h"
 
- /**
-  * Vivant implementation
-  */
-
-
-  /**
-   * @return vitual void
-   */
-virtual vitual void Vivant::getEnergie() {
-	return null;
+Vivant::Vivant(Environnement * environnement, std::string espece, int hp,
+	int energy, int ageAdulte, int ageMax,
+	int x, int y)
+	:m_environnement(environnement), m_espece(espece), m_hp(hp), m_hpMax(hp),
+	m_energy(energy), m_energyMax(energy), m_age(0), m_ageAdulte(ageAdulte), m_ageMax(ageMax),
+	m_coordonne(x, y)
+{
 }
 
-/**
- * @return virtual void
- */
-virtual virtual void Vivant::seekEnergie() {
-	return null;
+int Vivant::getHp() const
+{
+	return m_hp;
 }
 
-/**
- * @return virutal void
- */
-virtual virutal void Vivant::reproduction() {
-	return null;
+int Vivant::gatHpMax() const
+{
+	return m_hpMax;
 }
 
-/**
- * @return virtual void
- */
-virtual virtual void Vivant::simulation() {
-	return null;
+int Vivant::getEnergy() const
+{
+	return m_age;
 }
 
-/**
- * @return virtual void
- */
-virtual virtual void Vivant::mourrir() {
-	return null;
+int Vivant::getEnergyMax() const
+{
+	return m_ageMax;
 }
 
-/**
- * @return virtual bool
- */
-virtual virtual bool Vivant::estMort() {
-	return null;
+int Vivant::getAge() const
+{
+	return m_age;
+}
+
+int Vivant::getAgeAdulte() const
+{
+	return m_ageAdulte;
+}
+
+int Vivant::getAgeMax() const
+{
+	return m_ageMax;
+}
+
+std::string Vivant::getEspece() const
+{
+	return m_espece;
+}
+
+Coordonne Vivant::getCoordonne() const
+{
+	return m_coordonne;
+}
+
+void Vivant::setHp(int hp)
+{
+	m_hp = hp;
+}
+
+void Vivant::setHpMax(int hpMax)
+{
+	m_hpMax = hpMax;
+}
+
+void Vivant::setEnergy(int energy)
+{
+	m_energy = energy;
+}
+
+void Vivant::setEnergyMax(int energyMax)
+{
+	m_energyMax = energyMax;
+}
+
+void Vivant::setAge(int age)
+{
+	m_age = age;
+}
+
+void Vivant::setAgeAdulte(int ageAdulte)
+{
+	m_ageAdulte = ageAdulte;
+}
+
+void Vivant::setAgeMax(int ageMax)
+{
+	m_ageMax = ageMax;
+}
+
+void Vivant::setEspece(std::string & espece)
+{
+	m_espece = espece;
+}
+
+void Vivant::setCoordonne(Coordonne & coordonne)
+{
+	m_coordonne = coordonne;
 }

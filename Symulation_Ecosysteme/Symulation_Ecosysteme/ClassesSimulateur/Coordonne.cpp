@@ -1,7 +1,7 @@
 /**
  * Project Untitled
  */
-
+#include "stdafx.h"
 
 #include "Coordonne.h"
 
@@ -9,6 +9,11 @@
  * Coordonne implementation
  */
 
+
+Coordonne::Coordonne(double x, double y)
+	: m_x(x), m_y(y)
+{
+}
 
 /**
  * @return double

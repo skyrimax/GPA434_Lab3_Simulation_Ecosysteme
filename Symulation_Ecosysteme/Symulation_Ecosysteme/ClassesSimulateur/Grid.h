@@ -9,21 +9,22 @@
 // Header files du simulateur
 #include "Terrain.h"
 #include "constantes.h"
+#include "Plante.h"
 
-class Terrain;
+// Déclarations anticipées
+class Environnement;
 
 class Grid {
 public: 
     
 	Grid();
-
-	void genererTerrain();
     
 	void updateTerrain();
 
 	Terrain* getTerrain(int x, int y);
 private: 
-	Terrain *grid[LARGEUR_GRILLE][HAUTEUR_GRILLE];
+	Terrain *m_grid[LARGEUR_GRILLE][HAUTEUR_GRILLE];
+	Environnement* m_environnementProprietaire;
 };
 
 #endif //_GRID_H

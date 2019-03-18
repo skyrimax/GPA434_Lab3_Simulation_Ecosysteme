@@ -9,14 +9,47 @@
  // Librairies standard
 #include <list>
 
+// Header files du simulateur
 #include "Vivant.h"
+#include"constantes.h"
 
+// Déclarations anticipées
+class Herbivore;
 
 class Plante: public Vivant {
+public:
+	// Cosntructeur
+	Plante()=default;
+	Plante(Environnement* environnement, std::string espece, int hp,
+		int energy, int ageAdulte, int ageMax, int x, int y,
+		int timeToReproduction);
+	// Destructeur
+	~Plante()=default;
+
+	// Fonctions membres virtuelles héritées de QGraphicsItem
+	virtual QRectF boundingRect() const;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+	// Fonctions membres virtuelles héritées de Vivant
+	virtual void replenishEnergy() override;
+	virtual void seekEnergy() override;
+	virtual void healing() override;
+	virtual void receiveDamages(int nbDamage);
+	virtual void reproduction() override;
+	virtual void simulation() override;
+	virtual void dying() override;
+	virtual bool isDead() override;
+	virtual bool isDamaged();
+
+	// Fonctions membres propre au plantes
+
+
 private: 
-    int fruits;
-    std::list<Herbivore*> isEatenBy;
-    bool isBeingEaten;
+    int m_fruits;
+	int m_timer;
+	int m_timeToReproduction;
+    std::list<Herbivore*> m_isEatenBy;
+    bool m_isBeingEaten;
 };
 
 #endif //_PLANTE_H

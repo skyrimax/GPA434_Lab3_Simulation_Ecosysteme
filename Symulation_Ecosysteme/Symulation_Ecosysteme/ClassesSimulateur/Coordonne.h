@@ -8,6 +8,8 @@
 
 class Coordonne {
 public: 
+
+	Coordonne(double x=0, double y=0);
     
 double getX();
     
@@ -21,8 +23,8 @@ void moveX();
     
 void moveY();
 private: 
-    double x;
-    double y;
+    double m_x;
+    double m_y;
 };
 
 #endif //_COORDONNE_H
