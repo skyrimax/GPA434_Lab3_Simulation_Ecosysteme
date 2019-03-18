@@ -59,6 +59,14 @@ void Plante::healing()
 
 void Plante::receiveDamages(int nbDamage)
 {
+	if (m_fruits == 0) {
+		m_hp -= nbDamage;
+		if (m_hp < 0)
+			m_hp = 0;
+	}
+	else {
+		m_fruits -= nbDamage / COUT_FRUIT;
+	}
 }
 
 void Plante::reproduction()
@@ -172,4 +180,12 @@ bool Plante::isDead()
 bool Plante::isDamaged()
 {
 	return m_hp<m_hpMax;
+}
+
+void Plante::pousserFruits()
+{
+	if (m_energy >= COUT_FRUIT) {
+		m_energy -= COUT_FRUIT;
+			m_fruits++;
+	}
 }

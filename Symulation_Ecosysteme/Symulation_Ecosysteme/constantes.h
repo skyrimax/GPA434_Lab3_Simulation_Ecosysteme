@@ -30,3 +30,4 @@
 #define COUT_GUERISON 10
 #define RATE_GUERISON 1
 #define HP_TO_RESSOURCE_RATE 10
+#define COUT_FRUIT 5

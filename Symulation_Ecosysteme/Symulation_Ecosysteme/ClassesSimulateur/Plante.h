@@ -42,7 +42,7 @@ public:
 	virtual bool isDamaged();
 
 	// Fonctions membres propre au plantes
-
+	void pousserFruits();
 
 private: 
     int m_fruits;
