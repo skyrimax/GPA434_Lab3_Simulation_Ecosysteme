@@ -19,40 +19,40 @@ Coordonne::Coordonne(double x, double y)
  * @return double
  */
 double Coordonne::getX() {
-    return 0.0;
+    return m_x;
 }
 
 /**
  * @return int
  */
-int Coordonne::getY() {
-    return 0;
+double Coordonne::getY() {
+    return m_y;
 }
 
 /**
  * @return void
  */
-void Coordonne::setX() {
-    return;
+void Coordonne::setX(double x) {
+	m_x = x;
 }
 
 /**
  * @return void
  */
-void Coordonne::setY() {
-    return;
+void Coordonne::setY(double y) {
+	m_y = y;
 }
 
 /**
  * @return void
  */
-void Coordonne::moveX() {
-    return;
+void Coordonne::moveX(double deltaX) {
+	m_x += deltaX;
 }
 
 /**
  * @return void
  */
-void Coordonne::moveY() {
-    return;
+void Coordonne::moveY(double deltaY) {
+	m_y += deltaY;
 }
