@@ -6,7 +6,9 @@ ParameterWindow::ParameterWindow(QWidget *parent)
 {
 	setupUi(this);
 	
-;
+	//Désactivation des mods qui seront ajouté ultérieurement si on a le temps
+	viruscheckBox->setEnabled(false);
+	seasoncheckBox->setEnabled(false);
 }
 
 ParameterWindow::~ParameterWindow()
@@ -26,4 +28,39 @@ void ParameterWindow::showAide()
 	QMessageBox::about(this, u8R"(Aide aux paramètres)", aide);
 }
 
+int ParameterWindow::getQteLapin()
+{
+	return qteLapins->value();
+}
+
+int ParameterWindow::getQteChevreuil()
+{
+
+	return qteChevreuils->value();
+}
+
+int ParameterWindow::getQteLoup()
+{
+	return qteLoups->value();
+}
+
+int ParameterWindow::getQteHorde()
+{
+	return qteHordes->value();
+}
+
+int ParameterWindow::getQteMeute()
+{
+	return qteMeutes->value();
+}
+
+bool ParameterWindow::isSeasonCheck()
+{
+	return seasoncheckBox->isChecked();
+}
+
+bool ParameterWindow::isVirusCheck()
+{
+	return viruscheckBox->isChecked();
+}
 

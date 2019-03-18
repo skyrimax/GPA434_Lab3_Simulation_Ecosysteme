@@ -6,6 +6,14 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+	/*Désactivation des boutons de la simulation afin
+	que l'utilisateur rentre ses paramètres avant*/
+	ui.pauseButton->setEnabled(false);
+	ui.resumeButton->setEnabled(false);
+	ui.stepButton->setEnabled(false);
+	ui.stopButton->setEnabled(false);
+
 }
 
 void SimulationMainWindow::showAPropos()
@@ -13,7 +21,7 @@ void SimulationMainWindow::showAPropos()
 	//Créer le message
 	QString aboutProgramm{ \
 	u8R"---(EcoSimulated est un logiciel de simulation d'un écosystème incluant
- les plantes, herbivores et carnivore.
+ les plantes, lapins, chevreuils et loups.
 
 Ce programme a été réalisé par :
 	- Frédéric Grondines
@@ -34,4 +42,32 @@ void SimulationMainWindow::on_parameterButton_clicked()
 	ParameterWindow dialog(this);
 
 	dialog.exec();
+}
+
+void SimulationMainWindow::on_startButton_clicked()
+{
+	ui.parameterButton->setEnabled(false);
+	ui.stopButton->setEnabled(true);
+	ui.pauseButton->setEnabled(true);
+}
+
+void SimulationMainWindow::on_pauseButton_clicked()
+{
+	ui.stepButton->setEnabled(true);
+	ui.resumeButton->setEnabled(true);
+}
+
+void SimulationMainWindow::on_resumButton_clicked()
+{
+	ui.stepButton->setEnabled(false);
+}
+
+void SimulationMainWindow::on_stepButton_clicked()
+{
+
+}
+
+void SimulationMainWindow::on_stopButton_clicked()
+{
+
 }

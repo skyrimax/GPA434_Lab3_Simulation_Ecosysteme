@@ -5,49 +5,49 @@
 
 #include "Vivant.h"
 
-/**
- * Vivant implementation
- */
+ /**
+  * Vivant implementation
+  */
 
 
-/**
- * @return vitual void
- */
+  /**
+   * @return vitual void
+   */
 virtual vitual void Vivant::getEnergie() {
-    return null;
+	return null;
 }
 
 /**
  * @return virtual void
  */
 virtual virtual void Vivant::seekEnergie() {
-    return null;
+	return null;
 }
 
 /**
  * @return virutal void
  */
 virtual virutal void Vivant::reproduction() {
-    return null;
+	return null;
 }
 
 /**
  * @return virtual void
  */
 virtual virtual void Vivant::simulation() {
-    return null;
+	return null;
 }
 
 /**
  * @return virtual void
  */
 virtual virtual void Vivant::mourrir() {
-    return null;
+	return null;
 }
 
 /**
  * @return virtual bool
  */
 virtual virtual bool Vivant::estMort() {
-    return null;
+	return null;
 }

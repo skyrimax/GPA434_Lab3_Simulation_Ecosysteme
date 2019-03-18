@@ -52,15 +52,18 @@
     <Filter Include="Source Files\Classes simulateur\Vivants\Animal">
       <UniqueIdentifier>{442c4da0-cb17-4e4e-a857-a144a12cdf0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Classes Qt">
+      <UniqueIdentifier>{2ccb2553-e049-4780-a5cb-71d622ce7302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes Qt">
+      <UniqueIdentifier>{595beeb3-d82f-4772-a7d1-c5412c0919b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SimulationMainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClassesSimulateur\Environement.cpp">
@@ -102,8 +105,11 @@
     <ClCompile Include="ClassesSimulateur\Velocite.cpp">
       <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
+    <ClCompile Include="SimulationMainWindow.cpp">
+      <Filter>Source Files\Classes Qt</Filter>
+    </ClCompile>
     <ClCompile Include="ParameterWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Classes Qt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,10 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="SimulationMainWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classes Qt</Filter>
     </QtMoc>
     <QtMoc Include="ParameterWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classes Qt</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
