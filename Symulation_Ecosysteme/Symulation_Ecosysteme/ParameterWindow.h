@@ -19,7 +19,7 @@ public:
 	int getQteChevreuil();
 	int getQteLoup();
 	//Accesseur retourner le nombre de troupeau initial
-	int getQteHorde();
+	int getQteHarde();
 	int getQteMeute();
 	//Accesseur afin de déterminer si les mods on été cochés
 	bool isSeasonCheck();

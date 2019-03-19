@@ -44,9 +44,9 @@ int ParameterWindow::getQteLoup()
 	return qteLoups->value();
 }
 
-int ParameterWindow::getQteHorde()
+int ParameterWindow::getQteHarde()
 {
-	return qteHordes->value();
+	return qteHardes->value();
 }
 
 int ParameterWindow::getQteMeute()

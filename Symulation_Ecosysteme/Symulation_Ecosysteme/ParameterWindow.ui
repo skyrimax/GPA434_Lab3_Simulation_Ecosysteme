@@ -29,7 +29,7 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Quantité de hordes de chevreuil :</string>
+            <string>Quantité de hardes de chevreuil :</string>
            </property>
           </widget>
          </item>
@@ -47,7 +47,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QSpinBox" name="qteHordes">
+          <widget class="QSpinBox" name="qteHardes">
            <property name="maximum">
             <number>10</number>
            </property>
