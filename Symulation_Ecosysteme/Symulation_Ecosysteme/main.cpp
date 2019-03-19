@@ -1,11 +1,16 @@
-#include "stdafx.h"
-#include "SimulationMainWindow.h"
-#include <QtWidgets/QApplication>
+#include "constantes.h"
+#include "ClassesSimulateur/Coordonne.h"
+#include "ImplementantionFonctionsGenerales.h"
+#include <iostream>
 
-int main(int argc, char *argv[])
+int main(void)
 {
-	QApplication a(argc, argv);
-	SimulationMainWindow w;
-	w.show();
-	return a.exec();
+	//test du retour de la valeur de la distance
+
+	//DistanceEntre2Points(Coordonne(7,7), pt2);
+
+	//Test de atan2
+	VitesseVersAngle(-7, -7);
+
+	return EXIT_SUCCESS;
 }
