@@ -2,13 +2,13 @@
 #define _USE_MATH_DEFINES
 
 #include "stdafx.h"
-#include "ImplementantionFonctionsGenerales.h"
+#include "FonctionsGenerales.h"
 #include "ClassesSimulateur/Coordonne.h"
 #include <cmath>
 #include <iostream>
 
 
-double DistanceEntre2Points(Coordonne pt1, Coordonne pt2)
+double distanceEntre2Points(Coordonne pt1, Coordonne pt2)
 {
 	double distance;
 
@@ -18,7 +18,7 @@ double DistanceEntre2Points(Coordonne pt1, Coordonne pt2)
 	return distance;
 }
 
-double VitesseVersAngle(double vx, double vy)
+double vitesseVersAngle(double vx, double vy)
 {
 	double angle;
 

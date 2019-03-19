@@ -6,7 +6,7 @@
 #ifndef _VELOCITE_H
 #define _VELOCITE_H
 
-#include "ImplementantionFonctionsGenerales.h"
+#include "FonctionsGenerales.h"
 
 class Orientation {
 public: 

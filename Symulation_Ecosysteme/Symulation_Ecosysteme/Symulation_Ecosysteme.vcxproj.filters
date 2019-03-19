@@ -105,7 +105,7 @@
     <ClCompile Include="ClassesSimulateur\Orientation.cpp">
       <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
-    <ClCompile Include="ImplementantionFonctionsGenerales.cpp">
+    <ClCompile Include="FonctionsGenerales.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,11 +155,11 @@
     <ClInclude Include="ClassesSimulateur\Orientation.h">
       <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
-    <ClInclude Include="ImplementantionFonctionsGenerales.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ClassesSimulateur\Coordonne.h">
       <Filter>Header Files\Classes simulateur\Vivants</Filter>
+    </ClInclude>
+    <ClInclude Include="FonctionsGenerales.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
