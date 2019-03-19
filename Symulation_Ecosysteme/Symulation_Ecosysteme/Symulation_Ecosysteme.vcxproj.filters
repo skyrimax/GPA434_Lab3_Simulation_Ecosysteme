@@ -125,9 +125,6 @@
     <ClInclude Include="ClassesSimulateur\Vivant.h">
       <Filter>Header Files\Classes simulateur\Vivants</Filter>
     </ClInclude>
-    <ClInclude Include="ClassesSimulateur\Coordonne.h">
-      <Filter>Header Files\Classes simulateur\Vivants</Filter>
-    </ClInclude>
     <ClInclude Include="ClassesSimulateur\Plante.h">
       <Filter>Header Files\Classes simulateur\Vivants</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="ImplementantionFonctionsGenerales.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Coordonne.h">
+      <Filter>Header Files\Classes simulateur\Vivants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

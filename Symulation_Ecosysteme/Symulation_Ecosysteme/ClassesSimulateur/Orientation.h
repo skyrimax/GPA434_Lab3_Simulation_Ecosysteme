@@ -6,6 +6,8 @@
 #ifndef _VELOCITE_H
 #define _VELOCITE_H
 
+#include "ImplementantionFonctionsGenerales.h"
+
 class Orientation {
 public: 
 
@@ -37,6 +39,9 @@ private:
 	// Composantes du vecteur unitaire
 	double m_unitX;
 	double m_unitY;
+
+	// Direction du vecteur
+	double m_direction
 };
 
 #endif //_VELOCITE_H
