@@ -18,6 +18,7 @@ public:
 	// Accesseur du vecteur unitaire
 	double getUnitX();
 	double getUnitY();
+	double getDirection();
 
 	// Mutateur du vecteur de base
 	void setVX(double vX);

@@ -34,26 +34,111 @@ bool Animal::isSprinting() {
  */
 void Animal::sprint() {
 	m_isSprinting = true;
+
+	this->trackTarget();
+
+	this->deplacer(m_sprint);
 }
 
 /**
  * @return void
  */
 void Animal::walk() {
+
 	m_isSprinting = false;
+
+	this->trackTarget();
+
+	this->deplacer(m_vitesse);
 }
 
 /**
  * @return void
  */
 void Animal::flee() {
-    return;
+
+	m_isSprinting = true;
+
+	closestPredateur();
+
+	m_orientation.setVX(m_coordonne.getX() - m_closestPredateur->m_coordonne.getX());
+	m_orientation.setVY(m_coordonne.getY() - m_closestPredateur->m_coordonne.getY());
+
+	this->deplacer(m_sprint);
 }
 
 /**
  * @return void
  */
 void Animal::wander() {
-    return;
+
+	double angle;
+
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(-DEVIATION_MAX, DEVIATION_MAX);
+
+	m_isSprinting = false;
+
+	angle = m_orientation.getDirection();
+	angle += dist(mt);
+
+	m_coordonne.setX(sin(angle*M_PI / 360));
+	m_coordonne.setY(sin(angle*M_PI / 360));
+
+	this->deplacer(m_vitesse);
 }
 
+void Animal::deplacer(double vitesse) {
+
+	Coordonne nextCoordonne(m_coordonne);
+	Coordonne pointCroisement(-1, -1);
+
+	double distance;
+
+	nextCoordonne.moveX(m_vitesse*m_orientation.getUnitX());
+	nextCoordonne.moveY(m_vitesse*m_orientation.getUnitY());
+
+	// Computer si points de croisement
+	//pointCroisement=
+
+	if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
+		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
+
+		m_orientation.setVX(-m_orientation.getVX());
+
+		pointCroisement.moveX(m_orientation.getUnitX()*distance);
+
+		m_coordonne.setX(pointCroisement.getX());
+		m_coordonne.setY(nextCoordonne.getY());
+	}
+
+	else if (pointCroisement.getY() == 0 || pointCroisement.getY() == LARGEUR_GRILLE) {
+		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
+
+		m_orientation.setVY(-m_orientation.getVY());
+
+		pointCroisement.moveY(m_orientation.getUnitY()*distance);
+
+		m_coordonne.setY(pointCroisement.getY());
+		m_coordonne.setX(nextCoordonne.getX());
+	}
+	else {
+		m_coordonne.setX(nextCoordonne.getX());
+		m_coordonne.setY(nextCoordonne.getY());
+	}
+}
+
+void Animal::closestPredateur() {
+	double distance = DBL_MAX;
+	Animal *closest = nullptr;
+
+	for (auto const predator : m_predateurs) {
+		if (distanceEntre2Points(m_coordonne, predator->m_coordonne) < distance) {
+			distance = distanceEntre2Points(m_coordonne, predator->m_coordonne);
+			closest = predator;
+		}
+	}
+
+	m_closestPredateur = closest;
+}

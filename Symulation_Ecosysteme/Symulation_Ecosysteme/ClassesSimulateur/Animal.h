@@ -6,12 +6,15 @@
 #ifndef _ANIMAL_H
 #define _ANIMAL_H
 
+#define _USE_MATH_DEFINES
+
  // Librairies standard
 #include <list>
+#include <cmath>
 
 #include "Vivant.h"
 #include "Sex.h"
-#include "Velocite.h"
+#include "Orientation.h"
 #include "Charogne.h"
 
 
@@ -39,14 +42,20 @@ public:
 	virtual void chooseTarget() = 0;
 	virtual void trackTarget() = 0;
 
-private: 
+protected: 
+
+	// Fonction membre pour déplacer l'animal
+	void deplacer(double vitesse);
+	void closestPredateur();
+
     double m_vitesse;
     double m_sprint;
     bool m_isSprinting;
     Sex m_sex;
     bool m_aEnfant;
     std::list<Animal*> m_predateurs;
-    Orientation m_velocite;
+	Animal* m_closestPredateur;
+    Orientation m_orientation;
     int m_timerMort;
 	int m_timerGestation;
 	int m_timerReproduction;

@@ -32,6 +32,11 @@ double Orientation::getUnitY() {
 	return m_unitY;
 }
 
+double Orientation::getDirection()
+{
+	return m_direction;
+}
+
 /**
  * @return void
  */

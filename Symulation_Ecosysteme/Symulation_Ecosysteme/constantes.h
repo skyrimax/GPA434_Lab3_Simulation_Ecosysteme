@@ -31,3 +31,6 @@
 #define RATE_GUERISON 1
 #define HP_TO_RESSOURCE_RATE 10
 #define COUT_FRUIT 5
+
+// Constantes relatant aux animaux
+#define DEVIATION_MAX 5
