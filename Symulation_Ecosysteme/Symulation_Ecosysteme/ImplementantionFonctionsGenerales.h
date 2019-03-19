@@ -4,9 +4,8 @@
 #include "ClassesSimulateur/Coordonne.h"
 
 //Definition des types employes pour le programme et fonctions generales 
-
-//typedef trajectoire(double x, double y);
-//typedef frontiere(double x, double y);
+//
+//
 
 //Fonction qui retourne la distance entre 2 points dans l environnement
 double DistanceEntre2Points(Coordonne pt1,Coordonne pt2);
