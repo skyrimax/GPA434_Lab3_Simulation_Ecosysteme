@@ -99,11 +99,11 @@
     <ClCompile Include="ClassesSimulateur\Omnivore.cpp">
       <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
-    <ClCompile Include="ClassesSimulateur\Velocite.cpp">
-      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
-    </ClCompile>
     <ClCompile Include="PerlinNoiseGenerator.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesSimulateur\Orientation.cpp">
+      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,14 +146,14 @@
     <ClInclude Include="ClassesSimulateur\Omnivore.h">
       <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
-    <ClInclude Include="ClassesSimulateur\Velocite.h">
-      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
-    </ClInclude>
     <ClInclude Include="constantes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoiseGenerator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesSimulateur\Orientation.h">
+      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
