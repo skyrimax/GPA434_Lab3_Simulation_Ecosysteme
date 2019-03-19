@@ -11,7 +11,7 @@ public:
     
 double getX();
     
-int getY();
+double getY();
     
 void setX();
     

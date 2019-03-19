@@ -20,7 +20,7 @@ double Coordonne::getX() {
 /**
  * @return int
  */
-int Coordonne::getY() {
+double Coordonne::getY() {
     return 0;
 }
 
