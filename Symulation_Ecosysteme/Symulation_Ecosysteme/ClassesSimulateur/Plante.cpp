@@ -148,6 +148,8 @@ void Plante::reproduction()
 
 void Plante::simulation()
 {
+	m_timer--;
+
 	if (!this->isDead()) {
 		this->replenishEnergy();
 
@@ -162,8 +164,6 @@ void Plante::simulation()
 	{
 		this->dying();
 	}
-
-	m_timer--;
 }
 
 void Plante::dying()

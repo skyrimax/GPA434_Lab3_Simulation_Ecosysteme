@@ -4,38 +4,43 @@
 #include "stdafx.h"
 
 #include "Animal.h"
+#include "Environement.h"
 
 /**
  * Animal implementation
  */
 
 
+Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y, double vitesse, double sprint, Sex sex, int timerMort, int timerGestation, int timerReproduction, std::string cible)
+{
+}
+
 /**
  * @return void
  */
 void Animal::devenirCharogne() {
-    return;
+	m_environnement->addCharogne(new Charogne(this));
 }
 
 /**
  * @return bool
  */
 bool Animal::isSprinting() {
-    return false;
+    return m_isSprinting;
 }
 
 /**
  * @return void
  */
 void Animal::sprint() {
-    return;
+	m_isSprinting = true;
 }
 
 /**
  * @return void
  */
 void Animal::walk() {
-    return;
+	m_isSprinting = false;
 }
 
 /**
@@ -52,19 +57,3 @@ void Animal::wander() {
     return;
 }
 
-/**
- * @return virtual void
- */
-void Animal::chooseTarget() {
-    return;
-}
-
-/**
- * @return virtual void
- */
-void Animal::trackTarget() {
-    return;
-}
-/**
- * Class1 implementation
- */

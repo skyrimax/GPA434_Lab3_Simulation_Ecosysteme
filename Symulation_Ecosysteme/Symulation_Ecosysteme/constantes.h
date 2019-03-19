@@ -13,9 +13,9 @@
 
 // Constantes relantant à la génération du terrain
 #define THRESHOLD_EAU 0.1
-#define THRESHOLD_TERRE 0.3
-#define THRESHOLD_GAZON 0.5
-#define THRESHOLD_PLANTE 0.85
+#define THRESHOLD_TERRE 0.35
+#define THRESHOLD_GAZON 0.65
+#define THRESHOLD_PLANTE 1.0
 
 // Constraintes relatant à la fonction de bruit pour la génération du terrain
 #define OCTAVES 6
