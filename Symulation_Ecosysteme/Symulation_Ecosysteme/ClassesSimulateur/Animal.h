@@ -33,7 +33,6 @@ public:
 	~Animal() = default;
 
 	// Fonctions membres virtuelles héritées de Vivant
-	virtual void seekEnergy() override;
 	virtual void healing() override;
 	virtual void receiveDamages(int nbDamage) override;
 	virtual void reproduction() override;
@@ -52,6 +51,7 @@ public:
 	// Fonction membres spécifique à chaque type d'animaux
 	virtual void chooseTarget() = 0;
 	virtual void trackTarget() = 0;
+	virtual void accoucher()=0;
 
 protected: 
 
@@ -64,14 +64,18 @@ protected:
     bool m_isSprinting;
     Sex m_sex;
     bool m_aEnfant;
+	bool m_enceinte;
 	int m_nbProgenituresMin;
 	int m_nbProgenituresMax;
     std::list<Animal*> m_predateurs;
 	Animal* m_closestPredateur;
+	Animal* m_mate;
     Orientation m_orientation;
     int m_timerMort;
 	int m_timerGestation;
+	int m_tempsGestation;
 	int m_timerReproduction;
+	int m_tempsReproduction;
 	std::list<std::string> m_cible;
 };
 

@@ -14,45 +14,70 @@
 Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y,
 	double vitesse, double sprint, Sex sex,
 	int nbProgenituresMin, int nbProgenituresMax,
-	int timerMort, int timerGestation, int timerReproduction,
+	int timerMort, int tempsGestation, int tempsReproduction,
 	std::list<std::string> cible)
 	: Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
 	m_vitesse(vitesse), m_sprint(sprint), m_sex(sex), m_isSprinting(false),
 	m_aEnfant(false), m_nbProgenituresMin(nbProgenituresMin),
 	m_nbProgenituresMax(nbProgenituresMax), m_closestPredateur(nullptr),
-	m_timerMort(timerMort), m_timerGestation(timerGestation),
-	m_cible(cible)
-{
-}
-
-void Animal::seekEnergy()
+	m_mate(nullptr), m_timerMort(timerMort), m_tempsGestation(tempsGestation),
+	m_tempsReproduction(tempsReproduction), m_cible(cible)
 {
 }
 
 void Animal::healing()
 {
+	if (m_hpMax - m_hp >= RATE_GUERISON)
+	{
+		if (m_energy > COUT_GUERISON*RATE_GUERISON) {
+			m_energy -= COUT_GUERISON * RATE_GUERISON;
+			m_hp += RATE_GUERISON;
+		}
+	}
+	else {
+		if (m_energy > (m_hpMax - m_hp)*COUT_GUERISON) {
+			m_energy -= (m_hpMax - m_hp)*COUT_GUERISON;
+			m_hp = m_hpMax;
+		}
+	}
 }
 
 void Animal::receiveDamages(int nbDamage)
 {
+	m_hp -= nbDamage;
+	if (m_hp < 0)
+		m_hp = 0;
 }
 
 void Animal::reproduction()
 {
+	if (m_sex == Sex::Female) {
+		m_aEnfant = true;
+
+		m_enceinte = true;
+		m_timerGestation = m_tempsGestation;
+	}
+	else
+	{
+		m_aEnfant = true;
+
+		m_timerReproduction = m_tempsReproduction;
+	}
 }
 
 void Animal::dying()
 {
+	// Il ne se passe rien de particulier à la mort d'un animal.
 }
 
 bool Animal::isDead()
 {
-	return false;
+	return m_hp==0;
 }
 
 bool Animal::isDamaged()
 {
-	return false;
+	return m_hp<m_hpMax;
 }
 
 /**
