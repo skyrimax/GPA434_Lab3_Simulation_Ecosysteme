@@ -13,7 +13,6 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.resumeButton->setEnabled(false);
 	ui.stepButton->setEnabled(false);
 	ui.stopButton->setEnabled(false);
-
 }
 
 void SimulationMainWindow::showAPropos()
@@ -35,6 +34,9 @@ Dans le cadre du cours :
 	- Laboratoire 3
 
 Version 1.0)---" };
+
+	//Afficher le message
+	QMessageBox::about(this, u8R"(À propos)", aboutProgramm);
 }
 
 void SimulationMainWindow::on_parameterButton_clicked()

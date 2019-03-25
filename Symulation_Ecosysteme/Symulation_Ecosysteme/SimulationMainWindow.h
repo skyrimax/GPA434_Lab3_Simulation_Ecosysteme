@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
+#include <QTimer>
 #include "ui_SimulationMainWindow.h"
 #include "ParameterWindow.h"
 
@@ -14,11 +15,17 @@ public:
 private:
 	Ui::SimulationMainWindowClass ui;
 
+	/*Timer qui sera de 30 millisecondes qui
+	fera faire une boucle à chaque fois. Lorsque
+	Le timer atteindre 30 millisecondes, il enverra
+	Un signal*/
+	QTimer mTimer;
+
+	QGraphicsScene mGraphicsScene;
 
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation
 	void showAPropos();
-
 	//Slots pour aller définir les paramètre de simulation
 	void on_parameterButton_clicked();
 	//Slots pour démarrer la simulation

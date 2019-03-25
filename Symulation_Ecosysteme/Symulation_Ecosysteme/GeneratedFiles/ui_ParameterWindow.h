@@ -34,7 +34,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_6;
     QSpacerItem *horizontalSpacer_6;
-    QSpinBox *qteHordes;
+    QSpinBox *qteHardes;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_4;
     QSpacerItem *horizontalSpacer_5;
@@ -90,11 +90,11 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer_6);
 
-        qteHordes = new QSpinBox(ParameterWindow);
-        qteHordes->setObjectName(QString::fromUtf8("qteHordes"));
-        qteHordes->setMaximum(10);
+        qteHardes = new QSpinBox(ParameterWindow);
+        qteHardes->setObjectName(QString::fromUtf8("qteHardes"));
+        qteHardes->setMaximum(10);
 
-        horizontalLayout_2->addWidget(qteHordes);
+        horizontalLayout_2->addWidget(qteHardes);
 
 
         gridLayout->addLayout(horizontalLayout_2, 1, 2, 1, 2);
@@ -251,7 +251,7 @@ public:
     void retranslateUi(QDialog *ParameterWindow)
     {
         ParameterWindow->setWindowTitle(QApplication::translate("ParameterWindow", "Param\303\250tres", nullptr));
-        label_6->setText(QApplication::translate("ParameterWindow", "Quantit\303\251 de hordes de chevreuil :", nullptr));
+        label_6->setText(QApplication::translate("ParameterWindow", "Quantit\303\251 de hardes de chevreuil :", nullptr));
         label_4->setText(QApplication::translate("ParameterWindow", "Quantit\303\251 de chevreuils au d\303\251marrage :", nullptr));
         label_5->setText(QApplication::translate("ParameterWindow", "Quantit\303\251 de loups au d\303\251marrage :", nullptr));
         label_3->setText(QApplication::translate("ParameterWindow", "Quantit\303\251 de lapins au d\303\251marrage :", nullptr));
