@@ -59,6 +59,14 @@ void Plante::healing()
 
 void Plante::receiveDamages(int nbDamage)
 {
+	if (m_fruits == 0) {
+		m_hp -= nbDamage;
+		if (m_hp < 0)
+			m_hp = 0;
+	}
+	else {
+		m_fruits -= nbDamage / COUT_FRUIT;
+	}
 }
 
 void Plante::reproduction()
@@ -134,10 +142,14 @@ void Plante::reproduction()
 
 		} while (m_fruits>0 && !hasReproduced);
 	}
+
+	m_timer = m_timeToReproduction;
 }
 
 void Plante::simulation()
 {
+	m_timer--;
+
 	if (!this->isDead()) {
 		this->replenishEnergy();
 
@@ -156,7 +168,8 @@ void Plante::simulation()
 
 void Plante::dying()
 {
-	// Rien à faire à la mort d'une plante
+	m_environnement->getTerrain(m_coordonne.getX(), m_coordonne.getY())->
+		gainRessources(m_hp*HP_TO_RESSOURCE_RATE + m_energy * COUT_GUERISON*HP_TO_RESSOURCE_RATE);
 }
 
 bool Plante::isDead()
@@ -167,4 +180,12 @@ bool Plante::isDead()
 bool Plante::isDamaged()
 {
 	return m_hp<m_hpMax;
+}
+
+void Plante::pousserFruits()
+{
+	if (m_energy >= COUT_FRUIT) {
+		m_energy -= COUT_FRUIT;
+			m_fruits++;
+	}
 }

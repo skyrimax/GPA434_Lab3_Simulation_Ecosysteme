@@ -13,9 +13,9 @@
 
 // Constantes relantant à la génération du terrain
 #define THRESHOLD_EAU 0.1
-#define THRESHOLD_TERRE 0.3
-#define THRESHOLD_GAZON 0.5
-#define THRESHOLD_PLANTE 0.85
+#define THRESHOLD_TERRE 0.35
+#define THRESHOLD_GAZON 0.65
+#define THRESHOLD_PLANTE 1.0
 
 // Constraintes relatant à la fonction de bruit pour la génération du terrain
 #define OCTAVES 6
@@ -29,3 +29,8 @@
 #define RESSOURCES_MIN_PLANTE 100
 #define COUT_GUERISON 10
 #define RATE_GUERISON 1
+#define HP_TO_RESSOURCE_RATE 10
+#define COUT_FRUIT 5
+
+// Constantes relatant aux animaux
+#define DEVIATION_MAX 5

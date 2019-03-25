@@ -8,6 +8,7 @@
 
  // Librairies standard
 #include <list>
+#include <random>
 
 // Librairies de Qt
 #include <qgraphicsitem>

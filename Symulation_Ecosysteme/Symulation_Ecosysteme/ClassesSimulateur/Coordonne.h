@@ -11,17 +11,18 @@ public:
 
 	Coordonne(double x=0, double y=0);
     
-double getX();
+	// Accesseurs
+	double getX();
+	double getY();
     
-int getY();
+	// Mutateurs pour imposer des valeurs hard
+	void setX(double x);
+	void setY(double y);
     
-void setX();
-    
-void setY();
-    
-void moveX();
-    
-void moveY();
+	// Fonction membres pour un déplacemetn de coordonnées
+	void moveX(double deltaX);
+	void moveY(double deltaY);
+
 private: 
     double m_x;
     double m_y;

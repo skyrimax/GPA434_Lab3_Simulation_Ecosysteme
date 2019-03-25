@@ -25,6 +25,7 @@ public:
 
 	// Fontions membres
 	void reprendreRessources();
+	void gainRessources(int nbRessources);
 	void perdreRessources(int nbRessources);
 	void update();
 	bool hasPlante();
