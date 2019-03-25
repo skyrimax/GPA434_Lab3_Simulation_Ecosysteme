@@ -11,8 +11,48 @@
  */
 
 
-Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y, double vitesse, double sprint, Sex sex, int timerMort, int timerGestation, int timerReproduction, std::string cible)
+Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y,
+	double vitesse, double sprint, Sex sex,
+	int nbProgenituresMin, int nbProgenituresMax,
+	int timerMort, int timerGestation, int timerReproduction,
+	std::list<std::string> cible)
+	: Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
+	m_vitesse(vitesse), m_sprint(sprint), m_sex(sex), m_isSprinting(false),
+	m_aEnfant(false), m_nbProgenituresMin(nbProgenituresMin),
+	m_nbProgenituresMax(nbProgenituresMax), m_closestPredateur(nullptr),
+	m_timerMort(timerMort), m_timerGestation(timerGestation),
+	m_cible(cible)
 {
+}
+
+void Animal::seekEnergy()
+{
+}
+
+void Animal::healing()
+{
+}
+
+void Animal::receiveDamages(int nbDamage)
+{
+}
+
+void Animal::reproduction()
+{
+}
+
+void Animal::dying()
+{
+}
+
+bool Animal::isDead()
+{
+	return false;
+}
+
+bool Animal::isDamaged()
+{
+	return false;
 }
 
 /**
