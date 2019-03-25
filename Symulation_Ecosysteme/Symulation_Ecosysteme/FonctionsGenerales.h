@@ -8,10 +8,10 @@
 //
 
 //Fonction qui retourne la distance entre 2 points dans l environnement
-double DistanceEntre2Points(Coordonne pt1,Coordonne pt2);
+double distanceEntre2Points(Coordonne pt1,Coordonne pt2);
 
 //Fonction qui qui retourne l angle d orientation a partir de l axe des x avec vecteur vitesse
-double VitesseVersAngle(double vx,double vy);
+double vitesseVersAngle(double vx,double vy);
 
 //Fonction qui retourne le point cartesien de croisement de la trajectoire dun animal avec la frontiere  
-//Croisement entre 2 lignes (trajectoire, frontiere)
+double croisementEntre2Lignes(Coordonne depart, Coordonne destination);
