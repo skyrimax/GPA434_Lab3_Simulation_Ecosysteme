@@ -8,7 +8,7 @@
 
 Vivant::Vivant(Environnement * environnement, std::string espece, int hp,
 	int energy, int ageAdulte, int ageMax,
-	int x, int y)
+	double x, double y)
 	:m_environnement(environnement), m_espece(espece), m_hp(hp), m_hpMax(hp),
 	m_energy(energy), m_energyMax(energy), m_age(0), m_ageAdulte(ageAdulte), m_ageMax(ageMax),
 	m_coordonne(x, y)

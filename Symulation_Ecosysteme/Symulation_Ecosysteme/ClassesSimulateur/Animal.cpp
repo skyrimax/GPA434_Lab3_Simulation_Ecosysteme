@@ -11,16 +11,18 @@
  */
 
 
-Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y,
+Animal::Animal(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, double x, double y,
 	double vitesse, double sprint, Sex sex,
 	int nbProgenituresMin, int nbProgenituresMax,
+	Animal* mere, Meute* meute,
 	int timerMort, int tempsGestation, int tempsReproduction,
 	std::list<std::string> cible)
 	: Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
 	m_vitesse(vitesse), m_sprint(sprint), m_sex(sex), m_isSprinting(false),
 	m_aEnfant(false), m_nbProgenituresMin(nbProgenituresMin),
 	m_nbProgenituresMax(nbProgenituresMax), m_closestPredateur(nullptr),
-	m_mate(nullptr), m_timerMort(timerMort), m_tempsGestation(tempsGestation),
+	m_mate(nullptr), m_mere(mere), m_meute(meute),
+	m_timerMort(timerMort), m_tempsGestation(tempsGestation),
 	m_tempsReproduction(tempsReproduction), m_cible(cible)
 {
 }
@@ -85,6 +87,11 @@ bool Animal::isDamaged()
  */
 void Animal::devenirCharogne() {
 	m_environnement->addCharogne(new Charogne(this));
+}
+
+bool Animal::isHungry()
+{
+	return false;
 }
 
 /**
