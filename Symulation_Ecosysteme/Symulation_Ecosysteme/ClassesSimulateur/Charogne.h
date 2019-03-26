@@ -15,6 +15,11 @@ public:
 void pourrir();
     
 int getTime();
+
+protected:
+	//Ajouté par Fred, couleur des charognes
+	static const QColor sCharognesBackgoundColor;
+
 private: 
     int time;
 };

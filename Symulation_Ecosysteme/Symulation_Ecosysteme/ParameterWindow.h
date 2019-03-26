@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+#include <QMessageBox>
 #include "ui_ParameterWindow.h"
 #include "SimulationMainWindow.h"
 

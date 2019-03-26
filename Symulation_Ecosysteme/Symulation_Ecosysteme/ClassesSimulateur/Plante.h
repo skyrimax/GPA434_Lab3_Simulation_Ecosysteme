@@ -8,7 +8,8 @@
 
  // Librairies standard
 #include <list>
-
+//Librairies de Qt
+#include <QGraphicsItem>
 // Header files du simulateur
 #include "Vivant.h"
 #include"constantes.h"
@@ -16,9 +17,11 @@
 // Déclarations anticipées
 class Herbivore;
 
+
+//Ajout du parent QGraphicItem par Fred
 class Plante: public Vivant {
 public:
-	// Cosntructeur
+	// Constructeur
 	Plante()=default;
 	Plante(Environnement* environnement, std::string espece, int hp,
 		int energy, int ageAdulte, int ageMax, int x, int y,
@@ -43,6 +46,12 @@ public:
 
 	// Fonctions membres propre au plantes
 	void pousserFruits();
+
+protected:
+	//Ajouté par Fred, la forme de la plante
+	QRectF mshape;
+	//Ajouté par Fred, couleur des plantes
+	static const QColor sPlantesBackgoundColor;
 
 private: 
     int m_fruits;

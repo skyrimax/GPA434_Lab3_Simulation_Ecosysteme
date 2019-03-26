@@ -7,25 +7,39 @@
 #include "Herbivore.h"
 #include "Terrain.h"
 #include "Environement.h"
+#include <QPainter>
 
 /**
  * Plante implementation
  */
+
+ //Ajouté par Fred, Plantes RGB : 11-102-35
+const QColor Plante::sPlantesBackgoundColor(11, 102, 35);
+
+
 
 Plante::Plante(Environnement * environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax, int x, int y,
 	int timeToReproduction)
 	:Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
 	m_timeToReproduction(timeToReproduction), m_timer(timeToReproduction), m_fruits(0), m_isBeingEaten(false)
 {
+	//Ajout par Fred
+	//Création d'un rectangle de 10 par 10 positioné à (x,y)
+	mshape.setRect(x, y, 10, 10);
 }
 
 QRectF Plante::boundingRect() const
 {
-	return QRectF();
+	//Ajouté par Fred,
+	return QRectF(this->getCoordonne().getX(), this->getCoordonne().getY(),10,10);
 }
 
 void Plante::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	//Ajouté par Fred,
+	painter->setPen(Qt::NoPen);
+	painter->setBrush(sPlantesBackgoundColor);
+	painter->drawRect(mshape);
 }
 
 void Plante::replenishEnergy()

@@ -7,6 +7,13 @@
 #include "Terrain.h"
 #include "Grid.h"
 
+
+//Ajouté par Fred, Eau RGB : 0-0-255
+const QColor Terrain::sWaterBackgoundColor(0, 0, 255);
+//Ajouté par Fred, Gazon RGB : 0-255-0
+const QColor Terrain::sGrassBackgoundColor(0, 255, 0);
+//Ajouté par Fred, Terre RGB : 102-51-0
+const QColor Terrain::sEarthBackgoundColor(102, 51, 0);
 /**
  * Terrain implementation
  */

@@ -4,6 +4,7 @@
 #include <QTimer>
 #include "ui_SimulationMainWindow.h"
 #include "ParameterWindow.h"
+#include "ClassesSimulateur/Environement.h"
 
 class SimulationMainWindow : public QMainWindow
 {
@@ -20,8 +21,10 @@ private:
 	Le timer atteindre 30 millisecondes, il enverra
 	Un signal*/
 	QTimer mTimer;
-
+	//Créattion de la scène
 	QGraphicsScene mGraphicsScene;
+	//Création d'un environnement
+	Environnement *environnement;
 
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation

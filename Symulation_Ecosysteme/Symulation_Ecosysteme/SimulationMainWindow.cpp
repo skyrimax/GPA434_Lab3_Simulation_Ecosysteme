@@ -13,6 +13,7 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.resumeButton->setEnabled(false);
 	ui.stepButton->setEnabled(false);
 	ui.stopButton->setEnabled(false);
+
 }
 
 void SimulationMainWindow::showAPropos()
@@ -51,6 +52,8 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.parameterButton->setEnabled(false);
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
+
+	environnement = new Environnement();
 }
 
 void SimulationMainWindow::on_pauseButton_clicked()
@@ -71,5 +74,5 @@ void SimulationMainWindow::on_stepButton_clicked()
 
 void SimulationMainWindow::on_stopButton_clicked()
 {
-
+	mGraphicsScene.clear();
 }

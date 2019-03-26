@@ -4,6 +4,10 @@
 #include "stdafx.h"
 
 #include "Charogne.h"
+#include <QPainter>
+
+ //Ajouté par Fred, Charognes : 11-102-35
+const QColor Charogne::sCharognesBackgoundColor(255, 0, 0);
 
 /**
  * Charogne implementation

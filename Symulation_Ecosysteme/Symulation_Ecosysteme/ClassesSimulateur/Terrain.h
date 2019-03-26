@@ -38,6 +38,14 @@ public:
 	TypeTerrain getType();
 	int getRessources();
 
+protected:
+	//Ajouté par Fred, couleur de l'eau
+	static const QColor sWaterBackgoundColor;
+	//Ajouté par Fred, couleur du gazon
+	static const QColor sGrassBackgoundColor;
+	//Ajouté par Fred, couleur de la terre
+	static const QColor sEarthBackgoundColor;
+
 private: 
     int m_resource;
     TypeTerrain m_type;
