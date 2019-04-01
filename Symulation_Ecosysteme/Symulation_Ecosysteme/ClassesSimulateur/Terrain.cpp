@@ -33,6 +33,17 @@ Terrain::Terrain(Grid * grilleProprietaire, int x, int y, TypeTerrain type)
 		m_resource = RESSOURCES_FRONTIERE;
 		break;
 	}
+
+	setPos(x, y);
+}
+
+QRectF Terrain::boundingRect() const
+{
+	return QRectF();
+}
+
+void Terrain::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+{
 }
 
 /**
@@ -65,6 +76,32 @@ void Terrain::reprendreRessources() {
 		break;
 	default:
 		m_resource = RESSOURCES_FRONTIERE;
+		break;
+	}
+}
+
+void Terrain::gainRessources(int nbRessources)
+{
+	m_resource += nbRessources;
+	switch (m_type)
+	{
+	case Terrain::TypeTerrain::Eau:
+		if (m_resource > RESSOURCES_EAU)
+			m_resource = RESSOURCES_EAU;
+		break;
+	case Terrain::TypeTerrain::Terre:
+		if (m_resource > RESSOURCES_TERRE)
+			m_resource = RESSOURCES_TERRE;
+		break;
+	case Terrain::TypeTerrain::Gazon:
+		if (m_resource > RESSOURCES_GAZON)
+			m_resource = RESSOURCES_GAZON;
+		break;
+	case Terrain::TypeTerrain::Frontiere:
+		if (m_resource > RESSOURCES_FRONTIERE)
+			m_resource = RESSOURCES_FRONTIERE;
+		break;
+	default:
 		break;
 	}
 }
