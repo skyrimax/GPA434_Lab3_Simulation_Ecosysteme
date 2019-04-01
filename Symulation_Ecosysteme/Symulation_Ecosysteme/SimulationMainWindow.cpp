@@ -14,7 +14,11 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.stepButton->setEnabled(false);
 	ui.stopButton->setEnabled(false);
 
-}
+	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
+	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
+	afin de mettre à jour les positions et les états.*/
+	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
+	}
 
 void SimulationMainWindow::showAPropos()
 {
@@ -49,22 +53,31 @@ void SimulationMainWindow::on_parameterButton_clicked()
 
 void SimulationMainWindow::on_startButton_clicked()
 {
+	/*Blocage du bouton paramètre et débloquage
+	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
 
-	environnement = new Environnement();
+
+	mTimer.start(30);
 }
 
 void SimulationMainWindow::on_pauseButton_clicked()
 {
+	/*Déblocage des boutons reprendre et par étape.*/
 	ui.stepButton->setEnabled(true);
 	ui.resumeButton->setEnabled(true);
+
+	mTimer.stop();
 }
 
 void SimulationMainWindow::on_resumButton_clicked()
 {
+	/*Blocage du bouton par étape*/
 	ui.stepButton->setEnabled(false);
+
+	mTimer.start(30);
 }
 
 void SimulationMainWindow::on_stepButton_clicked()
@@ -75,4 +88,6 @@ void SimulationMainWindow::on_stepButton_clicked()
 void SimulationMainWindow::on_stopButton_clicked()
 {
 	mGraphicsScene.clear();
+
+	mTimer.stop();
 }

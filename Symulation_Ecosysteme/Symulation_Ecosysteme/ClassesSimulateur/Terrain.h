@@ -52,6 +52,8 @@ protected:
 	static const QColor sGrassBackgoundColor;
 	//Ajouté par Fred, couleur de la terre
 	static const QColor sEarthBackgoundColor;
+	//Ajouté par Fred, couleur de la terre
+	static const QColor sFrontierBackgoundColor;
 
 private: 
     int m_resource;
@@ -60,6 +62,8 @@ private:
 	int m_x;
 	int m_y;
 	bool m_hasPlante;
+	//Ajouté par Fred, la forme de la plante
+	QRectF mshape;
 };
 
 #endif //_TERRAIN_H

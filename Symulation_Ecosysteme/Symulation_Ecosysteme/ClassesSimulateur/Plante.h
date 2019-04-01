@@ -18,7 +18,6 @@
 class Herbivore;
 
 
-//Ajout du parent QGraphicItem par Fred
 class Plante: public Vivant {
 public:
 	// Constructeur
