@@ -15,6 +15,7 @@
 #include "Vivant.h"
 #include "Orientation.h"
 #include "Charogne.h"
+#include "constantes.h"
 
 
 class Animal: public Vivant {
@@ -24,10 +25,11 @@ public:
 	// Constructeur
 	Animal() = default;
 	Animal(Environnement* environnement, std::string espece, int hp,
-		int energy, int ageAdulte, int ageMax, int x, int y,
+		int energy, int ageAdulte, int ageMax, double x, double y,
 		double vitesse, double sprint, Sex sex,
 		int nbProgenituresMin, int nbProgenituresMax,
-		int timerMort, int timerGestation, int timerReproduction,
+		Animal* mere, Meute* meute,
+		int timerMort, int tempsGestation, int tempsReproduction,
 		std::list<std::string> cible);
 	// Destructeur
 	~Animal() = default;
@@ -42,15 +44,22 @@ public:
     
 	// Fonctions membres communes à tous les animaux
 	void devenirCharogne();
+	bool isHungry();
 	bool isSprinting();
 	void sprint();
 	void walk();
 	void flee();
 	void wander();
+	void trackMother();
+	void devenirAdulte();
 
 	// Fonction membres spécifique à chaque type d'animaux
 	virtual void chooseTarget() = 0;
+	virtual void chooseTarget(Vivant* target) = 0;
+	virtual void resetTarget() = 0;
 	virtual void trackTarget() = 0;
+	virtual void chooseMate() = 0;
+	virtual void trackMate() = 0;
 	virtual void accoucher()=0;
 
 protected: 
@@ -59,6 +68,7 @@ protected:
 	void deplacer(double vitesse);
 	void closestPredateur();
 
+	// Attributs
     double m_vitesse;
     double m_sprint;
     bool m_isSprinting;
@@ -70,6 +80,9 @@ protected:
     std::list<Animal*> m_predateurs;
 	Animal* m_closestPredateur;
 	Animal* m_mate;
+	Animal* m_mere;
+	Meute* m_meute;
+	std::list<Animal*> m_enfant;
     Orientation m_orientation;
     int m_timerMort;
 	int m_timerGestation;

@@ -13,6 +13,7 @@ class Meute: public QGraphicsItemGroup {
 public:
 
 	void simulation();
+	void addMembre(Animal* membre);
 
 private: 
     std::list<Animal*> membres;

@@ -25,7 +25,7 @@ public:
 	// Constructeur
 	Vivant() = default;
 	Vivant(Environnement* environnement, std::string espece, int hp,
-		int energy, int ageAdulte, int ageMax, int x, int y);
+		int energy, int ageAdulte, int ageMax, double x, double y);
 	// Destructeur
 	~Vivant()=default;
 

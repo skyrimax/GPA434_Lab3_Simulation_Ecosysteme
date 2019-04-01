@@ -112,56 +112,56 @@ void Environnement::addPlante(Plante *plante) {
 /**
  * @return list<Plante*>
  */
-std::list<Plante*> Environnement::getPlantes() const {
+std::list<Plante*>& Environnement::getPlantes() const {
     return m_plantes;
 }
 
 /**
  * @return list<Meute*>
  */
-std::list<Meute*> Environnement::getMeutesHerbivores() const{
+std::list<Meute*>& Environnement::getMeutesHerbivores() const{
     return m_meutesHerbivores;
 }
 
 /**
  * @return list<Herbivore*>
  */
-std::list<Herbivore*> Environnement::getHerbivores() const{
+std::list<Herbivore*>& Environnement::getHerbivores() const{
     return m_herbivores;
 }
 
 /**
  * @return list<Meute*>
  */
-std::list<Meute*> Environnement::getMeutesCarnivores() const{
+std::list<Meute*>& Environnement::getMeutesCarnivores() const{
     return m_meutesCarnivores;
 }
 
 /**
  * @return list<Carnivore*>
  */
-std::list<Carnivore*> Environnement::getCarnivores() const{
+std::list<Carnivore*>& Environnement::getCarnivores() const{
     return m_carnivores;
 }
 
 /**
  * @return list<Meute*>
  */
-std::list<Meute*> Environnement::getMeutesCharognards() const{
+std::list<Meute*>& Environnement::getMeutesCharognards() const{
     return m_meutesCharognards;
 }
 
 /**
  * @return list<Carnivore*>
  */
-std::list<Carnivore*> Environnement::getCharognards() const{
+std::list<Carnivore*>& Environnement::getCharognards() const{
     return m_charognards;
 }
 
 /**
 * @return list<Charogne*>
 */
-std::list<Charogne*> Environnement::getCharognes() const {
+std::list<Charogne*>& Environnement::getCharognes() const {
 	return m_charognes;
 }
 

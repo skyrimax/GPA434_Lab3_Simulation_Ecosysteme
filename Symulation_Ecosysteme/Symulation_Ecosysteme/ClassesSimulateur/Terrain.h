@@ -10,10 +10,13 @@
 //#include "Grid.h"
 #include "constantes.h"
 
+// Librairies de Qt
+#include <qgraphicsitem>
+
 // Déclaration anticipée
 class Grid;
 
-class Terrain {
+class Terrain: public QGraphicsItem {
 public: 
     
 	enum class TypeTerrain { Eau = 0, Terre = 1, Gazon = 2, Frontiere = 3 };
@@ -22,6 +25,10 @@ public:
 	Terrain(Grid* grilleProprietaire, int x, int y, TypeTerrain type);
 	// Destructeur par défault, on a pas à détruire la grille
 	Terrain() = default;
+
+	// Fonctions membres virtuelles héritées de QGraphicsItem
+	virtual QRectF boundingRect() const;
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	// Fontions membres
 	void reprendreRessources();
