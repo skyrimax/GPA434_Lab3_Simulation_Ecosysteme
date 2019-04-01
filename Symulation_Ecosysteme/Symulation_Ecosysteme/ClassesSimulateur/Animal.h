@@ -50,12 +50,16 @@ public:
 	void walk();
 	void flee();
 	void wander();
+	void trackMother();
+	void devenirAdulte();
 
 	// Fonction membres spécifique à chaque type d'animaux
+	virtual void chooseTarget() = 0;
+	virtual void chooseTarget(Vivant* target) = 0;
+	virtual void resetTarget() = 0;
+	virtual void trackTarget() = 0;
 	virtual void chooseMate() = 0;
 	virtual void trackMate() = 0;
-	virtual void chooseTarget() = 0;
-	virtual void trackTarget() = 0;
 	virtual void accoucher()=0;
 
 protected: 
@@ -64,6 +68,7 @@ protected:
 	void deplacer(double vitesse);
 	void closestPredateur();
 
+	// Attributs
     double m_vitesse;
     double m_sprint;
     bool m_isSprinting;

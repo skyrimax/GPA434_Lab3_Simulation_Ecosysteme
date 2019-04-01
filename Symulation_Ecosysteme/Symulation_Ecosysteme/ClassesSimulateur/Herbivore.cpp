@@ -41,43 +41,32 @@ void Herbivore::seekEnergy()
 void Herbivore::simulation()
 {
 	closestPredateur();
-
-	if (m_age < m_ageAdulte) {
-
-	}
-	if (m_age >= m_ageAdulte && m_age<m_ageMax) {
-		if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
-			m_coordonne) < AWARENESS_CIRCLE) {
-			flee();
-		}
-		else if (m_energy < 0.1*m_energyMax) {
-			seekEnergy();
-			trackTarget();
-			if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
-				m_coordonne.getY() == m_plante->getCoordonne().getY()) {
-				replenishEnergy();
-			}
-		}
-		else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
-			chooseMate();
-			trackMate();
-			if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
-				m_coordonne.getY() == m_mate->getCoordonne().getY()) {
-				reproduction();
-
-				m_mate->reproduction();
-			}
-		}
-		else if (m_sex == Sex::Female && m_enfant.size() != 0) {
-			bool needToFindFood = false;
-
-			for (auto const enfant : m_enfant) {
-				if (enfant->isHungry()) {
-					needToFindFood = true;
+	if (!isDead()) {
+		if (m_age < m_ageAdulte) {
+			if (m_plante != nullptr) {
+				trackTarget();
+				if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
+					m_coordonne.getY() == m_plante->getCoordonne().getY()) {
+					replenishEnergy();
 				}
 			}
-
-			if (needToFindFood) {
+			else
+			{
+				trackMother();
+			}
+		}
+		else if (m_age == m_ageAdulte) {
+			devenirAdulte();
+		}
+		else if (m_age > m_ageAdulte) {
+			if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
+				m_coordonne) < AWARENESS_CIRCLE) {
+				flee();
+			}
+			else if (m_hp < .9*m_hpMax) {
+				healing();
+			}
+			else if (m_energy < 0.1*m_energyMax) {
 				seekEnergy();
 				trackTarget();
 				if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
@@ -85,17 +74,53 @@ void Herbivore::simulation()
 					replenishEnergy();
 				}
 			}
+			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
+				chooseMate();
+				trackMate();
+				if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
+					m_coordonne.getY() == m_mate->getCoordonne().getY()) {
+					reproduction();
+
+					m_mate->reproduction();
+				}
+			}
+			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
+				bool needToFindFood = false;
+
+				for (auto const enfant : m_enfant) {
+					if (enfant->isHungry()) {
+						needToFindFood = true;
+					}
+				}
+
+				if (needToFindFood) {
+					seekEnergy();
+
+					for (auto const enfant : m_enfant) {
+						enfant->chooseTarget(m_plante);
+					}
+
+					trackTarget();
+					if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
+						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
+						replenishEnergy();
+					}
+				}
+			}
+			if (m_hp < m_hpMax) {
+				healing();
+			}
+			else {
+				wander();
+			}
+			m_age++;
+			if (m_timerReproduction > 0)
+				m_timerReproduction--;
+			if (m_enceinte && m_timerGestation > 0)
+				m_timerGestation--;
 		}
-		else {
-			wander();
-		}
-		m_age++;
-		if (m_timerReproduction > 0)
-			m_timerReproduction--;
-		if (m_enceinte && m_timerGestation > 0)
-			m_timerGestation--;
 	}
-	else if (m_age >= m_ageMax) {
+	else if (isDead()) {
 		if (m_timerMort > 0) {
 			m_timerMort--;
 		}
@@ -103,14 +128,6 @@ void Herbivore::simulation()
 			devenirCharogne();
 		}
 	}
-}
-
-void Herbivore::chooseMate()
-{
-}
-
-void Herbivore::trackMate()
-{
 }
 
 void Herbivore::chooseTarget()
@@ -134,10 +151,48 @@ void Herbivore::chooseTarget()
 	m_plante = closestPlante;
 }
 
+void Herbivore::chooseTarget(Vivant * target)
+{
+	m_plante = static_cast<Plante*>(target);
+}
+
+void Herbivore::resetTarget()
+{
+	m_plante = nullptr;
+}
+
 void Herbivore::trackTarget()
 {
 	m_orientation.setVX(m_plante->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_plante->getCoordonne().getY() - m_coordonne.getY());
+
+	walk();
+}
+
+void Herbivore::chooseMate()
+{
+	Herbivore* mate = nullptr;
+	int distance = INT_MAX;
+
+	std::list<Herbivore*> liste = m_environnement->getHerbivores();
+
+	for (auto const h : liste) {
+		if (h->getEspece == m_espece) {
+			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
+				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
+
+				mate = h;
+			}
+		}
+	}
+
+	m_mate = mate;
+}
+
+void Herbivore::trackMate()
+{
+	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
 	walk();
 }

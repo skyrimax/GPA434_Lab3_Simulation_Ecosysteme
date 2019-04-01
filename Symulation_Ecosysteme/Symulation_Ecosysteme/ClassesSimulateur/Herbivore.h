@@ -35,10 +35,12 @@ private:
 	virtual void simulation() override;
 
 	// Fonctions membres virtuelles héritées de Animal
+	virtual void chooseTarget() override;
+	virtual void chooseTarget(Vivant* target) override;
+	virtual void resetTarget() override;
+	virtual void trackTarget() override;
 	virtual void chooseMate() override;
 	virtual void trackMate() override;
-	virtual void chooseTarget() override;
-	virtual void trackTarget() override;
 	virtual void accoucher() override;
 
 protected: 

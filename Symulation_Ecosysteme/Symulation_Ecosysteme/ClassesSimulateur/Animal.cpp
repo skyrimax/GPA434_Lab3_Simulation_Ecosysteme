@@ -161,6 +161,14 @@ void Animal::wander() {
 	this->deplacer(m_vitesse);
 }
 
+void Animal::trackMother()
+{
+}
+
+void Animal::devenirAdulte()
+{
+}
+
 void Animal::deplacer(double vitesse) {
 
 	Coordonne nextCoordonne(m_coordonne);
