@@ -46,8 +46,8 @@ public:
 	void devenirCharogne();
 	bool isHungry();
 	bool isSprinting();
-	void sprint();
-	void walk();
+	void sprint(Animal* cible);
+	void walk(Animal* cible);
 	void flee();
 	void wander();
 	void trackMother();
@@ -66,6 +66,7 @@ protected:
 
 	// Fonction membre pour déplacer l'animal
 	void deplacer(double vitesse);
+	void deplacer(double vitesse, Animal* cible);
 	void closestPredateur();
 
 	// Attributs

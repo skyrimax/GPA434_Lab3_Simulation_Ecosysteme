@@ -121,11 +121,17 @@ void Herbivore::simulation()
 		}
 	}
 	else if (isDead()) {
-		if (m_timerMort > 0) {
-			m_timerMort--;
+		if (m_dead) {
+			if (m_timerMort > 0) {
+				m_timerMort--;
+			}
+			else {
+				devenirCharogne();
+			}
 		}
-		else {
-			devenirCharogne();
+		else
+		{
+			dying();
 		}
 	}
 }
