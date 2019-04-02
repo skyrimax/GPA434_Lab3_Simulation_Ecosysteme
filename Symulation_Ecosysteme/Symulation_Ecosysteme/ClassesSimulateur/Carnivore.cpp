@@ -7,7 +7,7 @@
 #include "Environement.h"
 
 /**
- * Carnivore implementation
+ * Carnivore implemantation
  */
 
 QRectF Carnivore::boundingRect() const
