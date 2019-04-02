@@ -5,18 +5,41 @@
 
 #include "Herbivore.h"
 #include "Environement.h"
+#include <QPainter>
 
 /**
  * Herbivore implementation
  */
+Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
+	int energy, int ageAdulte, int ageMax, double x, double y,
+	double vitesse, double sprint, Sex sex,
+	int nbProgenituresMin, int nbProgenituresMax,
+	Animal* mere, Meute* meute,
+	int timerMort, int tempsGestation, int tempsReproduction,
+	std::list<std::string> cible)
+{
+	//Ajouté par Fred, création d'une flèce pour les herbivores
+	mshape << QPointF(0, 0)
+		<< QPointF(-0.25, 0.5)
+		<< QPointF(1, 0.)
+		<< QPointF(-0.25, -0.5);
+
+	sHerbivorBackgoundColor.setRgb(255,255,0);
+}
+
 
 QRectF Herbivore::boundingRect() const
 {
-	return QRectF();
+	//Ajouté par Fred,
+	return QRectF(-0.25, -0.5, 1.0 , 1.25);
 }
 
 void Herbivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	//Ajouté par Fred
+	painter->setPen(Qt::NoPen);
+	painter->setBrush(sHerbivorBackgoundColor);
+	painter->drawPolygon(mshape);
 }
 
 void Herbivore::replenishEnergy()

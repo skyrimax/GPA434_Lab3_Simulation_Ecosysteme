@@ -9,14 +9,6 @@
 #include <QPainter>
 
 
-//Ajouté par Fred, Eau RGB : 0-0-255
-const QColor Terrain::sWaterBackgoundColor(0, 0, 255);
-//Ajouté par Fred, Gazon RGB : 0-255-0
-const QColor Terrain::sGrassBackgoundColor(0, 255, 0);
-//Ajouté par Fred, Terre RGB : 102-51-0
-const QColor Terrain::sEarthBackgoundColor(102, 51, 0);
-//Ajouté par Fred, Frontière RGB : 0-0-0
-const QColor Terrain::sFrontierBackgoundColor(0, 0, 0);
 /**
  * Terrain implementation
  */
@@ -51,6 +43,11 @@ Terrain::Terrain(Grid * grilleProprietaire, int x, int y, TypeTerrain type)
 Création d'un rectangle de 1 par 1 positioné à (x,y)
 	qui représente le terrain à un point*/
 	mshape.setRect(x, y, 1, 1);
+
+	sWaterBackgoundColor.setRgb(0,0,255);
+	sGrassBackgoundColor.setRgb(0, 255, 0);
+	sEarthBackgoundColor.setRgb(102, 51, 0);
+	sFrontierBackgoundColor.setRgb(0, 0, 0);
 }
 
 QRectF Terrain::boundingRect() const

@@ -2,6 +2,8 @@
 #include "SimulationMainWindow.h"
 #include "ParameterWindow.h"
 
+
+
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -20,12 +22,12 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
 	}
 
+/*Fonction À Propos pour expliquer le programme*/
 void SimulationMainWindow::showAPropos()
 {
 	//Créer le message
 	QString aboutProgramm{ \
-	u8R"---(EcoSimulated est un logiciel de simulation d'un écosystème incluant
- les plantes, lapins, chevreuils et loups.
+	u8R"---(EcoSimulated est un logiciel de simulation d'un écosystème incluant les plantes, lapins, chevreuils et loups. Dans cette simulation, les loups vont chercher à se nourrir en chassant les chevreuils, ces derniers vont tenter de s'échapper des loups mais devront également trouver de la nourriture, les plantes, pour survivre. Les plantes ont des fruits qui vont nourrir les chevreuils, les plantes vont donc perdre des fruits, mais  d'autres fruits repousseront avec le temps. Il y a aussi un système de reproduction propre à chaque espèce, afin d'assurer leur survie.
 
 Ce programme a été réalisé par :
 	- Frédéric Grondines
@@ -44,6 +46,7 @@ Version 1.0)---" };
 	QMessageBox::about(this, u8R"(À propos)", aboutProgramm);
 }
 
+/*Ouverture des paramètre lors de l'activation du bouton*/
 void SimulationMainWindow::on_parameterButton_clicked()
 {
 	ParameterWindow dialog(this);
@@ -51,6 +54,7 @@ void SimulationMainWindow::on_parameterButton_clicked()
 	dialog.exec();
 }
 
+/*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
 	/*Blocage du bouton paramètre et débloquage
@@ -63,6 +67,7 @@ void SimulationMainWindow::on_startButton_clicked()
 	mTimer.start(30);
 }
 
+/*Met la simulation en pause en arretant le timer*/
 void SimulationMainWindow::on_pauseButton_clicked()
 {
 	/*Déblocage des boutons reprendre et par étape.*/
@@ -72,6 +77,7 @@ void SimulationMainWindow::on_pauseButton_clicked()
 	mTimer.stop();
 }
 
+/*Continue la simulation là où elle était*/
 void SimulationMainWindow::on_resumButton_clicked()
 {
 	/*Blocage du bouton par étape*/
@@ -80,11 +86,15 @@ void SimulationMainWindow::on_resumButton_clicked()
 	mTimer.start(30);
 }
 
+/*Envoie un singal à simulation à chaque fois qu'on pèse
+sur le bouton Par Étape*/
 void SimulationMainWindow::on_stepButton_clicked()
 {
 
 }
 
+/*Bouton qui arrête la simulation en arrêtant le timer
+et en effacant le GraphicView*/
 void SimulationMainWindow::on_stopButton_clicked()
 {
 	mGraphicsScene.clear();

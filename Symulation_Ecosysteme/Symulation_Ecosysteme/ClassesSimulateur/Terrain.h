@@ -47,13 +47,13 @@ public:
 
 protected:
 	//Ajouté par Fred, couleur de l'eau
-	static const QColor sWaterBackgoundColor;
+	QColor sWaterBackgoundColor;
 	//Ajouté par Fred, couleur du gazon
-	static const QColor sGrassBackgoundColor;
+	QColor sGrassBackgoundColor;
 	//Ajouté par Fred, couleur de la terre
-	static const QColor sEarthBackgoundColor;
+	QColor sEarthBackgoundColor;
 	//Ajouté par Fred, couleur de la terre
-	static const QColor sFrontierBackgoundColor;
+	QColor sFrontierBackgoundColor;
 
 private: 
     int m_resource;

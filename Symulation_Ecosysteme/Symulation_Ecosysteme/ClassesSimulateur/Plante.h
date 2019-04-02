@@ -50,7 +50,7 @@ protected:
 	//Ajouté par Fred, la forme de la plante
 	QRectF mshape;
 	//Ajouté par Fred, couleur des plantes
-	static const QColor sPlantesBackgoundColor;
+	QColor sPlantesBackgoundColor;
 
 private: 
     int m_fruits;
