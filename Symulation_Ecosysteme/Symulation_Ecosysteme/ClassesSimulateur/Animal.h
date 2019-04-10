@@ -34,6 +34,9 @@ public:
 	// Destructeur
 	~Animal() = default;
 
+	// Accesseur de meute
+	Meute* getMeute();
+
 	// Fonctions membres virtuelles héritées de Vivant
 	virtual void healing() override;
 	virtual void receiveDamages(int nbDamage) override;
@@ -52,6 +55,8 @@ public:
 	void wander();
 	void trackMother();
 	void devenirAdulte();
+	void trackAlpha();
+	void sprintAlpha();
 
 	// Fonction membres spécifique à chaque type d'animaux
 	virtual void chooseTarget() = 0;

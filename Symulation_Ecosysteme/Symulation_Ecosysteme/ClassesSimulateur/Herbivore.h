@@ -13,7 +13,7 @@
 class Plante;
 
 class Herbivore: public Animal {
-private:
+public:
 
 	// Constructeur
 	Herbivore() = default;

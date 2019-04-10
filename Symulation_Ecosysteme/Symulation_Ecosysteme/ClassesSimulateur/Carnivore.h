@@ -11,13 +11,16 @@
 
 
 class Carnivore: public Animal {
-private: 
+public: 
 
 	// Constructeur
 	Carnivore() = default;
 	Carnivore(Environnement* environnement, std::string espace, int hp, int energy, int ageAdulte, int ageMax,
 		double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
 		Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible);
+
+	// Fonctions membres des carnivores
+	bool isCharognard();
 
 	// Fonctions membre virtuelles héritées de QGraphicsItem
 	virtual QRectF boundingRect() const;
@@ -38,8 +41,8 @@ private:
 	virtual void accoucher() override;
 
 protected:
-    Animal* proie;
-    bool isCharognard;
+    Animal* m_proie;
+    bool m_isCharognard;
 };
 
 #endif //_CARNIVORE_H
