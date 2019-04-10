@@ -8,6 +8,8 @@
 
 #include <QGraphicsItemGroup>
 
+//Ajouté par Fred:
+class Animal; //Averti le programme qu'il y aura une class Animal
 
 class Meute: public QGraphicsItemGroup {
 public:
