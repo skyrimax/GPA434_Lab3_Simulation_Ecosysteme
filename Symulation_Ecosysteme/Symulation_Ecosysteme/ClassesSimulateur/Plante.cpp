@@ -36,7 +36,7 @@ Plante::Plante(Environnement * environnement, std::string espece, int hp, int en
 	//Création d'un rectangle de 10 par 10 positioné à (x,y)
 	mshape.setRect(x, y, 10, 10);
 
-	sPlantesBackgoundColor.setRgb(11, 102, 35);
+	sPlantesBackgoundColor.setRgb(11, 102, 35);//vert
 }
 
 /*boundingRect est un fonction purement virtuelle de QGraphicItems,

@@ -44,10 +44,10 @@ Création d'un rectangle de 1 par 1 positioné à (x,y)
 	qui représente le terrain à un point*/
 	mshape.setRect(x, y, 1, 1);
 
-	sWaterBackgoundColor.setRgb(0,0,255);
-	sGrassBackgoundColor.setRgb(0, 255, 0);
-	sEarthBackgoundColor.setRgb(102, 51, 0);
-	sFrontierBackgoundColor.setRgb(0, 0, 0);
+	sWaterBackgoundColor.setRgb(0,0,255);//bleu
+	sGrassBackgoundColor.setRgb(0, 255, 0);//Vert
+	sEarthBackgoundColor.setRgb(102, 51, 0);//brun
+	sFrontierBackgoundColor.setRgb(0, 0, 0);//noir
 }
 
 QRectF Terrain::boundingRect() const

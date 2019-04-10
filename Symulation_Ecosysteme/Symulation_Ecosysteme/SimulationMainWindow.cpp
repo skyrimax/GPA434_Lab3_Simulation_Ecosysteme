@@ -16,10 +16,14 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.stepButton->setEnabled(false);
 	ui.stopButton->setEnabled(false);
 
+	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
+	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
+
 	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
 	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
 	afin de mettre à jour les positions et les états.*/
 	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
+
 	}
 
 /*Fonction À Propos pour expliquer le programme*/
@@ -90,7 +94,11 @@ void SimulationMainWindow::on_resumButton_clicked()
 sur le bouton Par Étape*/
 void SimulationMainWindow::on_stepButton_clicked()
 {
+	/*1ere méthode avec la fonction advance de QGraphicsScene*/
+	mGraphicsScene.advance();
 
+	/*2ene méthode utilise directement la fonction simulatiom*/
+	environnement->simulation();
 }
 
 /*Bouton qui arrête la simulation en arrêtant le timer

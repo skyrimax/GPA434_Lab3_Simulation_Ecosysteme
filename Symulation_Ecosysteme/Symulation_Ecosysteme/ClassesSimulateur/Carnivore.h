@@ -43,6 +43,11 @@ public:
 protected:
     Animal* m_proie;
     bool m_isCharognard;
+
+	//Ajouté par Fred, la forme des carnivores
+	QPolygonF mshape;
+	//Ajouté par Fred, couleur des carnivores
+	QColor sCarnivoreBackgoundColor;
 };
 
 #endif //_CARNIVORE_H

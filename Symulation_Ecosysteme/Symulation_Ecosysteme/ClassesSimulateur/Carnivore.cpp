@@ -5,18 +5,39 @@
 
 #include "Carnivore.h"
 #include "Environement.h"
+#include <QPainter>
 
 /**
  * Carnivore implementation
  */
 
+Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, int energy, int ageAdulte, int ageMax,
+	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
+{
+	// ************** À IMPLANTER ***************
+
+		//Ajouté par Fred, création d'une flèce pour les carnivores
+	mshape << QPointF(0, 0)
+		<< QPointF(-0.25, 0.5)
+		<< QPointF(1, 0.)
+		<< QPointF(-0.25, -0.5);
+
+	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
+}
+
 QRectF Carnivore::boundingRect() const
 {
-	return QRectF();
+	//Ajouté par Fred,
+	return QRectF(-0.25, -0.5, 1.0, 1.25);
 }
 
 void Carnivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	//Ajouté par Fred
+	painter->setPen(Qt::NoPen);
+	painter->setBrush(sCarnivoreBackgoundColor);
+	painter->drawPolygon(mshape);
 }
 
 void Carnivore::replenishEnergy()

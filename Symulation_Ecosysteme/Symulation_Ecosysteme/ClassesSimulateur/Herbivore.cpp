@@ -24,7 +24,7 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 		<< QPointF(1, 0.)
 		<< QPointF(-0.25, -0.5);
 
-	sHerbivorBackgoundColor.setRgb(255,255,0);
+	sHerbivorBackgoundColor.setRgb(255,255,0);//Jaune
 }
 
 
