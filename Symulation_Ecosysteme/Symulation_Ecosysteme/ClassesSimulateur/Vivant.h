@@ -31,7 +31,7 @@ public:
 
 // Accesseurs
 	int getHp() const;
-	int gatHpMax() const;
+	int getHpMax() const;	//TYPO ALERT modified gatHpMax for getHpMax
 	int getEnergy() const;
 	int getEnergyMax() const;
 	int getAge() const;

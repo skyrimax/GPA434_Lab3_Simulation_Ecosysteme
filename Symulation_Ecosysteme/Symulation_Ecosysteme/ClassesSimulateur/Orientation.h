@@ -42,7 +42,7 @@ private:
 	double m_unitY;
 
 	// Direction du vecteur
-	double m_direction
+	double m_direction;
 };
 
 #endif //_VELOCITE_H

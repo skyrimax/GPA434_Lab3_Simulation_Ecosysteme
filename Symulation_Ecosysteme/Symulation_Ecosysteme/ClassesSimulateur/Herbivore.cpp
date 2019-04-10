@@ -185,8 +185,6 @@ void Herbivore::chooseMate()
 			}
 		}
 	}
-
-	m_mate = mate;
 }
 
 void Herbivore::trackMate()
@@ -226,4 +224,9 @@ void Herbivore::accoucher()
 			m_meute->addMembre(enfant);
 		}
 	}
+}
+
+Plante * Herbivore::getPlante()
+{
+	return m_plante;
 }
