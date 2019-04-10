@@ -19,7 +19,8 @@ class Animal;
 class Meute : public QGraphicsItemGroup {
 public:
 
-	void simulation();
+	std::list<Animal*> getMembres();
+
 	void addMembre(Animal* membre);
 	Animal* getAlpha();
 	void setAlpha();

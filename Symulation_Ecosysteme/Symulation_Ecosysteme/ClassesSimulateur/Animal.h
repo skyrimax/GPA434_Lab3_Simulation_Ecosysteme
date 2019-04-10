@@ -20,7 +20,6 @@
 //Ajouté par Fred:
 class Meute;//Averti le programme qu'il y aura une class Meute
 
-
 class Animal: public Vivant {
 public: 
 
@@ -37,6 +36,9 @@ public:
 	// Destructeur
 	~Animal() = default;
 
+	// Accesseur de meute
+	Meute* getMeute();
+
 	// Fonctions membres virtuelles héritées de Vivant
 	virtual void healing() override;
 	virtual void receiveDamages(int nbDamage) override;
@@ -49,8 +51,8 @@ public:
 	void devenirCharogne();
 	bool isHungry();
 	bool isSprinting();
-	void sprint();
-	void walk();
+	void sprint(Animal* cible);
+	void walk(Animal* cible);
 	void flee();
 	void wander();
 	void trackMother();
@@ -89,6 +91,7 @@ protected:
 
 	// Fonction membre pour déplacer l'animal
 	void deplacer(double vitesse);
+	void deplacer(double vitesse, Animal* cible);
 	void closestPredateur();
 
 	// Attributs

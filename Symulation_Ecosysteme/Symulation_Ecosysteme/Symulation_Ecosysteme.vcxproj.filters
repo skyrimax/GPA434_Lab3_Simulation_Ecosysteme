@@ -99,9 +99,6 @@
     <ClCompile Include="ClassesSimulateur\Meute.cpp">
       <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
     </ClCompile>
-    <ClCompile Include="ClassesSimulateur\Omnivore.cpp">
-      <Filter>Source Files\Classes simulateur\Vivants\Animal</Filter>
-    </ClCompile>
     <ClCompile Include="PerlinNoiseGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
       <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
     <ClInclude Include="ClassesSimulateur\Meute.h">
-      <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassesSimulateur\Omnivore.h">
       <Filter>Header Files\Classes simulateur\Vivants\Animal</Filter>
     </ClInclude>
     <ClInclude Include="constantes.h">

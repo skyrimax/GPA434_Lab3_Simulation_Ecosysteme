@@ -40,14 +40,14 @@ public:
 	void addCharogne(Charogne* charogne);
     
 // Accesseur des listes d'éléments
-	std::list<Plante*>& getPlantes() const;
-	std::list<Meute*>& getMeutesHerbivores() const;
-	std::list<Herbivore*>& getHerbivores() const;
-	std::list<Meute*>& getMeutesCarnivores() const;
-	std::list<Carnivore*>& getCarnivores() const;
-	std::list<Meute*>& getMeutesCharognards() const;
-	std::list<Carnivore*>& getCharognards() const;
-	std::list<Charogne*>& getCharognes() const;
+	std::list<Plante*>& getPlantes();
+	std::list<Meute*>& getMeutesHerbivores();
+	std::list<Herbivore*>& getHerbivores();
+	std::list<Meute*>& getMeutesCarnivores();
+	std::list<Carnivore*>& getCarnivores();
+	std::list<Meute*>& getMeutesCharognards();
+	std::list<Carnivore*>& getCharognards();
+	std::list<Charogne*>& getCharognes();
 
 // Accesseurs d'éléments de la grille
 	Terrain* getTerrain(int x, int y);
@@ -65,6 +65,7 @@ private:
     std::list<Meute*> m_meutesCharognards;
     std::list<Carnivore*> m_charognards;
     std::list<Charogne*> m_charognes;
+	std::list<Vivant*> m_vivnats;
     Grid m_grille;
 };
 

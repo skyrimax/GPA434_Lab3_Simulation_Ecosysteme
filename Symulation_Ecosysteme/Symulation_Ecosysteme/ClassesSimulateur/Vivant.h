@@ -71,6 +71,7 @@ protected:
     int m_age;
 	int m_ageAdulte;
     int m_ageMax;
+	bool m_dead;
     Coordonne m_coordonne;
     Environnement* m_environnement;
 };
