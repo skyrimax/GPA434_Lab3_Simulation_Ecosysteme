@@ -21,7 +21,7 @@ int Vivant::getHp() const
 	return m_hp;
 }
 
-int Vivant::gatHpMax() const
+int Vivant::getHpMax() const
 {
 	return m_hpMax;
 }

@@ -55,6 +55,26 @@ public:
 	void wander();
 	void trackMother();
 	void devenirAdulte();
+	void trackAlpha();
+	void sprintAlpha();
+
+	//Accesseurs
+	Sex getSex();
+	Animal* getclosestPredateur();
+	Orientation getOrientation();
+	Plante* getPlante();
+	bool getaEnfant();
+	int gettimerReproduction();
+	Animal* getMate();
+	bool getenceinte();
+	int gettimerGestation();
+	int gettimerMort();
+
+	//Mutateurs
+	void settimerReproduction(int timer);
+	void settimerGestation(int timer);
+	void settimerMort(int timer);
+	Orientation setOrientation(Orientation orientation);
 
 	// Fonction membres spécifique à chaque type d'animaux
 	virtual void chooseTarget() = 0;
@@ -93,6 +113,7 @@ protected:
 	int m_timerReproduction;
 	int m_tempsReproduction;
 	std::list<std::string> m_cible;
+	
 };
 
 #endif //_ANIMAL_H

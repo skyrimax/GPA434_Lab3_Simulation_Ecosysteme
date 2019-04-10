@@ -165,9 +165,8 @@ void Plante::reproduction()
 						caseAdjacente->perdreRessources(RESSOURCES_MIN_PLANTE);
 						caseAdjacente->setHasPlante(true);
 
-						m_environnement->addPlante(new Plante(m_environnement, /*Ajouter non de plante ici*/ "Arbre",
-							/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-							x, y, /*Ajouter temps reproduction*/ 300));
+						m_environnement->addPlante(new Plante(m_environnement, m_espece, m_hpMax, m_energyMax,
+							m_ageAdulte, m_ageMax, x, y, m_timeToReproduction));
 
 						hasReproduced = true;
 					}
@@ -179,9 +178,8 @@ void Plante::reproduction()
 					caseAdjacente->perdreRessources(RESSOURCES_MIN_PLANTE);
 					caseAdjacente->setHasPlante(true);
 
-					m_environnement->addPlante(new Plante(m_environnement, /*Ajouter non de plante ici*/ "Arbre",
-						/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-						x, y, /*Ajouter temps reproduction*/ 300));
+					m_environnement->addPlante(new Plante(m_environnement, m_espece, m_hpMax, m_energyMax,
+						m_ageAdulte, m_ageMax, x, y, m_timeToReproduction));
 
 					hasReproduced = true;
 				}

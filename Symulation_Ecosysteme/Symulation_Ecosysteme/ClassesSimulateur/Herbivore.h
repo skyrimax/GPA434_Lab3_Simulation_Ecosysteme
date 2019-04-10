@@ -13,6 +13,11 @@
 class Plante;
 
 class Herbivore: public Animal {
+
+
+public:
+	Plante* getPlante();
+
 private:
 
 	// Constructeur
@@ -42,6 +47,8 @@ private:
 	virtual void chooseMate() override;
 	virtual void trackMate() override;
 	virtual void accoucher() override;
+
+	
 
 protected: 
     Plante* m_plante;
