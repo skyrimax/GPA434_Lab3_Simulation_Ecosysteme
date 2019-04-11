@@ -10,11 +10,22 @@
 
 #include "PerlinNoiseGenerator.h"
 
-PerlinNoiseGenerator::PerlinNoiseGenerator(int repeat ) //Modifié par Fred, = -1 a été éffacé car le paramètre est déjà initialisé à -1 dans le .h
+PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat = -1)
 	: m_repeat(repeat)
 {
-	for (int i = 0; i < 512; i++)
-	{
+	std::list<int> liste;
+
+	srand(seed);
+
+	for (int i = 0; i < 256; i++) {
+		liste.push_back(i);
+	}
+
+	while (!liste.empty()) {
+
+	}
+
+	for (int i = 0; i < 512; i++) {
 		m_p[i] = m_permutation[i % 256];
 	}
 }

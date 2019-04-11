@@ -46,6 +46,10 @@ public:
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
+	// Accesseur virtuel hérité de Animal
+	virtual Vivant* getTarget() override;
+
+protected: 
 private: 
     Plante* m_plante;
 	//Ajouté par Fred, la forme des herbivores
