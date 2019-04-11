@@ -40,7 +40,7 @@ std::list<Animal*>& Meute::simulation()
 			for (const auto membre : m_membres) {
 				if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
 					membre->setOrientation(m_alpha->getOrientation());
-					membre->walk();
+					membre->walk(membre);
 				}
 				else {
 					membre->sprintAlpha();
@@ -112,8 +112,8 @@ std::list<Animal*>& Meute::simulation()
 					membre->healing();
 				}
 				else {
-					if (membre->getCoordonne().getX == m_alpha->getCoordonne().getX &&
-						membre->getCoordonne().getY == m_alpha->getCoordonne().getY) {
+					if (membre->getCoordonne().getX() == m_alpha->getCoordonne().getX() &&	//Modifié par Fred, ajout des () pour les getX et getY
+						membre->getCoordonne().getY() == m_alpha->getCoordonne().getY()) {
 						membre->wander();
 					}
 					else if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {

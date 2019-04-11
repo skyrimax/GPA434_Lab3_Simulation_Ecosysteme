@@ -46,7 +46,7 @@ public:
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
-protected: 
+private: 
     Plante* m_plante;
 	//Ajouté par Fred, la forme des herbivores
 	QPolygonF mshape;

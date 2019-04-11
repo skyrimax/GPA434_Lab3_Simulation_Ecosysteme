@@ -4,6 +4,7 @@
 #include "stdafx.h"
 
 #include "Orientation.h"
+#include "FonctionsGenerales.h"	//Ajout par Fred
 
 /**
  * Orientation implementation

@@ -91,7 +91,7 @@ void Carnivore::trackTarget()
 	m_orientation.setVX(proie->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(proie->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Carnivore::chooseMate()
@@ -102,7 +102,7 @@ void Carnivore::chooseMate()
 	std::list<Carnivore*> liste = m_environnement->getCarnivores();
 
 	for (auto const h : liste) {
-		if (h->getEspece == m_espece) {
+		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenu h->getEspece()
 			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -119,7 +119,7 @@ void Carnivore::trackMate()
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Carnivore::accoucher()

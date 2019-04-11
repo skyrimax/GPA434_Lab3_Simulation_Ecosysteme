@@ -46,11 +46,6 @@ public:
 	// Fonctions membres propre au plantes
 	void pousserFruits();
 
-protected:
-	//Ajouté par Fred, la forme de la plante
-	QRectF mshape;
-	//Ajouté par Fred, couleur des plantes
-	QColor sPlantesBackgoundColor;
 
 private: 
     int m_fruits;
@@ -58,6 +53,11 @@ private:
 	int m_timeToReproduction;
     std::list<Herbivore*> m_isEatenBy;
     bool m_isBeingEaten;
+
+	//Ajouté par Fred, la forme de la plante
+	QRectF mshape;
+	//Ajouté par Fred, couleur des plantes
+	QColor sPlantesBackgoundColor;
 };
 
 #endif //_PLANTE_H

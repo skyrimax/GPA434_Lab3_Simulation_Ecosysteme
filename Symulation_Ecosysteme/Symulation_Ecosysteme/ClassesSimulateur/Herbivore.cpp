@@ -195,7 +195,7 @@ void Herbivore::trackTarget()
 	m_orientation.setVX(m_plante->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_plante->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Herbivore::chooseMate()
@@ -206,7 +206,7 @@ void Herbivore::chooseMate()
 	std::list<Herbivore*> liste = m_environnement->getHerbivores();
 
 	for (auto const h : liste) {
-		if (h->getEspece == m_espece) {
+		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenue h->getEspece(). Il manquait les paranthèses de la fonction
 			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -221,7 +221,7 @@ void Herbivore::trackMate()
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Herbivore::accoucher()
