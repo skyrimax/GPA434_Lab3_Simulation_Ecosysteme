@@ -4,7 +4,7 @@
 #include "stdafx.h"
 
 #include "Meute.h"
-#
+
 
  /**
   * Meute implementation
@@ -68,8 +68,8 @@ void Meute::simulation()
 					if (membre->getHp() < .9*membre->getHpMax()) {//On va healer peu importe l'énergie à la sortie du else fi. C'est tu vraiment nécessaire.
 						membre->healing();
 					}
-
-					else if ((!membre->getaEnfant() || membre->gettimerReproduction() == 0) && membre->getSex() == Sex::Male) {
+					
+					else if ((!membre->getaEnfant() || membre->gettimerReproduction() == 0) && membre->getSex() == Animal::Sex::Male) {
 						membre->chooseMate();
 						membre->trackMate();
 						if (membre->getCoordonne().getX() == membre->getMate()->getCoordonne().getX() &&
@@ -149,7 +149,7 @@ void Meute::setAlpha()
 {
 	for (auto const membre : m_membres) {
 
-		if (membre->getSex() == sex::male && membre->getAge() >= membre->getAgeAdulte()) {
+		if (membre->getSex() == Animal::Sex::Male && membre->getAge() >= membre->getAgeAdulte()) {
 			m_alpha = membre;
 			break;
 		}

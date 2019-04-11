@@ -24,6 +24,7 @@ public:
 	void addMembre(Animal* membre);
 	Animal* getAlpha();
 	void setAlpha();
+	void simulation();
 
 private:
 	std::list<Animal*> m_membres;
