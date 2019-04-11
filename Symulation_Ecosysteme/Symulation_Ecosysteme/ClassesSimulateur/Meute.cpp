@@ -4,13 +4,19 @@
 #include "stdafx.h"
 
 #include "Meute.h"
+#include "Environement.h"
 
 
  /**
   * Meute implementation
   */
 
-void Meute::simulation()
+std::list<Animal*>& Meute::getMembres()
+{
+	return m_membres;
+}
+
+std::list<Animal*>& Meute::simulation()
 {
 
 	for (auto const membre : m_membres) {
@@ -68,7 +74,7 @@ void Meute::simulation()
 					if (membre->getHp() < .9*membre->getHpMax()) {//On va healer peu importe l'énergie à la sortie du else fi. C'est tu vraiment nécessaire.
 						membre->healing();
 					}
-					
+
 					else if ((!membre->getaEnfant() || membre->gettimerReproduction() == 0) && membre->getSex() == Animal::Sex::Male) {
 						membre->chooseMate();
 						membre->trackMate();
@@ -138,6 +144,13 @@ void Meute::simulation()
 		/***********************************************************************************************************/
 		/***********************************************************************************************************/
 	}
+}
+
+void Meute::addMembre(Animal * membre)
+{
+	m_membres.push_back(membre);
+
+	m_environnement->addVivant(membre);
 }
 
 Animal * Meute::getAlpha()

@@ -110,6 +110,11 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
 	 m_vivnats.push_back(charogne);
  }
 
+ void Environnement::addVivant(Vivant * vivant)
+ {
+	 m_vivnats.push_back(vivant);
+ }
+
 /**
  * @param Plante *plante
  * @return void
@@ -184,7 +189,7 @@ Terrain * Environnement::getTerrain(int x, int y)
 /**
  * @return void
  */
-QGraphicsItemGroup Environnement::simulation() {
+std::list<Vivant*>& Environnement::simulation() {
 	std::list<Vivant*> toDie;
 	std::list<Animal*> meuteToDie;
 	std::list<Meute*> emptyMeute;
@@ -321,11 +326,6 @@ QGraphicsItemGroup Environnement::simulation() {
 			m_meutesCharognards.remove(meute);
 		}
 	}
-}
 
-/**
- * @return QGraphicsItemGroup
- */
-QGraphicsItemGroup Environnement::retourAnimaux() {
-    return QGraphicsItemGroup();
+	return m_vivnats;
 }

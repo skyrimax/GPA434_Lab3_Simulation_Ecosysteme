@@ -27,6 +27,11 @@ Animal::Animal(Environnement * environnement, std::string espece, int hp, int en
 {
 }
 
+Meute * Animal::getMeute()
+{
+	return m_meute;
+}
+
 void Animal::healing()
 {
 	if (m_hpMax - m_hp >= RATE_GUERISON)
@@ -302,7 +307,7 @@ void Animal::sprintAlpha() {
 	}
 }
 
-Sex Animal::getSex()
+Animal::Sex Animal::getSex()
 {
 	return m_sex;
 }
@@ -317,10 +322,10 @@ Orientation Animal::getOrientation()
 	return m_orientation;
 }
 
-Plante * Animal::getPlante()
+/*Plante * Animal::getPlante()
 {
 	return m_plante;
-}
+}*/
 
 bool Animal::getaEnfant()
 {
@@ -367,7 +372,7 @@ void Animal::settimerMort(int timer)
 	m_timerMort = timer;
 }
 
-Orientation Animal::setOrientation()
+/*Orientation Animal::setOrientation()
 {
 	return m_orientation;
-}
+}*/
