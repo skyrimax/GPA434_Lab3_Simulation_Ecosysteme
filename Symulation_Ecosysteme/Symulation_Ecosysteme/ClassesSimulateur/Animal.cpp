@@ -278,3 +278,96 @@ void Animal::closestPredateur() {
 
 	m_closestPredateur = closest;
 }
+
+void Animal::trackAlpha()
+{
+	m_isSprinting = false;
+
+	if (this != m_meute->getAlpha()){
+		
+		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
+		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
+
+		deplacer(m_vitesse);
+	}
+}
+
+void Animal::sprintAlpha() {
+	m_isSprinting = true;
+	if (this != m_meute->getAlpha()) {
+		this->trackAlpha();
+
+		this->deplacer(m_sprint);
+
+	}
+}
+
+Sex Animal::getSex()
+{
+	return m_sex;
+}
+
+Animal * Animal::getclosestPredateur()
+{
+	return m_closestPredateur;
+}
+
+Orientation Animal::getOrientation()
+{
+	return m_orientation;
+}
+
+Plante * Animal::getPlante()
+{
+	return m_plante;
+}
+
+bool Animal::getaEnfant()
+{
+	return m_aEnfant;
+}
+
+int Animal::gettimerReproduction()
+{
+	return m_timerReproduction;
+}
+
+Animal * Animal::getMate()
+{
+	return m_mate;
+}
+
+bool Animal::getenceinte()
+{
+	return m_enceinte;
+}
+
+int Animal::gettimerGestation()
+{
+	return m_timerGestation;
+}
+
+int Animal::gettimerMort()
+{
+	return m_timerMort;
+}
+
+void Animal::settimerReproduction(int timer)
+{
+	m_timerReproduction = timer;
+}
+
+void Animal::settimerGestation(int timer)
+{
+	m_timerGestation = timer;
+}
+
+void Animal::settimerMort(int timer)
+{
+	m_timerMort = timer;
+}
+
+Orientation Animal::setOrientation()
+{
+	return m_orientation;
+}
