@@ -53,9 +53,8 @@ public:
 	Terrain* getTerrain(int x, int y);
 
 // Fonction commendant 
-	QGraphicsItemGroup simulation();
-    
-	QGraphicsItemGroup retourAnimaux();
+	std::list<Vivant*>& simulation();
+
 private: 
     std::list<Plante*> m_plantes;
     std::list<Meute*> m_meutesHerbivores;
