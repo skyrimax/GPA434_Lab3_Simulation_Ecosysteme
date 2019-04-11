@@ -6,7 +6,6 @@
 #ifndef _MEUTE_H
 #define _MEUTE_H
 
-#include <QGraphicsItemGroup>
 #include "vivant.h"
 #include "Animal.h"
 #include "orientation.h"
@@ -17,7 +16,7 @@
 class Animal;
 class Environnement;
 
-class Meute : public QGraphicsItemGroup {
+class Meute {
 public:
 
 	std::list<Animal*>& getMembres();
