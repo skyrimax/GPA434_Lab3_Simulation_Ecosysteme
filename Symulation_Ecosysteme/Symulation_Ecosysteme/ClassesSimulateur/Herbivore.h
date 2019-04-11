@@ -43,6 +43,9 @@ public:
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
+	// Accesseur virtuel hérité de Animal
+	virtual Vivant* getTarget() override;
+
 protected: 
     Plante* m_plante;
 };

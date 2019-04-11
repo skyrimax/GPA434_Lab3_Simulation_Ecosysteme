@@ -62,8 +62,6 @@ public:
 	Sex getSex();
 	Animal* getclosestPredateur();
 	Orientation getOrientation();
-	// Faire une fonction Vivant* getTarget()=0;
-	// Plante* getPlante();
 	bool getaEnfant();
 	int gettimerReproduction();
 	Animal* getMate();
@@ -85,6 +83,9 @@ public:
 	virtual void chooseMate() = 0;
 	virtual void trackMate() = 0;
 	virtual void accoucher()=0;
+
+	// Accesseur virtuel spécifique à chaque type d'animaux
+	virtual Vivant* getTarget() = 0;
 
 protected: 
 

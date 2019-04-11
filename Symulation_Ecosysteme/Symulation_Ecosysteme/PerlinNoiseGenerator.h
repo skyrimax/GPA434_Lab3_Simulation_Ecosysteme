@@ -10,11 +10,12 @@
 
 // Librairies standart
 #include <cmath>
+#include <list>
 
 class PerlinNoiseGenerator
 {
 public:
-	PerlinNoiseGenerator(int repeat=-1);
+	PerlinNoiseGenerator(int seed=0, int repeat=-1);
 	~PerlinNoiseGenerator();
 
 	// Fonctions statique utilisée dans l'argoritme
@@ -41,7 +42,7 @@ private:
 
 	// Table de hachage telle que définie par Ken Perlin
 	// Tableau arrangé au hasard contenant tous les chiffres de 0 à 255
-	static const int m_permutation[256];
+	/*static const*/ int m_permutation[256];
 
 	// Table de hachage permutée 2 fois pour éviter le dépassement
 	int m_p[512];
@@ -51,7 +52,7 @@ private:
 };
 
 // Table de hachage tiré d'internet
-const int PerlinNoiseGenerator::m_permutation[256]= { 151,160,137,91,90,15,					// Hash lookup table as defined by Ken Perlin.  This is a randomly
+/*const int PerlinNoiseGenerator::m_permutation[256]= { 151,160,137,91,90,15,					// Hash lookup table as defined by Ken Perlin.  This is a randomly
 		131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,	// arranged array of all numbers from 0-255 inclusive.
 		190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
 		88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
@@ -64,4 +65,4 @@ const int PerlinNoiseGenerator::m_permutation[256]= { 151,160,137,91,90,15,					
 		251,34,242,193,238,210,144,12,191,179,162,241, 81,51,145,235,249,14,239,107,
 		49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
 		138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
-};
+};*/

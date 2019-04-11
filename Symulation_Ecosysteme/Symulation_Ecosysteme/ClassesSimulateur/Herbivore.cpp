@@ -232,7 +232,7 @@ void Herbivore::accoucher()
 	}
 }
 
-Plante * Herbivore::getPlante()
+Vivant * Herbivore::getTarget()
 {
 	return m_plante;
 }
