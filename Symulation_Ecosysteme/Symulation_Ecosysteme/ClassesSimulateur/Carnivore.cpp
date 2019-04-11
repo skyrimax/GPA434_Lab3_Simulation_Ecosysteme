@@ -73,23 +73,23 @@ void Carnivore::chooseTarget()
 		}
 	}
 
-	proie = closestHerbivore;
+	m_proie = closestHerbivore;
 }
 
 void Carnivore::chooseTarget(Vivant* target)
 {
-	proie = static_cast<Herbivore*>(target);
+	m_proie = static_cast<Herbivore*>(target);
 }
 
 void Carnivore::resetTarget()
 {
-	proie = nullptr;
+	m_proie = nullptr;
 }
 
 void Carnivore::trackTarget()
 {
-	m_orientation.setVX(proie->getCoordonne().getX() - m_coordonne.getX());
-	m_orientation.setVY(proie->getCoordonne().getY() - m_coordonne.getY());
+	m_orientation.setVX(m_proie->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(m_proie->getCoordonne().getY() - m_coordonne.getY());
 
 	walk(this);
 }

@@ -23,7 +23,6 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
 	afin de mettre à jour les positions et les états.*/
 	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
-
 	}
 
 /*Fonction À Propos pour expliquer le programme*/

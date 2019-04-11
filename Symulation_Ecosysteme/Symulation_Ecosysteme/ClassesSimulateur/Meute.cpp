@@ -20,7 +20,7 @@ std::list<Animal*>& Meute::simulation()
 {
 
 	for (auto const membre : m_membres) {
-		if (distanceEntre2Points(membre->getclosestPredateur.getCoordonne(), membre->getCoordonne()) < AWARENESS_CIRCLE) {
+		if (distanceEntre2Points(membre->getclosestPredateur()->getCoordonne(), membre->getCoordonne()) < AWARENESS_CIRCLE) {
 			if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {
 				membre->flee();
 			}
@@ -39,8 +39,10 @@ std::list<Animal*>& Meute::simulation()
 			m_alpha->trackTarget();
 			for (const auto membre : m_membres) {
 				if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
-					membre->setOrientation(m_alpha->getOrientation());
-					membre->walk(membre);
+					//membre->setOrientation(m_alpha->getOrientation());
+					membre->trackAlpha();	//Modifié par Fred, remplacement du setOrientation par la fonction trackAlpha()
+					membre->walk(membre);	//Modifié par Fred, ajout du paramètre membre dans la fonction walk()
+
 				}
 				else {
 					membre->sprintAlpha();

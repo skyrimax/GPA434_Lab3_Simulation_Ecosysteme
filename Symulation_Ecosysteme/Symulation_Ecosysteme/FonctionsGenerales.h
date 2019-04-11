@@ -1,5 +1,7 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include "stdafx.h"
 #include "ClassesSimulateur/Coordonne.h"
 
@@ -15,3 +17,4 @@ double vitesseVersAngle(double vx,double vy);
 
 //Fonction qui retourne le point cartesien de croisement de la trajectoire dun animal avec la frontiere  
 //Croisement entre 2 lignes (trajectoire, frontiere)
+double croisementEntre2Lignes(Coordonne depart, Coordonne destination);

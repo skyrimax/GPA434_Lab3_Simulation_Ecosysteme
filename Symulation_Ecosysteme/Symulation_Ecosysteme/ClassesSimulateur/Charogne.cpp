@@ -7,14 +7,13 @@
 #include <QPainter>
 
 
-
 /**
  * Charogne implementation
  */
 
-Charogne::Charogne()
+//Modification du paramètre par Fred
+Charogne::Charogne(Animal *animal)
 {
-	
 	//Ajouté par Fred, création d'une flèce pour les charogne
 	mshape << QPointF(0, 0)
 		<< QPointF(-0.25, 0.5)
@@ -23,6 +22,7 @@ Charogne::Charogne()
 
 	sCharognesBackgoundColor.setRgb(255, 0, 0);
 }
+
 
 QRectF Charogne::boundingRect() const
 {
@@ -50,4 +50,57 @@ void Charogne::pourrir() {
  */
 int Charogne::getTime() {
     return 0;
+}
+
+//Ajouté par Fred
+void Charogne::replenishEnergy()
+{
+	
+}
+
+//Ajouté par Fred
+void Charogne::seekEnergy()
+{
+}
+
+//Ajouté par Fred
+void Charogne::healing()
+{
+
+}
+
+//Ajouté par Fred
+void Charogne::receiveDamages(int nbDamage)
+{
+
+}
+
+//Ajouté par Fred
+void Charogne::reproduction()
+{
+
+}
+
+//Ajouté par Fred
+void Charogne::simulation()
+{
+
+}
+
+//Ajouté par Fred
+void Charogne::dying()
+{
+
+}
+
+//Ajouté par Fred
+bool Charogne::isDead()
+{
+	return true;
+}
+
+//Ajouté par Fred
+bool Charogne::isDamaged()
+{
+	return false;
 }

@@ -10,7 +10,7 @@
 
 #include "PerlinNoiseGenerator.h"
 
-PerlinNoiseGenerator::PerlinNoiseGenerator(int repeat = -1)
+PerlinNoiseGenerator::PerlinNoiseGenerator(int repeat ) //Modifié par Fred, = -1 a été éffacé car le paramètre est déjà initialisé à -1 dans le .h
 	: m_repeat(repeat)
 {
 	for (int i = 0; i < 512; i++)

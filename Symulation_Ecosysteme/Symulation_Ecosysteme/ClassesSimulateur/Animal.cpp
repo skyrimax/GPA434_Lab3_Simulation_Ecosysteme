@@ -226,7 +226,7 @@ void Animal::deplacer(double vitesse)
 		nextCoordonne.moveX(m_orientation.getUnitX()*distance);
 		nextCoordonne.moveY(m_orientation.getUnitY()*distance);
 
-		pointCroisement = croissementEntre2Lignes(pointDepart, nextCoordonne);
+		pointCroisement = croisementEntre2Lignes(pointDepart, nextCoordonne);
 
 		if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
 			distance -= distanceEntre2Points(pointDepart, pointCroisement);

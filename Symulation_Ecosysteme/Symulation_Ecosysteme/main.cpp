@@ -1,3 +1,5 @@
+/*#include "stdafx.h"
+
 #include "constantes.h"
 #include "ClassesSimulateur/Coordonne.h"
 #include "ImplementantionFonctionsGenerales.h"
@@ -13,4 +15,20 @@ int main(void)
 	VitesseVersAngle(-7, -7);
 
 	return EXIT_SUCCESS;
+}*/
+
+/*Ajout par Fred, q
+uelqu'un avait effacé le main, qui contient les lignes de code
+pour faire fonctioner QT.
+*****NE PLUS EFFACER********/
+#include "stdafx.h"
+#include "SimulationMainWindow.h"
+#include <QtWidgets/QApplication>
+
+int main(int argc, char *argv[])
+{
+	QApplication a(argc, argv);
+	SimulationMainWindow w;
+	w.show();
+	return a.exec();
 }

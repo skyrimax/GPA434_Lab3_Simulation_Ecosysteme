@@ -7,12 +7,16 @@
 #define _CHAROGNE_H
 
 #include "Vivant.h"
+#include "Animal.h"
 
+class Animal; //Ajouté par Fred
 
 class Charogne: public Vivant {
 public: 
     
-	Charogne();
+	//Charogne();
+	Charogne(Animal *animal);//Ajouté par Fred
+	
 
 	// Fonctions membres virtuelles héritées de QGraphicsItem
 	virtual QRectF boundingRect() const;
@@ -21,6 +25,17 @@ public:
 	void pourrir();
 	int getTime();
 
+	/*Ajouté par Fred*/
+	// Fonctions membres virtuelles héritées de Vivant
+	virtual void replenishEnergy() override;
+	virtual void seekEnergy() override;
+	virtual void healing() override;
+	virtual void receiveDamages(int nbDamage);
+	virtual void reproduction() override;
+	virtual void simulation() override;
+	virtual void dying() override;
+	virtual bool isDead() override;
+	virtual bool isDamaged();
 
 private: 
     int time;

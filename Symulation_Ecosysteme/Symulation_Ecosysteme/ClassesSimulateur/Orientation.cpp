@@ -73,9 +73,9 @@ void Orientation::moveVY(double deltaVY) {
 }
 
 void Orientation::unitV() {
-	m_unitX = m_vX / DistanceEntre2Points(Coordonne(m_vX, m_vY), Coordonne());
+	m_unitX = m_vX / distanceEntre2Points(Coordonne(m_vX, m_vY), Coordonne());
 
-	m_unitY = m_vY / DistanceEntre2Points(Coordonne(m_vX, m_vY), Coordonne());
+	m_unitY = m_vY / distanceEntre2Points(Coordonne(m_vX, m_vY), Coordonne());
 
-	m_direction = VitesseVersAngle(m_unitX, m_unitY);
+	m_direction = vitesseVersAngle(m_unitX, m_unitY);
 }
