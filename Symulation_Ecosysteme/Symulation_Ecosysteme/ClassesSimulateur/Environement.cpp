@@ -110,6 +110,11 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
 	 m_vivnats.push_back(charogne);
  }
 
+ void Environnement::addVivant(Vivant * vivant)
+ {
+	 m_vivnats.push_back(vivant);
+ }
+
 /**
  * @param Plante *plante
  * @return void

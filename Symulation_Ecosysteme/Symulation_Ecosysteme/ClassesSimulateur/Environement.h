@@ -38,6 +38,7 @@ public:
 	void addCharognards(Carnivore *charognard);
 	void addCharogardsPack(Meute *meuteCharognards);
 	void addCharogne(Charogne* charogne);
+	void addVivant(Vivant* vivant);
     
 // Accesseur des listes d'éléments
 	std::list<Plante*>& getPlantes();

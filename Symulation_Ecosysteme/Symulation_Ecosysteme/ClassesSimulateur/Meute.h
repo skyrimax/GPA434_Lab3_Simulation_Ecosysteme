@@ -15,11 +15,12 @@
 
  // Déclaration enticipée
 class Animal;
+class Environnement;
 
 class Meute : public QGraphicsItemGroup {
 public:
 
-	std::list<Animal*> getMembres();
+	std::list<Animal*>& getMembres();
 	std::list<Animal*>& simulation();
 	void addMembre(Animal* membre);
 	Animal* getAlpha();
@@ -30,7 +31,7 @@ private:
 	bool attacked;
 	bool faim;
 	Animal* m_alpha;
-	
+	Environnement* m_environnement;
 };
 
 #endif //_MEUTE_H
