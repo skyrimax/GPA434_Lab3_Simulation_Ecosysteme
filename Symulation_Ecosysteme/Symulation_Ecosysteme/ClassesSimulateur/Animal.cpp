@@ -84,10 +84,6 @@ void Animal::dying()
 		m_mate->m_mate = nullptr;
 	}
 
-	for (auto const & predateur : m_predateurs) {
-		predateur->resetTarget();
-	}
-
 	removeFromTarget();
 
 	m_dead = true;
@@ -107,12 +103,19 @@ bool Animal::isDamaged()
  * @return void
  */
 void Animal::devenirCharogne() {
+
+	for (auto const & predateur : m_predateurs) {
+		predateur->resetTarget();
+	}
+
 	m_environnement->addCharogne(new Charogne(this));
+
+	m_toDelete = true;
 }
 
 bool Animal::isHungry()
 {
-	return false;
+	return m_energy<0.1*m_energyMax;
 }
 
 /**
@@ -184,10 +187,17 @@ void Animal::wander() {
 
 void Animal::trackMother()
 {
+	m_orientation.setVX(m_mere->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(m_mere->getCoordonne().getY() - m_coordonne.getY());
+
+	deplacer(m_vitesse);
 }
 
 void Animal::devenirAdulte()
 {
+	m_mere->m_enfant.remove(this);
+
+	m_mere = nullptr;
 }
 
 void Animal::deplacer(double vitesse)
