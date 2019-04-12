@@ -44,7 +44,7 @@ elle définit le contour rectangulaire de l'iteme.*/
 QRectF Plante::boundingRect() const
 {
 	//Ajouté par Fred,
-	return QRectF(this->getCoordonne().getX(), this->getCoordonne().getY(),10,10);
+	return QRectF(m_coordonne.getX(), m_coordonne.getY(), 10, 10);
 }
 
 /*paint est une fonction purement virtuelle de QGraphicItem,

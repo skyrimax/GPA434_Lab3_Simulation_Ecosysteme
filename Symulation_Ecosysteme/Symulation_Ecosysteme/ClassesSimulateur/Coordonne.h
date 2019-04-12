@@ -12,8 +12,8 @@ public:
 	Coordonne(double x=0, double y=0);
     
 	// Accesseurs
-	double getX();
-	double getY();
+	const double& getX() const;
+	const double& getY() const;
     
 	// Mutateurs pour imposer des valeurs hard
 	void setX(double x);
