@@ -66,7 +66,7 @@ private:
     std::list<Meute*> m_meutesCharognards;
     std::list<Carnivore*> m_charognards;
     std::list<Charogne*> m_charognes;
-	std::list<Vivant*> m_vivnats;
+	std::list<Vivant*> m_vivants;
     Grid m_grille;
 };
 

@@ -56,7 +56,7 @@ Environnement::~Environnement()
 void Environnement::addHerbivore(Herbivore *herbivore) {
 	m_herbivores.push_back(herbivore);
 
-	m_vivnats.push_back(herbivore);
+	m_vivants.push_back(herbivore);
 }
 
 /**
@@ -74,7 +74,7 @@ void Environnement::addHerbivorePack(Meute *meuteHerbivores) {
 void Environnement::addCarnivore(Carnivore *carnivore) {
 	m_carnivores.push_back(carnivore);
 
-	m_vivnats.push_back(carnivore);
+	m_vivants.push_back(carnivore);
 }
 
 /**
@@ -92,7 +92,7 @@ void Environnement::addCarnivorePack(Meute *meuteCarnivores) {
 void Environnement::addCharognards(Carnivore *charognard) {
 	m_charognards.push_back(charognard);
 
-	m_vivnats.push_back(charognard);
+	m_vivants.push_back(charognard);
 }
 
 /**
@@ -107,12 +107,12 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
  {
 	 m_charognes.push_back(charogne);
 
-	 m_vivnats.push_back(charogne);
+	 m_vivants.push_back(charogne);
  }
 
  void Environnement::addVivant(Vivant * vivant)
  {
-	 m_vivnats.push_back(vivant);
+	 m_vivants.push_back(vivant);
  }
 
 /**
@@ -122,7 +122,7 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
 void Environnement::addPlante(Plante *plante) {
 	m_plantes.push_back(plante);
 
-	m_vivnats.push_back(plante);
+	m_vivants.push_back(plante);
 }
 
 /**
@@ -277,7 +277,7 @@ std::list<Vivant*>& Environnement::simulation() {
 	}
 	
 	for (auto const & mort : toDie) {
-		m_vivnats.remove(mort);
+		m_vivants.remove(mort);
 
 		if (typeid(*mort) == typeid(Herbivore) || typeid(*mort) == typeid(Carnivore)) {
 			Animal* animalMort = static_cast<Animal*>(mort);
@@ -327,5 +327,5 @@ std::list<Vivant*>& Environnement::simulation() {
 		}
 	}
 
-	return m_vivnats;
+	return m_vivants;
 }
