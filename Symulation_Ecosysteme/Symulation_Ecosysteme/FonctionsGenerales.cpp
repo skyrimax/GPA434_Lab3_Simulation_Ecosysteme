@@ -1,11 +1,12 @@
 
-#define _USE_MATH_DEFINES
+
 
 #include "stdafx.h"
 #include "FonctionsGenerales.h"
 #include "ClassesSimulateur/Coordonne.h"
 #include <cmath>
 #include <iostream>
+#include "constantes.h"
 
 
 double distanceEntre2Points(Coordonne pt1, Coordonne pt2)
@@ -31,4 +32,33 @@ double vitesseVersAngle(double vx, double vy)
 		angle = angle + 360;
 	}
 	return angle;
+}
+
+double croisementEntre2Lignes(Coordonne depart, Coordonne destination)
+{
+	double longueur;
+
+	longueur = destination.getX() - depart.getX() + (destination.getY() - depart.getY());
+
+	Coordonne maxX = LARGEUR_GRILLE;
+	Coordonne maxY = HAUTEUR_GRILLE;
+
+	
+	if (destination == limite)
+	{
+
+
+	}
+
+	else if (destination > limite)
+	{
+
+	}
+
+	else 
+	{
+
+		return (-1, -1);
+	}
+	
 }

@@ -25,6 +25,7 @@ public:
 	Animal* getAlpha();
 	void setAlpha();
 
+
 private:
 	std::list<Animal*> m_membres;
 	bool faim;

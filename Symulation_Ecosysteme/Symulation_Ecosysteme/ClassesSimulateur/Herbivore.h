@@ -13,7 +13,10 @@
 class Plante;
 
 class Herbivore: public Animal {
+
+
 public:
+	Plante* getPlante();
 
 	// Constructeur
 	Herbivore() = default;
@@ -48,7 +51,12 @@ public:
 	virtual Vivant* getTarget() override;
 
 protected: 
+private: 
     Plante* m_plante;
+	//Ajouté par Fred, la forme des herbivores
+	QPolygonF mshape;
+	//Ajouté par Fred, couleur des herbivores
+	QColor sHerbivorBackgoundColor;
 };
 
 #endif //_HERBIVORE_H

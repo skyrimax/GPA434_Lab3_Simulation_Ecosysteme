@@ -5,18 +5,39 @@
 
 #include "Carnivore.h"
 #include "Environement.h"
+#include <QPainter>
 
 /**
  * Carnivore implementation
  */
 
+Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, int energy, int ageAdulte, int ageMax,
+	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
+{
+	// ************** À IMPLANTER ***************
+
+		//Ajouté par Fred, création d'une flèce pour les carnivores
+	mshape << QPointF(0, 0)
+		<< QPointF(-0.25, 0.5)
+		<< QPointF(1, 0.)
+		<< QPointF(-0.25, -0.5);
+
+	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
+}
+
 QRectF Carnivore::boundingRect() const
 {
-	return QRectF();
+	//Ajouté par Fred,
+	return QRectF(-0.25, -0.5, 1.0, 1.25);
 }
 
 void Carnivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	//Ajouté par Fred
+	painter->setPen(Qt::NoPen);
+	painter->setBrush(sCarnivoreBackgoundColor);
+	painter->drawPolygon(mshape);
 }
 
 void Carnivore::replenishEnergy()
@@ -52,25 +73,25 @@ void Carnivore::chooseTarget()
 		}
 	}
 
-	proie = closestHerbivore;
+	m_proie = closestHerbivore;
 }
 
 void Carnivore::chooseTarget(Vivant* target)
 {
-	proie = static_cast<Herbivore*>(target);
+	m_proie = static_cast<Herbivore*>(target);
 }
 
 void Carnivore::resetTarget()
 {
-	proie = nullptr;
+	m_proie = nullptr;
 }
 
 void Carnivore::trackTarget()
 {
-	m_orientation.setVX(proie->getCoordonne().getX() - m_coordonne.getX());
-	m_orientation.setVY(proie->getCoordonne().getY() - m_coordonne.getY());
+	m_orientation.setVX(m_proie->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(m_proie->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Carnivore::chooseMate()
@@ -81,7 +102,7 @@ void Carnivore::chooseMate()
 	std::list<Carnivore*> liste = m_environnement->getCarnivores();
 
 	for (auto const h : liste) {
-		if (h->getEspece == m_espece) {
+		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenu h->getEspece()
 			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -98,7 +119,7 @@ void Carnivore::trackMate()
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	walk(this);
 }
 
 void Carnivore::accoucher()

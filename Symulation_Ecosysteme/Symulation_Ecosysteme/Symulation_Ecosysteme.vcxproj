@@ -136,6 +136,7 @@
     <ClCompile Include="FonctionsGenerales.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PerlinNoiseGenerator.cpp" />
+    <ClCompile Include="ParameterWindow.cpp" />
     <ClCompile Include="SimulationMainWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -158,10 +159,15 @@
     <ClInclude Include="constantes.h" />
     <QtMoc Include="SimulationMainWindow.h" />
     <ClInclude Include="FonctionsGenerales.h" />
+    <QtMoc Include="ParameterWindow.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
     <ClInclude Include="PerlinNoiseGenerator.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="ParameterWindow.ui" />
     <QtUic Include="SimulationMainWindow.ui" />
   </ItemGroup>
   <ItemGroup>

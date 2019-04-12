@@ -8,7 +8,8 @@
 
  // Librairies standard
 #include <list>
-
+//Librairies de Qt
+#include <QGraphicsItem>
 // Header files du simulateur
 #include "Vivant.h"
 #include"constantes.h"
@@ -16,9 +17,10 @@
 // Déclarations anticipées
 class Herbivore;
 
+
 class Plante: public Vivant {
 public:
-	// Cosntructeur
+	// Constructeur
 	Plante()=default;
 	Plante(Environnement* environnement, std::string espece, int hp,
 		int energy, int ageAdulte, int ageMax, int x, int y,
@@ -45,12 +47,18 @@ public:
 	void pousserFruits();
 	std::list<Herbivore*>& getIsEatenBy();
 
+
 private: 
     int m_fruits;
 	int m_timer;
 	int m_timeToReproduction;
     std::list<Herbivore*> m_isEatenBy;
     bool m_isBeingEaten;
+
+	//Ajouté par Fred, la forme de la plante
+	QRectF mshape;
+	//Ajouté par Fred, couleur des plantes
+	QColor sPlantesBackgoundColor;
 };
 
 #endif //_PLANTE_H

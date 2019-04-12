@@ -45,6 +45,7 @@ public:
 	TypeTerrain getType();
 	int getRessources();
 
+
 private: 
     int m_resource;
     TypeTerrain m_type;
@@ -52,6 +53,16 @@ private:
 	int m_x;
 	int m_y;
 	bool m_hasPlante;
+	//Ajouté par Fred, la forme de la plante
+	QRectF mshape;
+	//Ajouté par Fred, couleur de l'eau
+	QColor sWaterBackgoundColor;
+	//Ajouté par Fred, couleur du gazon
+	QColor sGrassBackgoundColor;
+	//Ajouté par Fred, couleur de la terre
+	QColor sEarthBackgoundColor;
+	//Ajouté par Fred, couleur de la terre
+	QColor sFrontierBackgoundColor;
 };
 
 #endif //_TERRAIN_H

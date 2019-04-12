@@ -237,7 +237,7 @@ std::list<Vivant*>& Environnement::simulation() {
 			toDie.push_back(membre);
 		}
 
-		if (meuteCarnivores->getMembres().empty) {
+		if (meuteCarnivores->getMembres().empty()) {	//Modifié par Fred, meuteCarnivores->getMembres().empty est devnu meuteCarnivores->getMembres().empty()
 			emptyMeute.push_back(meuteCarnivores);
 		}
 	}
@@ -322,7 +322,7 @@ std::list<Vivant*>& Environnement::simulation() {
 		else if (std::find(m_meutesCarnivores.begin(), m_meutesCarnivores.end(), meute) != m_meutesCarnivores.end()) {
 			m_meutesCarnivores.remove(meute);
 		}
-		else if (std::find(m_meutesCharognards.begin(), m_meutesCharognards.end(), meute) != m_meutesCharognards.end) {
+		else if (std::find(m_meutesCharognards.begin(), m_meutesCharognards.end(), meute) != m_meutesCharognards.end()) { //Modifié par Fred, (std::find(m_meutesCharognards.begin(), m_meutesCharognards.end(), meute) != m_meutesCharognards.end est devenu (std::find(m_meutesCharognards.begin(), m_meutesCharognards.end(), meute) != m_meutesCharognards.end()
 			m_meutesCharognards.remove(meute);
 		}
 	}

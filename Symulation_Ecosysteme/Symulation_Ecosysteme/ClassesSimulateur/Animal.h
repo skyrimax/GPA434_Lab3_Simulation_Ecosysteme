@@ -17,6 +17,8 @@
 #include "Charogne.h"
 #include "constantes.h"
 
+//Ajouté par Fred:
+class Meute;//Averti le programme qu'il y aura une class Meute
 
 class Animal: public Vivant {
 public: 
