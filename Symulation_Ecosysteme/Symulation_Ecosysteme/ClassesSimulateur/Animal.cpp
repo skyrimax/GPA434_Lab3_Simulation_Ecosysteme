@@ -76,7 +76,19 @@ void Animal::dying()
 {
 	for (auto const enfant : m_enfant) {
 		enfant->resetTarget();
+
+		enfant->m_mere = nullptr;
 	}
+
+	if (m_mate != nullptr) {
+		m_mate->m_mate = nullptr;
+	}
+
+	for (auto const & predateur : m_predateurs) {
+		predateur->resetTarget();
+	}
+
+	removeFromTarget();
 
 	m_dead = true;
 }
@@ -184,40 +196,6 @@ void Animal::deplacer(double vitesse)
 	Coordonne nextCoordonne(m_coordonne);
 	Coordonne pointCroisement(-1, -1);
 
-	/*
-	nextCoordonne.moveX(m_vitesse*m_orientation.getUnitX());
-	nextCoordonne.moveY(m_vitesse*m_orientation.getUnitY());
-
-	// Computer si points de croisement
-	//pointCroisement=
-
-	if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
-		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
-
-		m_orientation.setVX(-m_orientation.getVX());
-
-		pointCroisement.moveX(m_orientation.getUnitX()*distance);
-
-		m_coordonne.setX(pointCroisement.getX());
-		m_coordonne.setY(nextCoordonne.getY());
-	}
-
-	else if (pointCroisement.getY() == 0 || pointCroisement.getY() == LARGEUR_GRILLE) {
-		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
-
-		m_orientation.setVY(-m_orientation.getVY());
-
-		pointCroisement.moveY(m_orientation.getUnitY()*distance);
-
-		m_coordonne.setY(pointCroisement.getY());
-		m_coordonne.setX(nextCoordonne.getX());
-	}
-	else {
-		m_coordonne.setX(nextCoordonne.getX());
-		m_coordonne.setY(nextCoordonne.getY());
-	}
-	*/
-
 	double distance = vitesse;
 
 	do {
@@ -289,7 +267,6 @@ void Animal::trackAlpha()
 	m_isSprinting = false;
 
 	if (this != m_meute->getAlpha()){
-		
 		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
 		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
 
@@ -300,10 +277,10 @@ void Animal::trackAlpha()
 void Animal::sprintAlpha() {
 	m_isSprinting = true;
 	if (this != m_meute->getAlpha()) {
-		this->trackAlpha();
+		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
+		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
 
 		this->deplacer(m_sprint);
-
 	}
 }
 
@@ -321,11 +298,6 @@ Orientation Animal::getOrientation()
 {
 	return m_orientation;
 }
-
-/*Plante * Animal::getPlante()
-{
-	return m_plante;
-}*/
 
 bool Animal::getaEnfant()
 {
@@ -371,8 +343,3 @@ void Animal::settimerMort(int timer)
 {
 	m_timerMort = timer;
 }
-
-/*Orientation Animal::setOrientation()
-{
-	return m_orientation;
-}*/
