@@ -57,10 +57,10 @@ std::list<Animal*>& Meute::simulation()
 
 	if (!m_alpha->isDead()) {
 		if (faim && !healingCritical) {
-			m_alpha->seekEnergy;
+			m_alpha->seekEnergy();
 			m_alpha->trackTarget();
 		}
-		else if (m_alpha->getaEnfant() || m_alpha->gettimerReproduction) {
+		else if (m_alpha->getaEnfant() || m_alpha->gettimerReproduction()) {
 			m_alpha->chooseMate();
 			m_alpha->trackMate();
 			if (m_alpha->getCoordonne().getX() == m_alpha->getMate()->getCoordonne().getX() &&
@@ -76,7 +76,7 @@ std::list<Animal*>& Meute::simulation()
 	}
 	else {
 		if (m_alpha->getDead()) {
-			if (m_alpha->gettimerMort > 0) {
+			if (m_alpha->gettimerMort() > 0) {
 				m_alpha->gettimerMort();
 			}
 			else {
@@ -94,7 +94,7 @@ std::list<Animal*>& Meute::simulation()
 
 	for (auto const & membre : m_membres) {
 		if (!membre->isDead() && membre != m_alpha) {
-			if (membre->getAge <= membre->getAgeAdulte()) {
+			if (membre->getAge() <= membre->getAgeAdulte()) {
 				membre->simulation();
 			}
 			else if (flagFlee) {
@@ -120,7 +120,7 @@ std::list<Animal*>& Meute::simulation()
 			}
 
 			(membre->getAge())++;
-			if (membre->gettimerGestation > 0)
+			if (membre->gettimerGestation() > 0)
 				(membre->gettimerGestation())--;
 		}
 		else if (membre->isDead() && membre != m_alpha) {
