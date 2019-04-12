@@ -10,7 +10,7 @@
 
 #include "PerlinNoiseGenerator.h"
 
-PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat = -1)
+PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat)
 	: m_repeat(repeat)
 {
 	std::vector<int> liste;
