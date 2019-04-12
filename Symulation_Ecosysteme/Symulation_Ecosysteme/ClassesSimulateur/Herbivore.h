@@ -11,6 +11,7 @@
 
  // Déclaration enticipée
 class Plante;
+class Meute;
 
 class Herbivore: public Animal {
 

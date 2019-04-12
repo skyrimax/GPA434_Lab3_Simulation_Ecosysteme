@@ -290,8 +290,8 @@ void Animal::trackAlpha()
 
 	if (this != m_meute->getAlpha()){
 		
-		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
-		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
+		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() + (rand() % 20 - 10) - m_coordonne.getX());
+		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() + (rand() % 20 - 10) - m_coordonne.getY());
 
 		deplacer(m_vitesse);
 	}
