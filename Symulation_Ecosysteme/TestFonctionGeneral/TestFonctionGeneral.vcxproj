@@ -117,12 +117,12 @@
   <ItemGroup>
     <ClInclude Include="..\Symulation_Ecosysteme\ClassesSimulateur\Coordonne.h" />
     <ClInclude Include="..\Symulation_Ecosysteme\constantes.h" />
-    <ClInclude Include="..\Symulation_Ecosysteme\ImplementantionFonctionsGenerales.h" />
+    <ClInclude Include="..\Symulation_Ecosysteme\FonctionsGenerales.h" />
     <ClInclude Include="..\Symulation_Ecosysteme\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Symulation_Ecosysteme\ClassesSimulateur\Coordonne.cpp" />
-    <ClCompile Include="..\Symulation_Ecosysteme\ImplementantionFonctionsGenerales.cpp" />
+    <ClCompile Include="..\Symulation_Ecosysteme\FonctionsGenerales.cpp" />
     <ClCompile Include="..\Symulation_Ecosysteme\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

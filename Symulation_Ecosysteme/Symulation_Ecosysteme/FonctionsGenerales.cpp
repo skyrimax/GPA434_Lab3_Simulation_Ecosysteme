@@ -1,5 +1,5 @@
 
-
+#define _USE_MATH_DEFINES
 
 #include "stdafx.h"
 #include "FonctionsGenerales.h"
@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include "constantes.h"
+#include <vector>
 
 
 double distanceEntre2Points(Coordonne pt1, Coordonne pt2)
@@ -34,31 +35,162 @@ double vitesseVersAngle(double vx, double vy)
 	return angle;
 }
 
-double croisementEntre2Lignes(Coordonne depart, Coordonne destination)
-{
-	double longueur;
+Coordonne croisementEntre2Lignes(Coordonne depart, Coordonne destination)
+{		
+	Coordonne futureDestination;
 
-	longueur = destination.getX() - depart.getX() + (destination.getY() - depart.getY());
-
-	Coordonne maxX = LARGEUR_GRILLE;
-	Coordonne maxY = HAUTEUR_GRILLE;
-
+	Coordonne maxWorldLimit= Coordonne(LARGEUR_GRILLE, HAUTEUR_GRILLE);
 	
-	/*if (destination == limite)
+	Coordonne minWorldLimit = Coordonne(0, 0);
+
+	//Si la destination est depasser la limite du coin superieur gauche (x<0, y<0) de la grille de l'environnement de la simulation 
+	if (destination.getX() < minWorldLimit.getX() && destination.getY() < minWorldLimit.getY())
 	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite
+		double frontiereX = 0;
+		double frontiereY = 0;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
 
+		//Calcul du facteur d echelle
+		double scaleX = abs((frontiereX - depart.getX()) / deltaX );
+		double scaleY = scaleX;
 
+		futureDestination = Coordonne(abs(destination.getX()*scaleX), abs(destination.getY()*scaleY));
+		
+		return futureDestination;
 	}
 
-	else if (destination > limite)
+	//Si la destination est depasser la limite gauche (x<0, 0<y<500) de la grille de l'environnement de la simulation 
+	else if (destination.getX() < minWorldLimit.getX() && destination.getY() < maxWorldLimit.getY())
 	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+		double frontiereX = 0;
+		double frontiereY = 500;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
 
+		//Calcul du facteur d echelle
+		double scaleX = abs((frontiereX - depart.getX()) / deltaX );
+		double scaleY = scaleX;
+
+		futureDestination = Coordonne(abs(destination.getX()*scaleX), destination.getY());
+
+		return futureDestination;
 	}
-	*/
-	//else 
-	//{
 
-		return (-1, -1);
-	//}
+	//Si la destination est depasser la limite du coin inferieur gauche (x<0, y>500) de la grille de l'environnement de la simulation 
+	else if (destination.getX() <= minWorldLimit.getX() && destination.getY() >= maxWorldLimit.getY())
+	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite
+		double frontiereX = 500;
+		double frontiereY = 500;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
+
+		//Calcul du facteur d echelle
+		double scaleY = abs((frontiereY - depart.getY()) / deltaY);
+		double scaleX = abs((frontiereX - depart.getX()) / deltaX);
+
+		futureDestination = Coordonne(abs(destination.getX()*scaleX), destination.getY()*scaleY);
+
+		return futureDestination;
+	}
+
+	//Si la destination est depasser la limite inferieure (plus de 0<x<500, y>500) de la grille de l'environnement de la simulation 
+	else if (destination.getX() < maxWorldLimit.getX() && destination.getY() > maxWorldLimit.getY())
+	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+		double frontiereX = 500;
+		double frontiereY = 500;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
+
+		//Calcul du facteur d echelle
+		double scaleY = abs((frontiereY - depart.getY()) / deltaY);
+
+		futureDestination = Coordonne(destination.getX() , destination.getY()*scaleY);
+
+		return  futureDestination;
+	}
+
+	//Si la destination est depasser la limite du coin inferieur droit (x>500, y>500) de la grille de l'environnement de la simulation 
+	else if (destination.getX() >= maxWorldLimit.getX() && destination.getY() >= maxWorldLimit.getY())
+	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+		double frontiereX = 500;
+		double frontiereY = 500;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
+
+		//Calcul du facteur d echelle
+		double scaleX = abs((frontiereX - depart.getX()) / deltaX );
+		double scaleY = scaleX;
+
+		futureDestination = Coordonne(destination.getX()*scaleX, destination.getY()*scaleY);
+
+		return futureDestination;
+	}
+
+	//Si la destination est depasser la limite droite (x>500, 0<y<500)de la grille de l'environnement de la simulation
+	else if (destination.getX() > maxWorldLimit.getX() && destination.getY() > minWorldLimit.getY())
+	{
+		//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+		double frontiereX = 500;
+		double frontiereY = 500;
+		double deltaX = destination.getX() - depart.getX();
+		double deltaY = destination.getY() - depart.getY();
+
+		//Calcul du facteur d echelle
+		double scaleX = abs((frontiereX - depart.getX()) / deltaX );
+		double scaleY = scaleX;
+
+		futureDestination = Coordonne(destination.getX()*scaleX, destination.getY());
+
+		return futureDestination;
+	}
+
+	//Si la destination est depasser la limite du coin superieur droit (x>500, y<0) de la grille de l'environnement de la simulation
+	else if (destination.getX() > maxWorldLimit.getX() && destination.getY() < minWorldLimit.getY())
+	{
+	//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+	double frontiereX = 500;
+	double frontiereY = 0;
+	double deltaX = destination.getX() - depart.getX();
+	double deltaY = destination.getY() - depart.getY();
+
+	//Calcul du facteur d echelle
+	double scaleX = abs((frontiereX - depart.getX()) /deltaX );
+	double scaleY = scaleX;
+
+	futureDestination = Coordonne(destination.getX()*scaleX, abs(destination.getY()*scaleY));
+
+		return futureDestination;
+	}
+
+	//Si la destination est depasser la limite superieure ( 0<x<500 , y<0) de la grille de l'environnement de la simulation
+	else if (minWorldLimit.getX() < destination.getX() < maxWorldLimit.getX() && destination.getY() < minWorldLimit.getY())
+	{
+	//etablissement des parametres our le calcul de la nouvelle coordonne limite 
+	double frontiereX = 500;
+	double frontiereY = 0;
+	double deltaX = destination.getX() - depart.getX();
+	double deltaY = destination.getY() - depart.getY();
+
+	//Calcul du facteur d echelle
+	double scaleY = abs((frontiereY - depart.getY()) / deltaY );
+	double scaleX = scaleY;
+
+	futureDestination = Coordonne(destination.getX(), abs(destination.getY()*scaleY));
+
+		return futureDestination;
+	}
+
+	//Si la destination est à l'intérieur de la grille de l'environnement de la simulation
+	else
 	
+	futureDestination = Coordonne(-1,-1);
+
+	return futureDestination;
 }
+
