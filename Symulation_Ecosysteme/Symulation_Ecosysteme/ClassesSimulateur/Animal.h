@@ -82,6 +82,7 @@ public:
 	virtual void chooseTarget(Vivant* target) = 0;
 	virtual void resetTarget() = 0;
 	virtual void trackTarget() = 0;
+	virtual void removeFromTarget() = 0;
 	virtual void chooseMate() = 0;
 	virtual void trackMate() = 0;
 	virtual void accoucher()=0;

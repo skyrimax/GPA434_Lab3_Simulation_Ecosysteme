@@ -76,7 +76,15 @@ void Animal::dying()
 {
 	for (auto const enfant : m_enfant) {
 		enfant->resetTarget();
+
+		enfant->m_mere = nullptr;
 	}
+
+	if (m_mate != nullptr) {
+		m_mate->m_mate = nullptr;
+	}
+
+	removeFromTarget();
 
 	m_dead = true;
 }
@@ -95,12 +103,19 @@ bool Animal::isDamaged()
  * @return void
  */
 void Animal::devenirCharogne() {
+
+	for (auto const & predateur : m_predateurs) {
+		predateur->resetTarget();
+	}
+
 	m_environnement->addCharogne(new Charogne(this));
+
+	m_toDelete = true;
 }
 
 bool Animal::isHungry()
 {
-	return false;
+	return m_energy<0.1*m_energyMax;
 }
 
 /**
@@ -116,7 +131,8 @@ bool Animal::isSprinting() {
 void Animal::sprint(Animal* cible) {
 	m_isSprinting = true;
 
-	this->trackTarget();
+	m_orientation.setVX(cible->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(cible->getCoordonne().getY() - m_coordonne.getY());
 
 	this->deplacer(m_sprint, cible);
 }
@@ -128,7 +144,8 @@ void Animal::walk(Animal* cible) {
 
 	m_isSprinting = false;
 
-	this->trackTarget();
+	m_orientation.setVX(cible->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(cible->getCoordonne().getY() - m_coordonne.getY());
 
 	this->deplacer(m_vitesse, cible);
 }
@@ -172,10 +189,17 @@ void Animal::wander() {
 
 void Animal::trackMother()
 {
+	m_orientation.setVX(m_mere->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(m_mere->getCoordonne().getY() - m_coordonne.getY());
+
+	deplacer(m_vitesse);
 }
 
 void Animal::devenirAdulte()
 {
+	m_mere->m_enfant.remove(this);
+
+	m_mere = nullptr;
 }
 
 void Animal::deplacer(double vitesse)
@@ -184,74 +208,44 @@ void Animal::deplacer(double vitesse)
 	Coordonne nextCoordonne(m_coordonne);
 	Coordonne pointCroisement(-1, -1);
 
-	/*
-	nextCoordonne.moveX(m_vitesse*m_orientation.getUnitX());
-	nextCoordonne.moveY(m_vitesse*m_orientation.getUnitY());
-
-	// Computer si points de croisement
-	//pointCroisement=
-
-	if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
-		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
-
-		m_orientation.setVX(-m_orientation.getVX());
-
-		pointCroisement.moveX(m_orientation.getUnitX()*distance);
-
-		m_coordonne.setX(pointCroisement.getX());
-		m_coordonne.setY(nextCoordonne.getY());
-	}
-
-	else if (pointCroisement.getY() == 0 || pointCroisement.getY() == LARGEUR_GRILLE) {
-		distance = distanceEntre2Points(pointCroisement, nextCoordonne);
-
-		m_orientation.setVY(-m_orientation.getVY());
-
-		pointCroisement.moveY(m_orientation.getUnitY()*distance);
-
-		m_coordonne.setY(pointCroisement.getY());
-		m_coordonne.setX(nextCoordonne.getX());
-	}
-	else {
-		m_coordonne.setX(nextCoordonne.getX());
-		m_coordonne.setY(nextCoordonne.getY());
-	}
-	*/
-
 	double distance = vitesse;
 
-	do {
-		nextCoordonne = pointDepart;
+	if (m_energy > vitesse*CONSOMMATION_DEPLACEMENT) {
+		do {
+			nextCoordonne = pointDepart;
 
-		nextCoordonne.moveX(m_orientation.getUnitX()*distance);
-		nextCoordonne.moveY(m_orientation.getUnitY()*distance);
+			nextCoordonne.moveX(m_orientation.getUnitX()*distance);
+			nextCoordonne.moveY(m_orientation.getUnitY()*distance);
 
 		pointCroisement = croisementEntre2Lignes(pointDepart, nextCoordonne);
 
-		if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
-			distance -= distanceEntre2Points(pointDepart, pointCroisement);
+			if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
+				distance -= distanceEntre2Points(pointDepart, pointCroisement);
 
-			if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
-				if (m_isSprinting) {
-					m_orientation.setVX(0);
+				if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
+					if (m_isSprinting) {
+						m_orientation.setVX(0);
+					}
+					else {
+						m_orientation.setVX(-m_orientation.getVX());
+					}
 				}
-				else {
-					m_orientation.setVX(-m_orientation.getVX());
+				else
+				{
+					if (m_isSprinting) {
+						m_orientation.setVY(0);
+					}
+					else {
+						m_orientation.setVY(-m_orientation.getVY());
+					}
 				}
-			}
-			else
-			{
-				if (m_isSprinting) {
-					m_orientation.setVY(0);
-				}
-				else {
-					m_orientation.setVY(-m_orientation.getVY());
-				}
-			}
 
-			pointDepart = pointCroisement;
-		}
-	} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
+				pointDepart = pointCroisement;
+			}
+		} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
+
+		m_energy -= vitesse;
+	}
 
 	m_coordonne = nextCoordonne;
 
@@ -261,8 +255,14 @@ void Animal::deplacer(double vitesse)
 void Animal::deplacer(double vitesse, Animal* cible) {
 	
 	if (distanceEntre2Points(m_coordonne, cible->m_coordonne) <= vitesse) {
-		m_coordonne.setX(cible->m_coordonne.getX());
-		m_coordonne.setY(cible->m_coordonne.getY());
+		if (m_energy > distanceEntre2Points(m_coordonne, cible->getCoordonne())
+			*CONSOMMATION_DEPLACEMENT) {
+			m_coordonne.setX(cible->m_coordonne.getX());
+			m_coordonne.setY(cible->m_coordonne.getY());
+
+			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
+				*CONSOMMATION_DEPLACEMENT;
+		}
 	}
 	else
 	{
@@ -289,9 +289,8 @@ void Animal::trackAlpha()
 	m_isSprinting = false;
 
 	if (this != m_meute->getAlpha()){
-		
-		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() + (rand() % 20 - 10) - m_coordonne.getX());
-		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() + (rand() % 20 - 10) - m_coordonne.getY());
+		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
+		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
 
 		deplacer(m_vitesse);
 	}
@@ -300,10 +299,10 @@ void Animal::trackAlpha()
 void Animal::sprintAlpha() {
 	m_isSprinting = true;
 	if (this != m_meute->getAlpha()) {
-		this->trackAlpha();
+		m_orientation.setVX(m_meute->getAlpha()->getCoordonne().getX() - m_coordonne.getX());
+		m_orientation.setVY(m_meute->getAlpha()->getCoordonne().getY() - m_coordonne.getY());
 
 		this->deplacer(m_sprint);
-
 	}
 }
 
@@ -321,11 +320,6 @@ Orientation Animal::getOrientation()
 {
 	return m_orientation;
 }
-
-/*Plante * Animal::getPlante()
-{
-	return m_plante;
-}*/
 
 bool Animal::getaEnfant()
 {
@@ -371,8 +365,3 @@ void Animal::settimerMort(int timer)
 {
 	m_timerMort = timer;
 }
-
-/*Orientation Animal::setOrientation()
-{
-	return m_orientation;
-}*/

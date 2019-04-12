@@ -37,6 +37,7 @@ public:
 	int getAge() const;
 	int getAgeAdulte() const;
 	int getAgeMax() const;
+	bool toDelete();
 	std::string getEspece() const;
 	Coordonne getCoordonne() const;
 
@@ -72,6 +73,7 @@ protected:
 	int m_ageAdulte;
     int m_ageMax;
 	bool m_dead;
+	bool m_toDelete;
     Coordonne m_coordonne;
     Environnement* m_environnement;
 };
