@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Symulation_Ecosysteme\ImplementantionFonctionsGenerales.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Symulation_Ecosysteme\ClassesSimulateur\Coordonne.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -27,15 +24,18 @@
     <ClInclude Include="..\Symulation_Ecosysteme\constantes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Symulation_Ecosysteme\FonctionsGenerales.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Symulation_Ecosysteme\ImplementantionFonctionsGenerales.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Symulation_Ecosysteme\ClassesSimulateur\Coordonne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Symulation_Ecosysteme\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Symulation_Ecosysteme\FonctionsGenerales.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
