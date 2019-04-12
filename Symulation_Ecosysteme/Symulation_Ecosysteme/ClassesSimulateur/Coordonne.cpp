@@ -18,14 +18,14 @@ Coordonne::Coordonne(double x, double y)
 /**
  * @return double
  */
-double Coordonne::getX() {
+const double& Coordonne::getX() const {
     return m_x;
 }
 
 /**
  * @return int
  */
-double Coordonne::getY() {
+const double& Coordonne::getY() const {
     return m_y;
 }
 
