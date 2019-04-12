@@ -210,38 +210,42 @@ void Animal::deplacer(double vitesse)
 
 	double distance = vitesse;
 
-	do {
-		nextCoordonne = pointDepart;
+	if (m_energy > vitesse*CONSOMMATION_DEPLACEMENT) {
+		do {
+			nextCoordonne = pointDepart;
 
-		nextCoordonne.moveX(m_orientation.getUnitX()*distance);
-		nextCoordonne.moveY(m_orientation.getUnitY()*distance);
+			nextCoordonne.moveX(m_orientation.getUnitX()*distance);
+			nextCoordonne.moveY(m_orientation.getUnitY()*distance);
 
-		pointCroisement = croissementEntre2Lignes(pointDepart, nextCoordonne);
+			pointCroisement = croissementEntre2Lignes(pointDepart, nextCoordonne);
 
-		if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
-			distance -= distanceEntre2Points(pointDepart, pointCroisement);
+			if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
+				distance -= distanceEntre2Points(pointDepart, pointCroisement);
 
-			if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
-				if (m_isSprinting) {
-					m_orientation.setVX(0);
+				if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
+					if (m_isSprinting) {
+						m_orientation.setVX(0);
+					}
+					else {
+						m_orientation.setVX(-m_orientation.getVX());
+					}
 				}
-				else {
-					m_orientation.setVX(-m_orientation.getVX());
+				else
+				{
+					if (m_isSprinting) {
+						m_orientation.setVY(0);
+					}
+					else {
+						m_orientation.setVY(-m_orientation.getVY());
+					}
 				}
+
+				pointDepart = pointCroisement;
 			}
-			else
-			{
-				if (m_isSprinting) {
-					m_orientation.setVY(0);
-				}
-				else {
-					m_orientation.setVY(-m_orientation.getVY());
-				}
-			}
+		} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
 
-			pointDepart = pointCroisement;
-		}
-	} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
+		m_energy -= vitesse;
+	}
 
 	m_coordonne = nextCoordonne;
 
@@ -251,8 +255,14 @@ void Animal::deplacer(double vitesse)
 void Animal::deplacer(double vitesse, Animal* cible) {
 	
 	if (distanceEntre2Points(m_coordonne, cible->m_coordonne) <= vitesse) {
-		m_coordonne.setX(cible->m_coordonne.getX());
-		m_coordonne.setY(cible->m_coordonne.getY());
+		if (m_energy > distanceEntre2Points(m_coordonne, cible->getCoordonne())
+			*CONSOMMATION_DEPLACEMENT) {
+			m_coordonne.setX(cible->m_coordonne.getX());
+			m_coordonne.setY(cible->m_coordonne.getY());
+
+			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
+				*CONSOMMATION_DEPLACEMENT;
+		}
 	}
 	else
 	{
