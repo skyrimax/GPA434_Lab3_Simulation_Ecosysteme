@@ -131,7 +131,8 @@ bool Animal::isSprinting() {
 void Animal::sprint(Animal* cible) {
 	m_isSprinting = true;
 
-	this->trackTarget();
+	m_orientation.setVX(cible->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(cible->getCoordonne().getY() - m_coordonne.getY());
 
 	this->deplacer(m_sprint, cible);
 }
@@ -143,7 +144,8 @@ void Animal::walk(Animal* cible) {
 
 	m_isSprinting = false;
 
-	this->trackTarget();
+	m_orientation.setVX(cible->getCoordonne().getX() - m_coordonne.getX());
+	m_orientation.setVY(cible->getCoordonne().getY() - m_coordonne.getY());
 
 	this->deplacer(m_vitesse, cible);
 }

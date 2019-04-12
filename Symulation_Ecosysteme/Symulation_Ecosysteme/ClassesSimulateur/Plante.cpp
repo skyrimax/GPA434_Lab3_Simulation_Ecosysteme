@@ -187,3 +187,8 @@ void Plante::pousserFruits()
 			m_fruits++;
 	}
 }
+
+std::list<Herbivore*>& Plante::getIsEatenBy()
+{
+	return m_isEatenBy;
+}

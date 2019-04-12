@@ -54,6 +54,8 @@ void Herbivore::simulation()
 			{
 				trackMother();
 			}
+
+			m_age++;
 		}
 		else if (m_age == m_ageAdulte) {
 			devenirAdulte();
@@ -169,10 +171,17 @@ void Herbivore::resetTarget()
 
 void Herbivore::trackTarget()
 {
+	m_isSprinting = false;
+
 	m_orientation.setVX(m_plante->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_plante->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	deplacer(m_vitesse);
+}
+
+void Herbivore::removeFromTarget()
+{
+	m_plante->getIsEatenBy().remove(this);
 }
 
 void Herbivore::chooseMate()
@@ -195,10 +204,12 @@ void Herbivore::chooseMate()
 
 void Herbivore::trackMate()
 {
+	m_isSprinting = false;
+
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk();
+	deplacer(m_vitesse);
 }
 
 void Herbivore::accoucher()

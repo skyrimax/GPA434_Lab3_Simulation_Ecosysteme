@@ -39,10 +39,11 @@ public:
 	virtual void simulation() override;
 	virtual void dying() override;
 	virtual bool isDead() override;
-	virtual bool isDamaged();
+	virtual bool isDamaged() override;
 
 	// Fonctions membres propre au plantes
 	void pousserFruits();
+	std::list<Herbivore*>& getIsEatenBy();
 
 private: 
     int m_fruits;
