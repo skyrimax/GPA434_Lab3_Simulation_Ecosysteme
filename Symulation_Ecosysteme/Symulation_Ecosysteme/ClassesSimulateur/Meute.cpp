@@ -6,6 +6,7 @@
 #include "Meute.h"
 #include "Environement.h"
 
+
  /**
   * Meute implementation
   */
@@ -19,7 +20,7 @@ std::list<Animal*>& Meute::simulation()
 {
 
 	for (auto const membre : m_membres) {
-		if (distanceEntre2Points(membre->getclosestPredateur.getCoordonne(), membre->getCoordonne()) < AWARENESS_CIRCLE) {
+		if (distanceEntre2Points(membre->getclosestPredateur()->getCoordonne(), membre->getCoordonne()) < AWARENESS_CIRCLE) {
 			if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {
 				membre->flee();
 			}
@@ -38,16 +39,18 @@ std::list<Animal*>& Meute::simulation()
 			m_alpha->trackTarget();
 			for (const auto membre : m_membres) {
 				if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
-					membre->setOrientation(m_alpha->getOrientation());
-					membre->walk();
+					//membre->setOrientation(m_alpha->getOrientation());
+					membre->trackAlpha();	//Modifié par Fred, remplacement du setOrientation par la fonction trackAlpha()
+					membre->walk(membre);	//Modifié par Fred, ajout du paramètre membre dans la fonction walk()
+
 				}
 				else {
 					membre->sprintAlpha();
 				}
 			}
 			/* Virguler dans le if ??.... C'est un && ?*/
-			if (m_alpha->getCoordonne.getX() == m_alpha->getPlante()->getCoordonne().getX(),		/*À voir, pas capable d'acceder à m_plante comme l'herbivore*/
-				m_alpha->getCoordonne.getY() == m_alpha->getPlante()->getCoordonne().getX()) {
+			if (m_alpha->getCoordonne().getX() == m_alpha->getTarget()->getCoordonne().getX() &&		/*À voir, pas capable d'acceder à m_plante comme l'herbivore*/
+				m_alpha->getCoordonne().getY() == m_alpha->getTarget()->getCoordonne().getX()) {
 				for (const auto membre : m_membres) {
 					if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
 						membre->replenishEnergy();
@@ -111,8 +114,8 @@ std::list<Animal*>& Meute::simulation()
 					membre->healing();
 				}
 				else {
-					if (membre->getCoordonne().getX == m_alpha->getCoordonne().getX &&
-						membre->getCoordonne().getY == m_alpha->getCoordonne().getY) {
+					if (membre->getCoordonne().getX() == m_alpha->getCoordonne().getX() &&	//Modifié par Fred, ajout des () pour les getX et getY
+						membre->getCoordonne().getY() == m_alpha->getCoordonne().getY()) {
 						membre->wander();
 					}
 					else if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {
@@ -143,6 +146,7 @@ std::list<Animal*>& Meute::simulation()
 		/***********************************************************************************************************/
 		/***********************************************************************************************************/
 	}
+	return m_membres;
 }
 
 void Meute::addMembre(Animal * membre)
@@ -166,6 +170,7 @@ void Meute::setAlpha()
 			break;
 		}
 	}
+
 }
 
 

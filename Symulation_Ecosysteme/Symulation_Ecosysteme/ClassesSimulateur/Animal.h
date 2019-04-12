@@ -16,7 +16,7 @@
 #include "Orientation.h"
 #include "Charogne.h"
 #include "constantes.h"
-
+class Meute;
 
 class Animal: public Vivant {
 public: 
