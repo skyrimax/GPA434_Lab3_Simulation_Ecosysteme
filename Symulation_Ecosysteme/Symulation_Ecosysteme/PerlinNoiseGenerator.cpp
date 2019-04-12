@@ -10,7 +10,7 @@
 
 #include "PerlinNoiseGenerator.h"
 
-PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat )
+PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat)
 	: m_repeat(repeat)
 {
 	std::vector<int> liste;
@@ -102,8 +102,8 @@ int PerlinNoiseGenerator::inc(int num)
 }
 
 double PerlinNoiseGenerator::perlin(double x, double y, double z)
-{	/*
-	if (m_repeat > 0) {
+{
+	/*if (m_repeat > 0) {
 		x = x % m_repeat;
 		y = y % m_repeat;
 		z = z % m_repeat;

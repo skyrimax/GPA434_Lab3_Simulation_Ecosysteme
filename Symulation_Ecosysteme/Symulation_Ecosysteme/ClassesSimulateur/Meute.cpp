@@ -16,12 +16,14 @@ std::list<Animal*>& Meute::getMembres()
 	return m_membres;
 }
 
-std::list<Animal*>& Meute::simulation()
+std::list<Animal*> Meute::simulation()
 {
 	bool flagFlee=false;
 	bool continueEating = true;
 	bool healing = false;
 	bool healingCritical = false;
+
+	std::list<Animal*> deads;
 
 	if (m_alpha == nullptr) {
 		setAlpha();
@@ -76,7 +78,7 @@ std::list<Animal*>& Meute::simulation()
 	}
 	else {
 		if (m_alpha->getDead()) {
-			if (m_alpha->gettimerMort() > 0) {
+			if (m_alpha->gettimerMort()) {
 				m_alpha->gettimerMort();
 			}
 			else {
@@ -137,7 +139,14 @@ std::list<Animal*>& Meute::simulation()
 			}
 		}
 	}
-	return m_membres;
+
+	for (auto const & membre : m_membres) {
+		if (membre->toDelete()) {
+			deads.push_back(membre);
+		}
+	}
+
+	return deads;
 }
 
 void Meute::addMembre(Animal * membre)

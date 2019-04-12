@@ -20,7 +20,7 @@ class Meute {
 public:
 
 	std::list<Animal*>& getMembres();
-	std::list<Animal*>& simulation();
+	std::list<Animal*> simulation();
 	void addMembre(Animal* membre);
 	Animal* getAlpha();
 	void setAlpha();
