@@ -15,6 +15,7 @@ ParameterWindow::ParameterWindow(QWidget *parent)
 
 ParameterWindow::~ParameterWindow()
 {
+
 }
 
 /*Affichage d'un message d'aide pour guider dans 
@@ -32,35 +33,60 @@ void ParameterWindow::showAide()
 	QMessageBox::about(this, u8R"(Aide aux paramètres)", aide);
 }
 
+void ParameterWindow::setQteChevreuil()
+{
+	mQteChevreuils= qteChevreuils->value();
+}
+
+void ParameterWindow::setQteLoups()
+{
+	mQteLoups= qteLoups->value();
+}
+
+void ParameterWindow::setQteLapins()
+{
+	mQteLapins = qteLapins->value();
+}
+
+void ParameterWindow::setQteMeuteLoups()
+{
+	mQteMeuteLoups= qteMeutes->value();
+}
+
+void ParameterWindow::setQteHardeChevreuil()
+{
+	mQteHardeChevreuil= qteHardes->value();
+}
+
 /*Retourne la quantité de lapins pour débuter la simulation*/
 int ParameterWindow::getQteLapin()
 {
-	return qteLapins->value();
+	return mQteLapins;
 }
 
 /*Retourne la quantité de chevreuils pour débuter la simulation*/
 int ParameterWindow::getQteChevreuil()
 {
 
-	return qteChevreuils->value();
+	return mQteChevreuils;
 }
 
 /*Retourne la quantité de loups pour débuter la simulation*/
 int ParameterWindow::getQteLoup()
 {
-	return qteLoups->value();
+	return mQteLoups;
 }
 
 /*Retourne la quantité de harde de chevreuil pour débuter la simulation*/
 int ParameterWindow::getQteHarde()
 {
-	return qteHardes->value();
+	return mQteHardeChevreuil;
 }
 
 /*Retourne la quantité de meute de loup pour débuter la simulation*/
 int ParameterWindow::getQteMeute()
 {
-	return qteMeutes->value();
+	return mQteMeuteLoups;
 }
 
 /*Renvoie si la case pour le mode saison a été coché*/

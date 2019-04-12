@@ -26,6 +26,12 @@ Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, i
 	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
 }
 
+/*Ajouté par Fred*/
+bool Carnivore::isCharognard()
+{
+	return m_isCharognard;
+}
+
 QRectF Carnivore::boundingRect() const
 {
 	//Ajouté par Fred,
@@ -95,6 +101,11 @@ void Carnivore::trackTarget()
 	walk(this);
 }
 
+void Carnivore::removeFromTarget()
+{
+	//À implémenter
+}
+
 void Carnivore::chooseMate()
 {
 	Carnivore* mate = nullptr;
@@ -155,3 +166,7 @@ void Carnivore::accoucher()
 }
 
 
+Vivant * Carnivore::getTarget()
+{
+	return m_proie;
+}

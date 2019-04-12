@@ -12,6 +12,7 @@
  */
 Grid::Grid()
 {
+
 	PerlinNoiseGenerator terrainGenerator;
 
 	Terrain::TypeTerrain type;
@@ -53,9 +54,6 @@ Grid::Grid()
 }
 
 
-/**
- * @return void
- */
 void Grid::updateTerrain() {
 	for (int i = 0; i < LARGEUR_GRILLE; i++) {
 		for (int j = 0; j < HAUTEUR_GRILLE; j++) {

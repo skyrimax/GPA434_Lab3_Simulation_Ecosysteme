@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SimulationMainWindow.h"
 #include "ParameterWindow.h"
-
+#include <QRandomGenerator>
 
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -23,7 +23,17 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	afin de mettre à jour les positions et les états.*/
 	//connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
 
-	}
+}
+
+Animal::Sex SimulationMainWindow::randomSex()
+{
+	return Animal::Sex(QRandomGenerator::global()->bounded(0,1));
+}
+
+Coordonne SimulationMainWindow::randomCoordonne()
+{
+	return Coordonne(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 500));
+}
 
 /*Fonction À Propos pour expliquer le programme*/
 void SimulationMainWindow::showAPropos()
@@ -60,8 +70,6 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
-	//Création de la grid du terrain
-	Grid *m_grid;
 
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
@@ -69,21 +77,65 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
 
-	// Vide la scène pour démarrer une nouvelle démo
-	mGraphicsScene.clear();
+	m_grid = new Grid();
 
+	
 	//Ajout du terrain à la scène
-	for (int i = 0; i < LARGEUR_GRILLE; i++) {
-		for (int j = 0; j < HAUTEUR_GRILLE; j++) {
+	for (int i = 0; i < LARGEUR_GRILLE; i++) 
+	{
+		for (int j = 0; j < HAUTEUR_GRILLE; j++) 
+		{
 			mGraphicsScene.addItem(new Terrain(
 				m_grid,
 				i,
 				j,
-				m_grid->getTerrain(i,j)->getType()));
+				m_grid->getTerrain(i, j)->getType()));
+
+			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon)&&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
+			{
+				mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
+					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
+					i, j, /*Ajouter temps reproduction*/ 300));
+			}
 		}
 	}
 
+	/*
+	for (int i = 0; i < 50; i++)
+	{
 
+		//environnement->addHerbivore(new Herbivore());
+
+		mGraphicsScene.addItem(new Herbivore(
+			environnement,//Environnement
+			std::string("Chevreuil"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Plante"}));//list de string
+
+		/*QGraphicsRectItem * rect = new QGraphicsRectItem();
+		rect->setRect(i, i, 50, 50);
+		mGraphicsScene.addItem(rect);
+	}*/
+
+	ui.graphicsView->setScene(&mGraphicsScene);
 
 	mTimer.start(30);
 }

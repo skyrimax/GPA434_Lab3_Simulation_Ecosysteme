@@ -12,6 +12,14 @@ class ParameterWindow : public QDialog, public Ui::ParameterWindow
 public:
 	ParameterWindow(QWidget *parent = Q_NULLPTR);
 	~ParameterWindow();
+
+	/*Mutateurs*/
+	void setQteChevreuil();
+	void setQteLoups();
+	void setQteLapins();
+	void setQteMeuteLoups();
+	void setQteHardeChevreuil();
+
 	/*
 	****ACCESSEURS****
 	*/
@@ -25,6 +33,13 @@ public:
 	//Accesseur afin de déterminer si les mods on été cochés
 	bool isSeasonCheck();
 	bool isVirusCheck();
+
+private:
+	int mQteChevreuils{ qteChevreuils->value() };
+	int mQteLapins{ qteLapins->value() };
+	int mQteLoups{qteLoups->value()};
+	int mQteMeuteLoups{qteMeutes->value()};
+	int mQteHardeChevreuil{qteHardes->value()};
 
 private slots:
 	//Slots qui affiche l'aide des paramètres

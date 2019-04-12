@@ -20,9 +20,9 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 {
 	//Ajouté par Fred, création d'une flèce pour les herbivores
 	mshape << QPointF(0, 0)
-		<< QPointF(-0.25, 0.5)
-		<< QPointF(1, 0.)
-		<< QPointF(-0.25, -0.5);
+		<< QPointF(-1.25, 1.5)
+		<< QPointF(2, 0.)
+		<< QPointF(-1.25, -1.5);
 
 	sHerbivorBackgoundColor.setRgb(255,255,0);//Jaune
 }

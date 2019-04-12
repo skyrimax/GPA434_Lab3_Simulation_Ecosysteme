@@ -36,11 +36,13 @@ public:
 	virtual void chooseTarget(Vivant* target) override;
 	virtual void resetTarget() override;
 	virtual void trackTarget() override;
+	virtual void removeFromTarget() override;
 	virtual void chooseMate() override;
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
-
+	// Accesseur virtuel hérité de Animal
+	virtual Vivant* getTarget() override;
 
 protected:
     Animal* m_proie;

@@ -5,6 +5,9 @@
 #include "ui_SimulationMainWindow.h"
 #include "ParameterWindow.h"
 #include "ClassesSimulateur/Environement.h"
+#include "ClassesSimulateur/Sex.h"
+
+class ParameterWindow;
 
 class SimulationMainWindow : public QMainWindow
 {
@@ -13,9 +16,13 @@ class SimulationMainWindow : public QMainWindow
 public:
 	SimulationMainWindow(QWidget *parent = Q_NULLPTR);
 
+
 private:
 	Ui::SimulationMainWindowClass ui;
+	Animal::Sex randomSex();
+	Coordonne randomCoordonne();
 
+	Grid *m_grid;
 	/*Timer qui sera de 30 millisecondes qui
 	fera faire une boucle à chaque fois. Lorsque
 	Le timer atteindre 30 millisecondes, il enverra
@@ -26,6 +33,9 @@ private:
 	//Création d'un environnement
 	Environnement *environnement;
 
+	ParameterWindow *mparameter;
+
+	
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation
 	void showAPropos();
