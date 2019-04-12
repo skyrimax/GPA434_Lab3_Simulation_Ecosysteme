@@ -49,8 +49,8 @@ std::list<Animal*>& Meute::simulation()
 				}
 			}
 			/* Virguler dans le if ??.... C'est un && ?*/
-			if (m_alpha->getCoordonne.getX() == m_alpha->getPlante()->getCoordonne().getX(),		/*À voir, pas capable d'acceder à m_plante comme l'herbivore*/
-				m_alpha->getCoordonne.getY() == m_alpha->getPlante()->getCoordonne().getX()) {
+			if (m_alpha->getCoordonne().getX() == m_alpha->getTarget()->getCoordonne().getX(),		/*À voir, pas capable d'acceder à m_plante comme l'herbivore*/
+				m_alpha->getCoordonne().getY() == m_alpha->getTarget()->getCoordonne().getX()) {
 				for (const auto membre : m_membres) {
 					if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
 						membre->replenishEnergy();
@@ -146,6 +146,7 @@ std::list<Animal*>& Meute::simulation()
 		/***********************************************************************************************************/
 		/***********************************************************************************************************/
 	}
+	
 }
 
 void Meute::addMembre(Animal * membre)

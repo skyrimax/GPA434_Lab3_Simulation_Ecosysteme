@@ -40,6 +40,7 @@ void Carnivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 	painter->drawPolygon(mshape);
 }
 
+
 void Carnivore::replenishEnergy()
 {
 	// ************** À IMPLANTER ***************
@@ -152,3 +153,5 @@ void Carnivore::accoucher()
 		}
 	}
 }
+
+

@@ -10,7 +10,7 @@
 
 // Librairies standart
 #include <cmath>
-#include <list>
+#include <vector>
 
 class PerlinNoiseGenerator
 {

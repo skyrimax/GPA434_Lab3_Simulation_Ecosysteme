@@ -44,7 +44,7 @@ double croisementEntre2Lignes(Coordonne depart, Coordonne destination)
 	Coordonne maxY = HAUTEUR_GRILLE;
 
 	
-	if (destination == limite)
+	/*if (destination == limite)
 	{
 
 
@@ -54,11 +54,11 @@ double croisementEntre2Lignes(Coordonne depart, Coordonne destination)
 	{
 
 	}
-
-	else 
-	{
+	*/
+	//else 
+	//{
 
 		return (-1, -1);
-	}
+	//}
 	
 }

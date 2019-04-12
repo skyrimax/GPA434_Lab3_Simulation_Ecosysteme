@@ -40,6 +40,8 @@ public:
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
+
+
 protected:
     Animal* m_proie;
     bool m_isCharognard;

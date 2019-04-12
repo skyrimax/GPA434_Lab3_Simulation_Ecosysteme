@@ -10,10 +10,10 @@
 
 #include "PerlinNoiseGenerator.h"
 
-PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat = -1)
+PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat )
 	: m_repeat(repeat)
 {
-	std::list<int> liste;
+	std::vector<int> liste;
 
 	srand(seed);
 
@@ -21,8 +21,14 @@ PerlinNoiseGenerator::PerlinNoiseGenerator(int seed, int repeat = -1)
 		liste.push_back(i);
 	}
 
-	while (!liste.empty()) {
+	for (int i = 0; i < 256; i++) {
+		int pos;
 
+		pos = rand() % liste.size();
+
+		m_permutation[i] = liste[pos];
+
+		liste.erase(liste.begin() + pos);
 	}
 
 	for (int i = 0; i < 512; i++) {

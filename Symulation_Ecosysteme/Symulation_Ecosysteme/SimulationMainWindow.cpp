@@ -3,7 +3,6 @@
 #include "ParameterWindow.h"
 
 
-
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -17,12 +16,13 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.stopButton->setEnabled(false);
 
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
-	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
+	connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
 	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
 	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
 	afin de mettre à jour les positions et les états.*/
-	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
+	//connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
+
 	}
 
 /*Fonction À Propos pour expliquer le programme*/
@@ -60,11 +60,29 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
+	//Création de la grid du terrain
+	Grid *m_grid;
+
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
+
+	// Vide la scène pour démarrer une nouvelle démo
+	mGraphicsScene.clear();
+
+	//Ajout du terrain à la scène
+	for (int i = 0; i < LARGEUR_GRILLE; i++) {
+		for (int j = 0; j < HAUTEUR_GRILLE; j++) {
+			mGraphicsScene.addItem(new Terrain(
+				m_grid,
+				i,
+				j,
+				m_grid->getTerrain(i,j)->getType()));
+		}
+	}
+
 
 
 	mTimer.start(30);
@@ -94,10 +112,10 @@ sur le bouton Par Étape*/
 void SimulationMainWindow::on_stepButton_clicked()
 {
 	/*1ere méthode avec la fonction advance de QGraphicsScene*/
-	mGraphicsScene.advance();
+	//mGraphicsScene.advance();
 
 	/*2ene méthode utilise directement la fonction simulatiom*/
-	environnement->simulation();
+	//environnement->simulation();
 }
 
 /*Bouton qui arrête la simulation en arrêtant le timer

@@ -16,8 +16,6 @@ class Herbivore: public Animal {
 
 
 public:
-	Plante* getPlante();
-
 	// Constructeur
 	Herbivore() = default;
 	Herbivore(Environnement* environnement, std::string espece, int hp,
@@ -49,7 +47,6 @@ public:
 	// Accesseur virtuel hérité de Animal
 	virtual Vivant* getTarget() override;
 
-protected: 
 private: 
     Plante* m_plante;
 	//Ajouté par Fred, la forme des herbivores
