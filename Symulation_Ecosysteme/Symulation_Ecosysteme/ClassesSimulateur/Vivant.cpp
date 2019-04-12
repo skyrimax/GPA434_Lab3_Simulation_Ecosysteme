@@ -16,52 +16,57 @@ Vivant::Vivant(Environnement * environnement, std::string espece, int hp,
 	setPos(x, y);
 }
 
-int Vivant::getHp() const
+int& Vivant::getHp()
 {
 	return m_hp;
 }
 
-int Vivant::getHpMax() const
+int& Vivant::getHpMax()
 {
 	return m_hpMax;
 }
 
-int Vivant::getEnergy() const
+int& Vivant::getEnergy()
 {
 	return m_age;
 }
 
-int Vivant::getEnergyMax() const
+int& Vivant::getEnergyMax()
 {
 	return m_ageMax;
 }
 
-int Vivant::getAge() const
+int& Vivant::getAge()
 {
 	return m_age;
 }
 
-int Vivant::getAgeAdulte() const
+int& Vivant::getAgeAdulte()
 {
 	return m_ageAdulte;
 }
 
-int Vivant::getAgeMax() const
+int& Vivant::getAgeMax()
 {
 	return m_ageMax;
 }
 
-bool Vivant::toDelete()
+bool& Vivant::toDelete()
 {
 	return m_toDelete;
 }
 
-std::string Vivant::getEspece() const
+bool & Vivant::getDead()
+{
+	return m_dead;
+}
+
+std::string& Vivant::getEspece()
 {
 	return m_espece;
 }
 
-Coordonne Vivant::getCoordonne() const
+Coordonne& Vivant::getCoordonne()
 {
 	return m_coordonne;
 }

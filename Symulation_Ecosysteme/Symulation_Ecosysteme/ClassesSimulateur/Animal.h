@@ -57,17 +57,18 @@ public:
 	void devenirAdulte();
 	void trackAlpha();
 	void sprintAlpha();
+	void closestPredateur();
 
 	//Accesseurs
-	Sex getSex();
+	Sex& getSex();
 	Animal* getclosestPredateur();
-	Orientation getOrientation();
-	bool getaEnfant();
-	int gettimerReproduction();
+	Orientation& getOrientation();
+	bool& getaEnfant();
+	int& gettimerReproduction();
 	Animal* getMate();
-	bool getenceinte();
-	int gettimerGestation();
-	int gettimerMort();
+	bool& getenceinte();
+	int& gettimerGestation();
+	int& gettimerMort();
 
 	//Mutateurs
 	void settimerReproduction(int timer);
@@ -93,7 +94,6 @@ protected:
 	// Fonction membre pour déplacer l'animal
 	void deplacer(double vitesse);
 	void deplacer(double vitesse, Animal* cible);
-	void closestPredateur();
 
 	// Attributs
     double m_vitesse;
