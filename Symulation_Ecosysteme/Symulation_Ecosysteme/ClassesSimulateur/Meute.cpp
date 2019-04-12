@@ -18,133 +18,124 @@ std::list<Animal*>& Meute::getMembres()
 
 std::list<Animal*>& Meute::simulation()
 {
+	bool flagFlee=false;
+	bool continueEating = true;
+	bool healing = false;
+	bool healingCritical = false;
 
-	for (auto const membre : m_membres) {
-		if (distanceEntre2Points(membre->getclosestPredateur()->getCoordonne(), membre->getCoordonne()) < AWARENESS_CIRCLE) {
-			if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {
-				membre->flee();
-			}
-			else {
-				for (auto const membre2 : m_membres) {
-					if (distanceEntre2Points(m_alpha->getCoordonne(), membre2->getCoordonne()) < DISTANCE_ALPHA &&
-						membre != m_alpha) {
-						membre->flee();
-					}
-				}
-				m_alpha->flee();
-			}
+	if (m_alpha == nullptr) {
+		setAlpha();
+	}
+
+	for (auto const & membre : m_membres) {
+		membre->closestPredateur();
+		if (distanceEntre2Points(membre->getclosestPredateur()->getCoordonne(),
+			membre->getCoordonne()) < AWARENESS_CIRCLE) {
+			flagFlee = true;
 		}
-		else if (membre->getEnergy() < 0.1*(membre->getEnergyMax())) {
-			m_alpha->seekEnergy();
-			m_alpha->trackTarget();
-			for (const auto membre : m_membres) {
-				if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
-					//membre->setOrientation(m_alpha->getOrientation());
-					membre->trackAlpha();	//Modifié par Fred, remplacement du setOrientation par la fonction trackAlpha()
-					membre->walk(membre);	//Modifié par Fred, ajout du paramètre membre dans la fonction walk()
 
-				}
-				else {
-					membre->sprintAlpha();
-				}
-			}
-			/* Virguler dans le if ??.... C'est un && ?*/
-			if (m_alpha->getCoordonne().getX() == m_alpha->getTarget()->getCoordonne().getX() &&		/*À voir, pas capable d'acceder à m_plante comme l'herbivore*/
-				m_alpha->getCoordonne().getY() == m_alpha->getTarget()->getCoordonne().getX()) {
-				for (const auto membre : m_membres) {
-					if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) < DISTANCE_ALPHA) {
-						membre->replenishEnergy();
-					}
-				}
+		if (membre->getEnergy() < 0.1*membre->getEnergyMax()) {
+			faim = true;
+		}
+
+		if (membre->getHp() < membre->getHpMax()) {
+			healing = true;
+		}
+
+		if (membre->getHp() < 0.9*membre->getHpMax()) {
+			healingCritical = true;
+		}
+	}
+
+	for (auto const & membre : m_membres) {
+		if (faim && membre->getEnergy() == membre->getEnergyMax()) {
+			continueEating = false;
+		}
+	}
+
+	faim = continueEating;
+
+	if (!m_alpha->isDead()) {
+		if (faim && !healingCritical) {
+			m_alpha->seekEnergy;
+			m_alpha->trackTarget();
+		}
+		else if (m_alpha->getaEnfant() || m_alpha->gettimerReproduction) {
+			m_alpha->chooseMate();
+			m_alpha->trackMate();
+			if (m_alpha->getCoordonne().getX() == m_alpha->getMate()->getCoordonne().getX() &&
+				m_alpha->getCoordonne().getY() == m_alpha->getMate()->getCoordonne().getY()) {
+				m_alpha->reproduction();
+
+				m_alpha->getMate()->reproduction();
 			}
 		}
 		else {
-			/***********************************************************************************************************/
-			/***********************************************************************************************************/
-			/***********************************************************************************************************/
-			if (!membre->isDead()) {
-				if (membre->getAge() < membre->getAgeAdulte()) {
-
-					membre->trackMother();
-
-				}
-				else if (membre->getAge() == membre->getAgeAdulte()) {
-					membre->devenirAdulte();
-				}
-				else if (membre->getAge() > membre->getAgeAdulte()) {
-
-					if (membre->getHp() < .9*membre->getHpMax()) {//On va healer peu importe l'énergie à la sortie du else fi. C'est tu vraiment nécessaire.
-						membre->healing();
-					}
-
-					else if ((!membre->getaEnfant() || membre->gettimerReproduction() == 0) && membre->getSex() == Animal::Sex::Male) {
-						membre->chooseMate();
-						membre->trackMate();
-						if (membre->getCoordonne().getX() == membre->getMate()->getCoordonne().getX() &&
-							membre->getCoordonne().getY() == membre->getMate()->getCoordonne().getY()) {
-							membre->reproduction();
-
-							membre->getMate()->reproduction();
-						}
-					}
-					//else if (m_sex == Sex::Female && m_enfant.size() != 0) {
-					//	bool needToFindFood = false;
-
-					//	for (auto const enfant : m_enfant) {
-					//		if (enfant->isHungry()) {
-					//			needToFindFood = true;
-						//	}
-					//	}
-
-					//	if (needToFindFood) {
-					//		seekEnergy();
-
-					//		for (auto const enfant : m_enfant) {
-					//			enfant->chooseTarget(m_plante);
-					//		}
-
-					//		trackTarget();
-					//		if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
-					//			m_coordonne.getY() == m_plante->getCoordonne().getY()) {
-					//			replenishEnergy();
-					//		}
-					//	}
-				}
-				if (membre->getHp() < membre->getHpMax()) {
-					membre->healing();
-				}
-				else {
-					if (membre->getCoordonne().getX() == m_alpha->getCoordonne().getX() &&	//Modifié par Fred, ajout des () pour les getX et getY
-						membre->getCoordonne().getY() == m_alpha->getCoordonne().getY()) {
-						membre->wander();
-					}
-					else if (distanceEntre2Points(m_alpha->getCoordonne(), membre->getCoordonne()) > DISTANCE_ALPHA) {
-						membre->trackAlpha();
-					}
-					else {
-						membre->sprintAlpha();
-					}
-
-				}
-				(membre->setAge(membre->getAge() + 1));
-				if (membre->gettimerReproduction() > 0)
-					membre->settimerReproduction(membre->gettimerReproduction() - 1);
-				if (membre->getenceinte() && membre->gettimerGestation() > 0)
-					membre->settimerGestation(membre->gettimerGestation() - 1);
-
+			m_alpha->wander();
+		}
+	}
+	else {
+		if (m_alpha->getDead()) {
+			if (m_alpha->gettimerMort > 0) {
+				m_alpha->gettimerMort();
 			}
-			else if (membre->isDead()) {
+			else {
+				m_alpha->devenirCharogne();
+			}
+		}
+		else {
+			m_alpha->dying();
+		}
+	}
+
+	(m_alpha->getAge())++;
+	if (m_alpha->gettimerReproduction() > 0)
+		(m_alpha->gettimerReproduction())--;
+
+	for (auto const & membre : m_membres) {
+		if (!membre->isDead() && membre != m_alpha) {
+			if (membre->getAge <= membre->getAgeAdulte()) {
+				membre->simulation();
+			}
+			else if (flagFlee) {
+				membre->flee();
+			}
+			else if (healingCritical) {
+				membre->healing();
+			}
+			else if (faim) {
+				membre->chooseTarget(m_alpha->getTarget());
+
+				membre->trackTarget();
+				if (membre->getCoordonne().getX() == membre->getTarget()->getCoordonne().getX() &&
+					membre->getCoordonne().getY() == membre->getTarget()->getCoordonne().getY()) {
+					membre->replenishEnergy();
+				}
+			}
+			else if (membre == m_alpha->getMate()) {
+				membre->trackMate();
+			}
+			else if (healing) {
+				membre->healing();
+			}
+
+			(membre->getAge())++;
+			if (membre->gettimerGestation > 0)
+				(membre->gettimerGestation())--;
+		}
+		else if (membre->isDead() && membre != m_alpha) {
+			if (membre->getDead()) {
 				if (membre->gettimerMort() > 0) {
-					membre->settimerMort(membre->gettimerMort() - 1);
+					(membre->gettimerMort())--;
 				}
 				else {
 					membre->devenirCharogne();
 				}
 			}
+			else {
+				membre->dying();
+			}
 		}
-		/***********************************************************************************************************/
-		/***********************************************************************************************************/
-		/***********************************************************************************************************/
 	}
 	return m_membres;
 }

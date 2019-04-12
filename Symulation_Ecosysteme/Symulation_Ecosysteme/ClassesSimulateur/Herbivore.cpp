@@ -82,19 +82,21 @@ void Herbivore::simulation()
 		}
 		else if (m_age == m_ageAdulte) {
 			devenirAdulte();
+
+			m_age++;
 		}
 		else if (m_age > m_ageAdulte) {
 			if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
 				m_coordonne) < AWARENESS_CIRCLE) {
 				flee();
 			}
-			else if (m_hp < .9*m_hpMax) {
+			else if (m_hp < 0.9*m_hpMax) {
 				healing();
 			}
 			else if (m_energy < 0.1*m_energyMax) {
 				seekEnergy();
 				trackTarget();
-				if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
+				if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
 					m_coordonne.getY() == m_plante->getCoordonne().getY()) {
 					replenishEnergy();
 				}
@@ -132,7 +134,7 @@ void Herbivore::simulation()
 					}
 				}
 			}
-			if (m_hp < m_hpMax) {
+			else if (m_hp < m_hpMax) {
 				healing();
 			}
 			else {
@@ -145,7 +147,7 @@ void Herbivore::simulation()
 				m_timerGestation--;
 		}
 	}
-	else if (isDead()) {
+	else {
 		if (m_dead) {
 			if (m_timerMort > 0) {
 				m_timerMort--;
@@ -154,8 +156,7 @@ void Herbivore::simulation()
 				devenirCharogne();
 			}
 		}
-		else
-		{
+		else {
 			dying();
 		}
 	}
@@ -178,6 +179,8 @@ void Herbivore::chooseTarget()
 			}
 		}
 	}
+
+	closestPlante->getIsEatenBy().push_back(this);
 
 	m_plante = closestPlante;
 }
@@ -212,17 +215,34 @@ void Herbivore::chooseMate()
 	Herbivore* mate = nullptr;
 	int distance = INT_MAX;
 
-	std::list<Herbivore*> liste = m_environnement->getHerbivores();
+	if (m_meute == nullptr) {
+		std::list<Herbivore*> liste = m_environnement->getHerbivores();
 
-	for (auto const h : liste) {
-		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenue h->getEspece(). Il manquait les paranthèses de la fonction
-			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
-				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
+		for (auto const h : liste) {
+			if (h->getEspece() == m_espece) {
+				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
-				mate = h;
+					mate = h;
+				}
 			}
 		}
 	}
+	else {
+		std::list<Animal*> liste = m_meute->getMembres();
+
+		for (auto const & h : liste) {
+			if (h->getEspece() == m_espece) {
+				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
+
+					mate = static_cast<Herbivore*>(h);
+				}
+			}
+		}
+	}
+
+	m_mate = mate;
 }
 
 void Herbivore::trackMate()

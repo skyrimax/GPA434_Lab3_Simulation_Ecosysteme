@@ -30,16 +30,17 @@ public:
 	~Vivant()=default;
 
 // Accesseurs
-	int getHp() const;
-	int getHpMax() const;	//TYPO ALERT modified gatHpMax for getHpMax
-	int getEnergy() const;
-	int getEnergyMax() const;
-	int getAge() const;
-	int getAgeAdulte() const;
-	int getAgeMax() const;
-	bool toDelete();
-	std::string getEspece() const;
-	Coordonne getCoordonne() const;
+	int& getHp();
+	int& getHpMax();
+	int& getEnergy();
+	int& getEnergyMax();
+	int& getAge();
+	int& getAgeAdulte();
+	int& getAgeMax();
+	bool& toDelete();
+	bool& getDead();
+	std::string& getEspece();
+	Coordonne& getCoordonne();
 
 // Mutateurs
 	void setHp(int hp);

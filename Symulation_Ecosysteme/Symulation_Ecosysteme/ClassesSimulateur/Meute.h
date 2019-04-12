@@ -28,7 +28,6 @@ public:
 
 private:
 	std::list<Animal*> m_membres;
-	bool attacked;
 	bool faim;
 	Animal* m_alpha;
 	Environnement* m_environnement;

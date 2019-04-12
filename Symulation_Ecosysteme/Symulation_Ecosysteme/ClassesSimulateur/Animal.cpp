@@ -306,7 +306,7 @@ void Animal::sprintAlpha() {
 	}
 }
 
-Animal::Sex Animal::getSex()
+Animal::Sex& Animal::getSex()
 {
 	return m_sex;
 }
@@ -316,17 +316,17 @@ Animal * Animal::getclosestPredateur()
 	return m_closestPredateur;
 }
 
-Orientation Animal::getOrientation()
+Orientation& Animal::getOrientation()
 {
 	return m_orientation;
 }
 
-bool Animal::getaEnfant()
+bool& Animal::getaEnfant()
 {
 	return m_aEnfant;
 }
 
-int Animal::gettimerReproduction()
+int& Animal::gettimerReproduction()
 {
 	return m_timerReproduction;
 }
@@ -336,17 +336,17 @@ Animal * Animal::getMate()
 	return m_mate;
 }
 
-bool Animal::getenceinte()
+bool& Animal::getenceinte()
 {
 	return m_enceinte;
 }
 
-int Animal::gettimerGestation()
+int& Animal::gettimerGestation()
 {
 	return m_timerGestation;
 }
 
-int Animal::gettimerMort()
+int& Animal::gettimerMort()
 {
 	return m_timerMort;
 }
