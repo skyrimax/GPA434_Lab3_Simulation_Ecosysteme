@@ -169,7 +169,7 @@ Coordonne croisementEntre2Lignes(Coordonne depart, Coordonne destination)
 	}
 
 	//Si la destination est depasser la limite superieure ( 0<x<500 , y<0) de la grille de l'environnement de la simulation
-	else if (minWorldLimit.getX() < destination.getX() < maxWorldLimit.getX() && destination.getY() < minWorldLimit.getY())
+	else if (destination.getX() < maxWorldLimit.getX() && destination.getY() < minWorldLimit.getY())
 	{
 	//etablissement des parametres our le calcul de la nouvelle coordonne limite 
 	double frontiereX = 500;
