@@ -35,6 +35,11 @@ private:
 
 	ParameterWindow *mparameter;
 
+	int mQteChevreuils;
+	int mQteLapins;
+	int mQteLoups;
+	int mQteMeuteLoups;
+	int mQteHardeChevreuil;
 	
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation

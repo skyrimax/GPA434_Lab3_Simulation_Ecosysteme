@@ -23,15 +23,21 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 		<< QPointF(-1.25, 1.5)
 		<< QPointF(2, 0.)
 		<< QPointF(-1.25, -1.5);
+	//mshape.setRect(x, y, 10, 10);
 
+	//setPos(QPointF(x, y));
+	setPos(QPointF(x,500));
+	setScale(2);
 	sHerbivorBackgoundColor.setRgb(255,255,0);//Jaune
 }
 
 
 QRectF Herbivore::boundingRect() const
 {
+	
 	//Ajouté par Fred,
-	return QRectF(-0.25, -0.5, 1.0 , 1.25);
+	return QRectF(-0.25 * scale(), -0.5 * scale(), 1.0 * scale(), 1.25 * scale());
+
 }
 
 void Herbivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)

@@ -5,7 +5,8 @@
 
 
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), mQteChevreuils{ 1 }, mQteLapins{ 1 }, mQteLoups{ 1 }
+	, mQteMeuteLoups{ 1 }, mQteHardeChevreuil{ 1 }
 {
 	ui.setupUi(this);
 
@@ -24,6 +25,7 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	afin de mettre à jour les positions et les états.*/
 	//connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
 
+	mparameter = new ParameterWindow();
 }
 
 Animal::Sex SimulationMainWindow::randomSex()
@@ -65,7 +67,14 @@ void SimulationMainWindow::on_parameterButton_clicked()
 {
 	ParameterWindow dialog(this);
 
-	dialog.exec();
+	if (dialog.exec())
+	{
+		mQteChevreuils = dialog.qteChevreuils->value();
+		mQteLapins = dialog.qteLapins->value();
+		mQteLoups = dialog.qteLoups->value();
+		mQteMeuteLoups = dialog.qteMeutes->value();
+		mQteHardeChevreuil = dialog.qteHardes->value();
+	}
 }
 
 /*Début de la simulation en appuyant sur start*/
@@ -77,12 +86,13 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.parameterButton->setEnabled(false);
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
+	ui.startButton->setEnabled(false);
 
 	m_grid = new Grid();
+	
 
-	/*
 	//Ajout du terrain à la scène
-	for (int i = 0; i < LARGEUR_GRILLE; i++) 
+	for (int i = 0; i < LARGEUR_GRILLE; i++)
 	{
 		for (int j = 0; j < HAUTEUR_GRILLE; j++) 
 		{
@@ -96,19 +106,18 @@ void SimulationMainWindow::on_startButton_clicked()
 				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
 				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon)&&
 				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
-			{*/
-				//mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
-				//	/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-				//	i, j, /*Ajouter temps reproduction*/ 300));
-			//}
-		//}
-	//}
+			{
+				mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
+					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
+					i, j, /*Ajouter temps reproduction*/ 300));
+			}
+		}
+	}
 
 	
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < mQteChevreuils; i++)
 	{
-		environnement->addHerbivore(new Herbivore());
-		/*
+		//environnement->addHerbivore(new Herbivore());
 		mGraphicsScene.addItem(new Herbivore(
 			environnement,//Environnement
 			std::string("Chevreuil"),//Espèce
@@ -129,9 +138,10 @@ void SimulationMainWindow::on_startButton_clicked()
 			10,//tempsgestation
 			5,//tempsreproduction
 			std::list<std::string> {"Plante"}));//list de string
-		*/
-		/*QGraphicsRectItem * rect = new QGraphicsRectItem();
-		rect->setRect(i, i, 50, 50);
+		
+		/*
+		QGraphicsRectItem * rect = new QGraphicsRectItem();
+		rect->setRect(i*20, i*20, 50, 50);
 		mGraphicsScene.addItem(rect);*/
 	}
 
@@ -177,4 +187,7 @@ void SimulationMainWindow::on_stopButton_clicked()
 	mGraphicsScene.clear();
 
 	mTimer.stop();
+
+	ui.parameterButton->setEnabled(true);
+	ui.startButton->setEnabled(true);
 }
