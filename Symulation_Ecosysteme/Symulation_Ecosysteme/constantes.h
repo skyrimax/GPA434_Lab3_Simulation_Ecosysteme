@@ -41,3 +41,6 @@
 
 // Constantes relatant aux charognes
 #define AGE_MAX_CHAROGNE 300
+
+// Constantes relatant aux carnivores
+#define RANGE_SPRINT 10

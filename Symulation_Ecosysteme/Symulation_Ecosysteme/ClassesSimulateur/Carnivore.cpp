@@ -170,7 +170,12 @@ void Carnivore::trackTarget()
 	m_orientation.setVX(m_proie->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_proie->getCoordonne().getY() - m_coordonne.getY());
 
-	walk(this);
+	if (distanceEntre2Points(m_coordonne, m_proie->getCoordonne()) < RANGE_SPRINT) {
+		deplacer(m_sprint, m_proie);
+	}
+	else {
+		deplacer(m_vitesse, m_proie);
+	}
 }
 
 void Carnivore::chooseMate()
