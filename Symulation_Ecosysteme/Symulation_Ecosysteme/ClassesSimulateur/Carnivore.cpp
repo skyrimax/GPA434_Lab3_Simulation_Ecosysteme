@@ -11,12 +11,15 @@
  * Carnivore implementation
  */
 
-Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, int energy, int ageAdulte, int ageMax,
+Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax,
 	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
-	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible,
+	bool isCharognard)
+	: Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
+		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
+		meute, timerMort, tempsGestation, tempsReproduction, cible),
+	m_isCharognard(isCharognard), m_proie(nullptr)
 {
-	// ************** À IMPLANTER ***************
-
 		//Ajouté par Fred, création d'une flèce pour les carnivores
 	mshape << QPointF(0, 0)
 		<< QPointF(-0.25, 0.5)

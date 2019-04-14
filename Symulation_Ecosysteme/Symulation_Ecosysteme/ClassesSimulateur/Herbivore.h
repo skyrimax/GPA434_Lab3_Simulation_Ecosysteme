@@ -16,7 +16,6 @@ class Herbivore: public Animal {
 
 
 public:
-	Plante* getPlante();
 
 	// Constructeur
 	Herbivore() = default;
