@@ -60,23 +60,97 @@ void Carnivore::simulation()
 
 void Carnivore::chooseTarget()
 {
-	std::list<Herbivore*> proies = m_environnement->getHerbivores();
 	double distance;
 	double distanceMin = INT_MAX;
-	Animal* closestHerbivore = nullptr;
+	Vivant* closestProie = nullptr;
 
-	for (auto const proie : proies) {
-		if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
-			distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+	if (m_isCharognard) {
+		for (auto const & charogne : m_environnement->getCharognes()) {
+			if (std::find(m_cible.begin(), m_cible.end(), charogne->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, charogne->getCoordonne());
 
-			if (distance < distanceMin) {
-				distanceMin = distance;
-				closestHerbivore = proie;
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = charogne;
+				}
+			}
+		}
+	}
+	else {
+		for (auto const proie : m_environnement->getCarnivores()) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesCarnivores()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
+			}
+		}
+
+		for (auto const proie : m_environnement->getCharognards) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesCharognards()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
+			}
+		}
+
+		for (auto const proie : m_environnement->getHerbivores()) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesHerbivores()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
 			}
 		}
 	}
 
-	m_proie = closestHerbivore;
+	m_proie = closestProie;
 }
 
 void Carnivore::chooseTarget(Vivant* target)

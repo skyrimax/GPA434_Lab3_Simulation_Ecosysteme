@@ -42,7 +42,7 @@ public:
 	virtual void accoucher() override;
 
 protected:
-    Animal* m_proie;
+    Vivant* m_proie;
     bool m_isCharognard;
 
 private:
