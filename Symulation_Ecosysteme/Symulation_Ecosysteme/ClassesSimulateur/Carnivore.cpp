@@ -23,7 +23,9 @@ Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, i
 		<< QPointF(1, 0.)
 		<< QPointF(-0.25, -0.5);
 
-	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
+	setPos(QPointF(x, y));
+	setScale(5);
+	sCarnivoreBackgoundColor.setRgb(255, 128, 0);//Orange
 }
 
 /*Ajouté par Fred*/

@@ -16,13 +16,18 @@ class SimulationMainWindow : public QMainWindow
 public:
 	SimulationMainWindow(QWidget *parent = Q_NULLPTR);
 
+	/*Fonction qui va ajouter un terrain*/
+	void addTerrain(Grid *m_grid);
+	void addHerbivore(Environnement *environnement);
+	void addCarnivore(Environnement *environnement);
 
-private:
-	Ui::SimulationMainWindowClass ui;
+	void simulation();
+
 	Animal::Sex randomSex();
 	Coordonne randomCoordonne();
+private:
+	Ui::SimulationMainWindowClass ui;
 
-	Grid *m_grid;
 	/*Timer qui sera de 30 millisecondes qui
 	fera faire une boucle à chaque fois. Lorsque
 	Le timer atteindre 30 millisecondes, il enverra
@@ -32,8 +37,8 @@ private:
 	QGraphicsScene mGraphicsScene;
 	//Création d'un environnement
 	Environnement *environnement;
-
-	ParameterWindow *mparameter;
+	//Pour la grille
+	Grid *m_grid;
 
 	int mQteChevreuils;
 	int mQteLapins;

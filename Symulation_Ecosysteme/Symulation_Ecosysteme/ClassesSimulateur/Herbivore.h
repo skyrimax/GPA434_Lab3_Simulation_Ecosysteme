@@ -27,6 +27,7 @@ public:
 		int timerMort, int tempsGestation, int tempsReproduction,
 		std::list<std::string> cible);
 
+
 	// Fonctions membres virtuelles héritées de QGraphicsItem
 	virtual QRectF boundingRect() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

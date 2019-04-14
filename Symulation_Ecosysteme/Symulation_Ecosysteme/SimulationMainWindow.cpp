@@ -18,14 +18,141 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.stopButton->setEnabled(false);
 
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
-	connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
+	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
 	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
 	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
 	afin de mettre à jour les positions et les états.*/
 	//connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
 
-	mparameter = new ParameterWindow();
+
+	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
+
+}
+
+
+
+void SimulationMainWindow::addTerrain(Grid *m_grid)
+{
+	for (int i = 0; i < LARGEUR_GRILLE; i++)
+	{
+		for (int j = 0; j < HAUTEUR_GRILLE; j++)
+		{
+			mGraphicsScene.addItem(new Terrain(
+				m_grid,
+				i,
+				j,
+				m_grid->getTerrain(i, j)->getType()));
+
+			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
+			{
+
+				mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
+					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
+					i, j, /*Ajouter temps reproduction*/ 300));
+			}
+		}
+	}
+
+}
+
+
+void SimulationMainWindow::addHerbivore(Environnement *environnement)
+{
+	for (int i = 0; i < mQteChevreuils; i++)
+	{
+		Herbivore *Chevreuil = new Herbivore(
+			environnement,//Environnement
+			std::string("Chevreuil"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Plante"});
+
+		environnement->addHerbivore(Chevreuil);
+
+		mGraphicsScene.addItem(Chevreuil);
+	}
+	for (int i = 0; i < mQteLapins; i++)
+	{
+		Herbivore *Lapin = new Herbivore(
+			environnement,//Environnement
+			std::string("Lapin"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Plante"});
+
+		environnement->addHerbivore(Lapin);
+
+		mGraphicsScene.addItem(Lapin);
+	}
+}
+
+
+void SimulationMainWindow::addCarnivore(Environnement *environnement)
+{
+	for (int i = 0; i < mQteLoups; i++)
+	{
+		Carnivore *Loup = new Carnivore(
+			environnement,//Environnement
+			std::string("Loup"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Chevreuil", "Lapin"});
+
+		environnement->addCarnivore(Loup);//Ajout à l'environnement
+		mGraphicsScene.addItem(Loup);//Ajout à la scène
+	}
+}
+
+
+void SimulationMainWindow::simulation()
+{
+	environnement->simulation();
 }
 
 Animal::Sex SimulationMainWindow::randomSex()
@@ -35,7 +162,7 @@ Animal::Sex SimulationMainWindow::randomSex()
 
 Coordonne SimulationMainWindow::randomCoordonne()
 {
-	return Coordonne(QRandomGenerator::global()->bounded(0, 500), QRandomGenerator::global()->bounded(0, 500));
+	return Coordonne(QRandomGenerator::global()->bounded(0, LARGEUR_GRILLE-1), QRandomGenerator::global()->bounded(0, HAUTEUR_GRILLE-1));
 }
 
 /*Fonction À Propos pour expliquer le programme*/
@@ -88,62 +215,12 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.pauseButton->setEnabled(true);
 	ui.startButton->setEnabled(false);
 
-	m_grid = new Grid();
-	
+	environnement = new Environnement(); //Génération d'un envirronement
+	m_grid = new Grid(); //Génération d'une grille
 
-	//Ajout du terrain à la scène
-	for (int i = 0; i < LARGEUR_GRILLE; i++)
-	{
-		for (int j = 0; j < HAUTEUR_GRILLE; j++) 
-		{
-			mGraphicsScene.addItem(new Terrain(
-				m_grid,
-				i,
-				j,
-				m_grid->getTerrain(i, j)->getType()));
-
-			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon)&&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
-			{
-				mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
-					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-					i, j, /*Ajouter temps reproduction*/ 300));
-			}
-		}
-	}
-
-	
-	for (int i = 0; i < mQteChevreuils; i++)
-	{
-		//environnement->addHerbivore(new Herbivore());
-		mGraphicsScene.addItem(new Herbivore(
-			environnement,//Environnement
-			std::string("Chevreuil"),//Espèce
-			100,//hp
-			100,//energy
-			10,//ageadulte
-			20,//agemax
-			randomCoordonne().getX(),//x
-			randomCoordonne().getY(),//y
-			2,//vitesse
-			4,//sprint
-			randomSex(),//sex
-			0,//nbProgenituremin
-			4,//nbprogenituremax
-			nullptr,//mere
-			nullptr,//meute
-			50,//timermort
-			10,//tempsgestation
-			5,//tempsreproduction
-			std::list<std::string> {"Plante"}));//list de string
-		
-		/*
-		QGraphicsRectItem * rect = new QGraphicsRectItem();
-		rect->setRect(i*20, i*20, 50, 50);
-		mGraphicsScene.addItem(rect);*/
-	}
+	//addTerrain(m_grid);//Ajout du terrain
+	addHerbivore(environnement);//Ajout des herbivores
+	addCarnivore(environnement);//Ajout des carnivores
 
 	ui.graphicsView->setScene(&mGraphicsScene);
 

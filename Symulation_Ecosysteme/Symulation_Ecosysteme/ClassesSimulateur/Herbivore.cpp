@@ -20,15 +20,21 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 {
 	//Ajouté par Fred, création d'une flèce pour les herbivores
 	mshape << QPointF(0, 0)
-		<< QPointF(-1.25, 1.5)
-		<< QPointF(2, 0.)
-		<< QPointF(-1.25, -1.5);
-	//mshape.setRect(x, y, 10, 10);
+		<< QPointF(-0.25, 0.5)
+		<< QPointF(1, 0.)
+		<< QPointF(-0.25, -0.5);
 
-	//setPos(QPointF(x, y));
-	setPos(QPointF(x,500));
-	setScale(2);
-	sHerbivorBackgoundColor.setRgb(255,255,0);//Jaune
+	setPos(QPointF(x, y));
+	if (espece == "Chevreuil")
+	{
+		sHerbivorBackgoundColor.setRgb(255, 255, 0);//Jaune pour les chevreuils
+		setScale(5);
+	}
+	else
+	{
+		sHerbivorBackgoundColor.setRgb(255, 0, 127);//Rose pour les lapins
+		setScale(4);
+	}
 }
 
 
@@ -42,10 +48,12 @@ QRectF Herbivore::boundingRect() const
 
 void Herbivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	
 	//Ajouté par Fred
 	painter->setPen(Qt::NoPen);
 	painter->setBrush(sHerbivorBackgoundColor);
 	painter->drawPolygon(mshape);
+
 }
 
 void Herbivore::replenishEnergy()

@@ -29,6 +29,7 @@ public:
 	// Destructeur
 	~Environnement();
     
+
 // Fonctions membres pour ajouter des éléments au listes
 	void addPlante(Plante *plante);
 	void addHerbivore(Herbivore *herbivore);
