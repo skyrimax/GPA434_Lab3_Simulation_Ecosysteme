@@ -63,6 +63,7 @@ public:
 
 	//Accesseurs
 	Sex& getSex();
+	std::list<Animal*>& getPredateur();
 	Animal* getclosestPredateur();
 	Orientation& getOrientation();
 	bool& getaEnfant();
@@ -95,7 +96,7 @@ protected:
 
 	// Fonction membre pour déplacer l'animal
 	void deplacer(double vitesse);
-	void deplacer(double vitesse, Animal* cible);
+	void deplacer(double vitesse, Vivant* cible);
 
 	// Attributs
     double m_vitesse;

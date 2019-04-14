@@ -17,6 +17,7 @@ class Herbivore: public Animal {
 
 
 public:
+
 	// Constructeur
 	Herbivore() = default;
 	Herbivore(Environnement* environnement, std::string espece, int hp,

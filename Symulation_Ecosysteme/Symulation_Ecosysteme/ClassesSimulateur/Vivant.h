@@ -41,6 +41,7 @@ public:
 	bool& getDead();
 	std::string& getEspece();
 	Coordonne& getCoordonne();
+	Environnement* getEnvironnement();
 
 // Mutateurs
 	void setHp(int hp);

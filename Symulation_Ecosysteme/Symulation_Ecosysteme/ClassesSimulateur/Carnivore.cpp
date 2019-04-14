@@ -11,12 +11,15 @@
  * Carnivore implementation
  */
 
-Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, int energy, int ageAdulte, int ageMax,
+Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax,
 	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
-	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible,
+	bool isCharognard)
+	: Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
+		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
+		meute, timerMort, tempsGestation, tempsReproduction, cible),
+	m_isCharognard(isCharognard), m_proie(nullptr)
 {
-	// ************** À IMPLANTER ***************
-
 		//Ajouté par Fred, création d'une flèce pour les carnivores
 	mshape << QPointF(0, 0)
 		<< QPointF(-0.25, 0.5)
@@ -29,6 +32,11 @@ Carnivore::Carnivore(Environnement* environnement, std::string espace, int hp, i
 }
 
 /*Ajouté par Fred*/
+bool Carnivore::isCharognard()
+{
+	return m_isCharognard;
+}
+
 bool Carnivore::isCharognard()
 {
 	return m_isCharognard;
@@ -66,28 +74,104 @@ void Carnivore::simulation()
 
 void Carnivore::chooseTarget()
 {
-	std::list<Herbivore*> proies = m_environnement->getHerbivores();
 	double distance;
 	double distanceMin = INT_MAX;
-	Animal* closestHerbivore = nullptr;
+	Vivant* closestProie = nullptr;
 
-	for (auto const proie : proies) {
-		if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
-			distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+	if (m_isCharognard) {
+		for (auto const & charogne : m_environnement->getCharognes()) {
+			if (std::find(m_cible.begin(), m_cible.end(), charogne->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, charogne->getCoordonne());
 
-			if (distance < distanceMin) {
-				distanceMin = distance;
-				closestHerbivore = proie;
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = charogne;
+				}
+			}
+		}
+	}
+	else {
+		for (auto const proie : m_environnement->getCarnivores()) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesCarnivores()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
+			}
+		}
+
+		for (auto const proie : m_environnement->getCharognards) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesCharognards()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
+			}
+		}
+
+		for (auto const proie : m_environnement->getHerbivores()) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+				if (distance < distanceMin) {
+					distanceMin = distance;
+					closestProie = proie;
+				}
+			}
+		}
+
+		for (auto const & meute : m_environnement->getMeutesHerbivores()) {
+			for (auto const proie : meute->getMembres()) {
+				if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+					distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
+
+					if (distance < distanceMin) {
+						distanceMin = distance;
+						closestProie = proie;
+					}
+				}
 			}
 		}
 	}
 
-	m_proie = closestHerbivore;
+	m_proie = closestProie;
 }
 
 void Carnivore::chooseTarget(Vivant* target)
 {
-	m_proie = static_cast<Herbivore*>(target);
+	if (std::find(m_cible.begin(), m_cible.end(), target->getEspece()) != m_cible.end()) {
+		m_proie = (target);
+	}
 }
 
 void Carnivore::resetTarget()
@@ -100,7 +184,19 @@ void Carnivore::trackTarget()
 	m_orientation.setVX(m_proie->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_proie->getCoordonne().getY() - m_coordonne.getY());
 
-	walk(this);
+	if (distanceEntre2Points(m_coordonne, m_proie->getCoordonne()) < RANGE_SPRINT) {
+		deplacer(m_sprint, m_proie);
+	}
+	else {
+		deplacer(m_vitesse, m_proie);
+	}
+}
+
+void Carnivore::removeFromTarget()
+{
+	if (typeid(*m_proie) == typeid(Herbivore) || typeid(*m_proie) == typeid(Carnivore)) {
+		static_cast<Animal*>(m_proie)->getPredateur().remove(this);
+	}
 }
 
 void Carnivore::removeFromTarget()
@@ -116,7 +212,7 @@ void Carnivore::chooseMate()
 	std::list<Carnivore*> liste = m_environnement->getCarnivores();
 
 	for (auto const h : liste) {
-		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenu h->getEspece()
+		if (h->getEspece() == m_espece) {
 			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 

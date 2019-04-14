@@ -217,7 +217,7 @@ void Animal::deplacer(double vitesse)
 			nextCoordonne.moveX(m_orientation.getUnitX()*distance);
 			nextCoordonne.moveY(m_orientation.getUnitY()*distance);
 
-		pointCroisement = croisementEntre2Lignes(pointDepart, nextCoordonne);
+			pointCroisement = croisementEntre2Lignes(pointDepart, nextCoordonne);
 
 			if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
 				distance -= distanceEntre2Points(pointDepart, pointCroisement);
@@ -252,13 +252,13 @@ void Animal::deplacer(double vitesse)
 	setPos(m_coordonne.getX(), m_coordonne.getY());
 }
 
-void Animal::deplacer(double vitesse, Animal* cible) {
+void Animal::deplacer(double vitesse, Vivant* cible) {
 	
-	if (distanceEntre2Points(m_coordonne, cible->m_coordonne) <= vitesse) {
+	if (distanceEntre2Points(m_coordonne, cible->getCoordonne()) <= vitesse) {
 		if (m_energy > distanceEntre2Points(m_coordonne, cible->getCoordonne())
 			*CONSOMMATION_DEPLACEMENT) {
-			m_coordonne.setX(cible->m_coordonne.getX());
-			m_coordonne.setY(cible->m_coordonne.getY());
+			m_coordonne.setX(cible->getCoordonne().getX());
+			m_coordonne.setY(cible->getCoordonne().getY());
 
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
@@ -309,6 +309,11 @@ void Animal::sprintAlpha() {
 Animal::Sex& Animal::getSex()
 {
 	return m_sex;
+}
+
+std::list<Animal*>& Animal::getPredateur()
+{
+	return m_predateurs;
 }
 
 Animal * Animal::getclosestPredateur()

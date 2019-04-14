@@ -201,7 +201,9 @@ void Herbivore::chooseTarget()
 
 void Herbivore::chooseTarget(Vivant * target)
 {
-	m_plante = static_cast<Plante*>(target);
+	if (std::find(m_cible.begin(), m_cible.end(), target->getEspece()) != m_cible.end()) {
+		m_plante = static_cast<Plante*>(target);
+	}
 }
 
 void Herbivore::resetTarget()
@@ -216,7 +218,7 @@ void Herbivore::trackTarget()
 	m_orientation.setVX(m_plante->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_plante->getCoordonne().getY() - m_coordonne.getY());
 
-	deplacer(m_vitesse);
+	deplacer(m_vitesse, m_plante);
 }
 
 void Herbivore::removeFromTarget()

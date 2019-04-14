@@ -23,7 +23,6 @@ public:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	void pourrir();
-	int getTime();
 
 	/*Ajouté par Fred*/
 	// Fonctions membres virtuelles héritées de Vivant
@@ -38,7 +37,6 @@ public:
 	virtual bool isDamaged();
 
 private: 
-    int time;
 	//Ajouté par Fred, couleur des charognes
 	QColor sCharognesBackgoundColor;
 	//Ajouté par Fred, la forme des charognes

@@ -71,6 +71,11 @@ Coordonne& Vivant::getCoordonne()
 	return m_coordonne;
 }
 
+Environnement * Vivant::getEnvironnement()
+{
+	return m_environnement;
+}
+
 void Vivant::setHp(int hp)
 {
 	m_hp = hp;
