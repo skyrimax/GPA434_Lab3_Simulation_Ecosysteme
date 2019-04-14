@@ -155,7 +155,9 @@ void Carnivore::chooseTarget()
 
 void Carnivore::chooseTarget(Vivant* target)
 {
-	m_proie = static_cast<Herbivore*>(target);
+	if (std::find(m_cible.begin(), m_cible.end(), target->getEspece()) != m_cible.end()) {
+		m_proie = (target);
+	}
 }
 
 void Carnivore::resetTarget()

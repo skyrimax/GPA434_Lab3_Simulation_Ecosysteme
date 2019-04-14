@@ -187,7 +187,9 @@ void Herbivore::chooseTarget()
 
 void Herbivore::chooseTarget(Vivant * target)
 {
-	m_plante = static_cast<Plante*>(target);
+	if (std::find(m_cible.begin(), m_cible.end(), target->getEspece()) != m_cible.end()) {
+		m_plante = static_cast<Plante*>(target);
+	}
 }
 
 void Herbivore::resetTarget()
