@@ -204,7 +204,7 @@ void Herbivore::trackTarget()
 	m_orientation.setVX(m_plante->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_plante->getCoordonne().getY() - m_coordonne.getY());
 
-	deplacer(m_vitesse);
+	deplacer(m_vitesse, );
 }
 
 void Herbivore::removeFromTarget()

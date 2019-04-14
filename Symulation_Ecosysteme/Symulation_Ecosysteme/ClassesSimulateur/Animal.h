@@ -95,7 +95,7 @@ protected:
 
 	// Fonction membre pour déplacer l'animal
 	void deplacer(double vitesse);
-	void deplacer(double vitesse, Animal* cible);
+	void deplacer(double vitesse, Vivant* cible);
 
 	// Attributs
     double m_vitesse;

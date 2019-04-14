@@ -252,13 +252,13 @@ void Animal::deplacer(double vitesse)
 	setPos(m_coordonne.getX(), m_coordonne.getY());
 }
 
-void Animal::deplacer(double vitesse, Animal* cible) {
+void Animal::deplacer(double vitesse, Vivant* cible) {
 	
-	if (distanceEntre2Points(m_coordonne, cible->m_coordonne) <= vitesse) {
+	if (distanceEntre2Points(m_coordonne, cible->getCoordonne()) <= vitesse) {
 		if (m_energy > distanceEntre2Points(m_coordonne, cible->getCoordonne())
 			*CONSOMMATION_DEPLACEMENT) {
-			m_coordonne.setX(cible->m_coordonne.getX());
-			m_coordonne.setY(cible->m_coordonne.getY());
+			m_coordonne.setX(cible->getCoordonne().getX());
+			m_coordonne.setY(cible->getCoordonne().getY());
 
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
