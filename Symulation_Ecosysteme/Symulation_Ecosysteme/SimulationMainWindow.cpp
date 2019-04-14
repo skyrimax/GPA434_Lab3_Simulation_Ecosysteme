@@ -20,19 +20,12 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
 	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
-	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
-	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
-	afin de mettre à jour les positions et les états.*/
-	//connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
-
-
 	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
-
 }
 
 
 
-void SimulationMainWindow::addTerrain(Grid *m_grid)
+void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement)
 {
 	for (int i = 0; i < LARGEUR_GRILLE; i++)
 	{
@@ -49,14 +42,16 @@ void SimulationMainWindow::addTerrain(Grid *m_grid)
 				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon) &&
 				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
 			{
-
-				mGraphicsScene.addItem(new Plante(environnement, /*Ajouter non de plante ici*/ "Arbre",
+				Plante *plante = new Plante(
+					environnement, /*Ajouter non de plante ici*/ "Arbre",
 					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-					i, j, /*Ajouter temps reproduction*/ 300));
+					randomCoordonne().getX(), randomCoordonne().getY(), /*Ajouter temps reproduction*/ 300);
+
+				environnement->addPlante(plante);
+				mGraphicsScene.addItem(plante);
 			}
 		}
 	}
-
 }
 
 
@@ -84,6 +79,8 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 			10,//tempsgestation
 			5,//tempsreproduction
 			std::list<std::string> {"Plante"});
+		Chevreuil->setAge(10);
+
 
 		environnement->addHerbivore(Chevreuil);
 
@@ -111,7 +108,7 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 			10,//tempsgestation
 			5,//tempsreproduction
 			std::list<std::string> {"Plante"});
-
+		Lapin->setAge(10);
 		environnement->addHerbivore(Lapin);
 
 		mGraphicsScene.addItem(Lapin);
@@ -143,7 +140,7 @@ void SimulationMainWindow::addCarnivore(Environnement *environnement)
 			10,//tempsgestation
 			5,//tempsreproduction
 			std::list<std::string> {"Chevreuil", "Lapin"});
-
+		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 		mGraphicsScene.addItem(Loup);//Ajout à la scène
 	}
@@ -155,10 +152,12 @@ void SimulationMainWindow::simulation()
 	environnement->simulation();
 }
 
+
 Animal::Sex SimulationMainWindow::randomSex()
 {
-	return Animal::Sex(QRandomGenerator::global()->bounded(0,1));
+	return Animal::Sex(QRandomGenerator::global()->bounded(0,2));
 }
+
 
 Coordonne SimulationMainWindow::randomCoordonne()
 {
@@ -218,7 +217,7 @@ void SimulationMainWindow::on_startButton_clicked()
 	environnement = new Environnement(); //Génération d'un envirronement
 	m_grid = new Grid(); //Génération d'une grille
 
-	//addTerrain(m_grid);//Ajout du terrain
+	addTerrain(m_grid, environnement);//Ajout du terrain
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores
 

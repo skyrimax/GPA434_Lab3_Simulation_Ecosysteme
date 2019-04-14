@@ -23,7 +23,7 @@ Animal::Animal(Environnement * environnement, std::string espece, int hp, int en
 	m_nbProgenituresMax(nbProgenituresMax), m_closestPredateur(nullptr),
 	m_mate(nullptr), m_mere(mere), m_meute(meute),
 	m_timerMort(timerMort), m_tempsGestation(tempsGestation),
-	m_tempsReproduction(tempsReproduction), m_cible(cible)
+	m_tempsReproduction(tempsReproduction), m_cible(cible), m_enceinte(false)
 {
 }
 
@@ -197,8 +197,10 @@ void Animal::trackMother()
 
 void Animal::devenirAdulte()
 {
-	m_mere->m_enfant.remove(this);
-
+	if (m_mere != nullptr)//Condition ajouté par Fred
+	{
+		m_mere->m_enfant.remove(this);
+	}
 	m_mere = nullptr;
 }
 
@@ -249,7 +251,6 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
-	setPos(m_coordonne.getX(), m_coordonne.getY());
 }
 
 void Animal::deplacer(double vitesse, Vivant* cible) {

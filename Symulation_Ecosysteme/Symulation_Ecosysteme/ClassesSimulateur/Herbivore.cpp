@@ -17,6 +17,9 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 	Animal* mere, Meute* meute,
 	int timerMort, int tempsGestation, int tempsReproduction,
 	std::list<std::string> cible)
+	:Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
+		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
+		meute, timerMort, tempsGestation, tempsReproduction, cible), m_plante(nullptr)
 {
 	//Ajouté par Fred, création d'une flèce pour les herbivores
 	mshape << QPointF(0, 0)
@@ -87,7 +90,7 @@ void Herbivore::simulation()
 					replenishEnergy();
 				}
 			}
-			else
+			else if(m_mere != nullptr) //Condition ajouté par Fred
 			{
 				trackMother();
 			}
@@ -100,9 +103,12 @@ void Herbivore::simulation()
 			m_age++;
 		}
 		else if (m_age > m_ageAdulte) {
-			if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
-				m_coordonne) < AWARENESS_CIRCLE) {
-				flee();
+			if (m_closestPredateur!=nullptr)//Condition ajouté par Fred
+			{
+				if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
+					m_coordonne) < AWARENESS_CIRCLE) {
+					flee();
+				}
 			}
 			else if (m_hp < 0.9*m_hpMax) {
 				healing();
@@ -117,12 +123,15 @@ void Herbivore::simulation()
 			}
 			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
 				chooseMate();
-				trackMate();
-				if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
-					m_coordonne.getY() == m_mate->getCoordonne().getY()) {
-					reproduction();
+				if (m_mate!=nullptr)//Condition ajouté par Fred
+				{
+					trackMate();
+					if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
+						m_coordonne.getY() == m_mate->getCoordonne().getY()) {
+						reproduction();
 
-					m_mate->reproduction();
+						m_mate->reproduction();
+					}
 				}
 			}
 			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
@@ -174,6 +183,7 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
+
 }
 
 void Herbivore::chooseTarget()
@@ -257,7 +267,7 @@ void Herbivore::chooseMate()
 			}
 		}
 	}
-
+	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 	m_mate = mate;
 }
 

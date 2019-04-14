@@ -13,12 +13,10 @@
 
 Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax,
 	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
-	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible,
-	bool isCharognard)
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
 	: Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
 		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
-		meute, timerMort, tempsGestation, tempsReproduction, cible),
-	m_isCharognard(isCharognard), m_proie(nullptr)
+		meute, timerMort, tempsGestation, tempsReproduction, cible), m_proie(nullptr)
 {
 		//Ajouté par Fred, création d'une flèce pour les carnivores
 	mshape << QPointF(0, 0)
@@ -37,10 +35,6 @@ bool Carnivore::isCharognard()
 	return m_isCharognard;
 }
 
-bool Carnivore::isCharognard()
-{
-	return m_isCharognard;
-}
 
 QRectF Carnivore::boundingRect() const
 {
@@ -70,6 +64,8 @@ void Carnivore::seekEnergy()
 void Carnivore::simulation()
 {
 	// ************** À IMPLANTER ***************
+	
+	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Carnivore::chooseTarget()
@@ -115,7 +111,7 @@ void Carnivore::chooseTarget()
 			}
 		}
 
-		for (auto const proie : m_environnement->getCharognards) {
+		for (auto const proie : m_environnement->getCharognards()) {
 			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
 				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
 
@@ -199,10 +195,6 @@ void Carnivore::removeFromTarget()
 	}
 }
 
-void Carnivore::removeFromTarget()
-{
-	//À implémenter
-}
 
 void Carnivore::chooseMate()
 {

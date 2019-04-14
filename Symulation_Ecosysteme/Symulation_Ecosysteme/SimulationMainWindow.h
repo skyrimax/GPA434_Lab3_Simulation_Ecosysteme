@@ -17,7 +17,7 @@ public:
 	SimulationMainWindow(QWidget *parent = Q_NULLPTR);
 
 	/*Fonction qui va ajouter un terrain*/
-	void addTerrain(Grid *m_grid);
+	void addTerrain(Grid *m_grid, Environnement *environnement);
 	void addHerbivore(Environnement *environnement);
 	void addCarnivore(Environnement *environnement);
 
