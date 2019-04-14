@@ -29,6 +29,11 @@ Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, i
 	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
 }
 
+bool Carnivore::isCharognard()
+{
+	return m_isCharognard;
+}
+
 QRectF Carnivore::boundingRect() const
 {
 	//Ajouté par Fred,
@@ -178,6 +183,13 @@ void Carnivore::trackTarget()
 	}
 }
 
+void Carnivore::removeFromTarget()
+{
+	if (typeid(*m_proie) == typeid(Herbivore) || typeid(*m_proie) == typeid(Carnivore)) {
+		static_cast<Animal*>(m_proie)->getPredateur().remove(this);
+	}
+}
+
 void Carnivore::chooseMate()
 {
 	Carnivore* mate = nullptr;
@@ -186,7 +198,7 @@ void Carnivore::chooseMate()
 	std::list<Carnivore*> liste = m_environnement->getCarnivores();
 
 	for (auto const h : liste) {
-		if (h->getEspece() == m_espece) {	//Modifié par Fred, h->getEspece est devenu h->getEspece()
+		if (h->getEspece() == m_espece) {
 			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 

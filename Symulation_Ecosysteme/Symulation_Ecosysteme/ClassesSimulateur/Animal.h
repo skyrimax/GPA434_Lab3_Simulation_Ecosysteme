@@ -63,6 +63,7 @@ public:
 
 	//Accesseurs
 	Sex& getSex();
+	std::list<Animal*>& getPredateur();
 	Animal* getclosestPredateur();
 	Orientation& getOrientation();
 	bool& getaEnfant();

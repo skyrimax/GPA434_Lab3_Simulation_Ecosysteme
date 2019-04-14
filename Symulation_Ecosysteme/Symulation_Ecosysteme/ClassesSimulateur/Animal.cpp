@@ -311,6 +311,11 @@ Animal::Sex& Animal::getSex()
 	return m_sex;
 }
 
+std::list<Animal*>& Animal::getPredateur()
+{
+	return m_predateurs;
+}
+
 Animal * Animal::getclosestPredateur()
 {
 	return m_closestPredateur;
