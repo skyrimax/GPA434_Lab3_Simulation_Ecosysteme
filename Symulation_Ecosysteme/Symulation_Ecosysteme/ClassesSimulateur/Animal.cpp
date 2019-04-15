@@ -370,3 +370,14 @@ void Animal::settimerMort(int timer)
 {
 	m_timerMort = timer;
 }
+
+bool Animal::chooseMate(Animal * mate)
+{
+	if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
+		m_mate = mate;
+
+		return true;
+	}
+
+	return false;
+}

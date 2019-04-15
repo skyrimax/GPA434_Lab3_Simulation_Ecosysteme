@@ -214,7 +214,7 @@ void Herbivore::removeFromTarget()
 
 void Herbivore::chooseMate()
 {
-	Herbivore* mate = nullptr;
+	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
 	if (m_meute == nullptr) {
@@ -234,13 +234,15 @@ void Herbivore::chooseMate()
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
-					mate = static_cast<Herbivore*>(h);
+					mate =h;
 				}
 			}
 		}
 	}
 
-	m_mate = mate;
+	if (mate->chooseMate(this)) {
+		m_mate = mate;
+	}
 }
 
 void Herbivore::trackMate()
@@ -250,7 +252,7 @@ void Herbivore::trackMate()
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	deplacer(m_vitesse);
+	deplacer(m_vitesse, m_mate);
 }
 
 void Herbivore::accoucher()

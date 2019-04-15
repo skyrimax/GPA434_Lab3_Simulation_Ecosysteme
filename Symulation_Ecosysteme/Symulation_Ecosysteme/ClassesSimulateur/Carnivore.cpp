@@ -192,7 +192,7 @@ void Carnivore::removeFromTarget()
 
 void Carnivore::chooseMate()
 {
-	Carnivore* mate = nullptr;
+	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
 	if (m_meute = nullptr) {
@@ -212,21 +212,25 @@ void Carnivore::chooseMate()
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
-					mate = static_cast<Carnivore*>(c);
+					mate = c;
 				}
 			}
 		}
 	}
 
-	m_mate = mate;
+	if (mate->chooseMate(this)) {
+		m_mate = mate;
+	}
 }
 
 void Carnivore::trackMate()
 {
+	m_isSprinting = false;
+
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk(this);
+	deplacer(m_vitesse, m_mate);
 }
 
 void Carnivore::accoucher()
