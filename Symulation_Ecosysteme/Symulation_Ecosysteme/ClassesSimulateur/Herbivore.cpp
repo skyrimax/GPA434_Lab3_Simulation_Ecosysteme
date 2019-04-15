@@ -264,12 +264,12 @@ void Herbivore::chooseMate()
 			}
 		}
 	}
-
-	if (mate->chooseMate(this)) {
-		m_mate = mate;
+	if (mate != nullptr)
+	{
+		if (mate->chooseMate(this)) { //Programme plante ici, mate est null
+			m_mate = mate;
+		}
 	}
-
-	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Herbivore::trackMate()

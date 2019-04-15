@@ -67,7 +67,6 @@ void Carnivore::simulation()
 {
 	// ************** À IMPLANTER ***************
 	
-	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Carnivore::chooseTarget()
@@ -203,7 +202,7 @@ void Carnivore::chooseMate()
 	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
-	if (m_meute = nullptr) {
+	if (m_meute == nullptr) {
 		for (auto const c : m_environnement->getCarnivores()) {
 			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {

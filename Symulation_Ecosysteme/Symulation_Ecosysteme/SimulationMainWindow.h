@@ -21,10 +21,14 @@ public:
 	void addHerbivore(Environnement *environnement);
 	void addCarnivore(Environnement *environnement);
 
+	Animal::Sex randomSex();//Génère un sexe aléatoire
+	Coordonne randomCoordonne();//Génère une coordonné de départ
+
+
+public slots:
 	void simulation();
 
-	Animal::Sex randomSex();
-	Coordonne randomCoordonne();
+
 private:
 	Ui::SimulationMainWindowClass ui;
 
@@ -40,12 +44,14 @@ private:
 	//Pour la grille
 	Grid *m_grid;
 
+	//Attributs pour les quantité de départ
 	int mQteChevreuils;
 	int mQteLapins;
 	int mQteLoups;
 	int mQteMeuteLoups;
 	int mQteHardeChevreuil;
 	
+
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation
 	void showAPropos();

@@ -178,11 +178,16 @@ void Animal::wander() {
 
 	m_isSprinting = false;
 
-	angle = m_orientation.getDirection();
+	angle = 1;
+	//angle = m_orientation.getDirection();
 	angle += dist(mt);
-
+	
+	m_coordonne.setX(m_coordonne.getX()+sin(angle*M_PI / 360));//Ajout par Fred
+	m_coordonne.setY(m_coordonne.getY()+sin(angle*M_PI / 360));//Ajout par Fred
+	/*
 	m_coordonne.setX(sin(angle*M_PI / 360));
 	m_coordonne.setY(sin(angle*M_PI / 360));
+	*/
 
 	this->deplacer(m_vitesse);
 }
@@ -244,6 +249,7 @@ void Animal::deplacer(double vitesse)
 
 				pointDepart = pointCroisement;
 			}
+
 		} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
 
 		m_energy -= vitesse;
@@ -251,7 +257,7 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
-	setPos(QPointF(m_coordonne.getX(),
+	setPos(pos()+QPointF(m_coordonne.getX(),
 		m_coordonne.getY()));
 }
 
@@ -266,7 +272,7 @@ void Animal::deplacer(double vitesse, Vivant* cible) {
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
 
-			setPos(QPointF(m_coordonne.getX(),
+			setPos(pos() + QPointF(m_coordonne.getX(),
 				m_coordonne.getY()));
 		}
 	}
@@ -379,11 +385,13 @@ void Animal::settimerMort(int timer)
 
 bool Animal::chooseMate(Animal * mate)
 {
-	if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
-		m_mate = mate;
-
-		return true;
+	if (m_espece != "")/*Ajout par Fred, temporairement*/
+	{
+		if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
+			m_mate = mate;
+			
+			return true;
+		}
 	}
-
 	return false;
 }

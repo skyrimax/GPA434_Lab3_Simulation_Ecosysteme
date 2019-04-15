@@ -11,7 +11,7 @@ class ParameterWindow : public QDialog, public Ui::ParameterWindow
 
 public:
 	ParameterWindow(QWidget *parent = Q_NULLPTR);
-	~ParameterWindow();
+	~ParameterWindow()=default;
 
 
 private slots:

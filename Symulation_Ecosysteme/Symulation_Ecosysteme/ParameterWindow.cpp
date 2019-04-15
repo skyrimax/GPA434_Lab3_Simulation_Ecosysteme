@@ -13,11 +13,6 @@ ParameterWindow::ParameterWindow(QWidget *parent)
 	seasoncheckBox->setEnabled(false);
 }
 
-ParameterWindow::~ParameterWindow()
-{
-
-}
-
 /*Affichage d'un message d'aide pour guider dans 
 la sélection des paramètres*/
 void ParameterWindow::showAide()
