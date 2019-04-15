@@ -251,6 +251,8 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
+	setPos(QPointF(m_coordonne.getX(),
+		m_coordonne.getY()));
 }
 
 void Animal::deplacer(double vitesse, Vivant* cible) {
@@ -263,6 +265,9 @@ void Animal::deplacer(double vitesse, Vivant* cible) {
 
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
+
+			setPos(QPointF(m_coordonne.getX(),
+				m_coordonne.getY()));
 		}
 	}
 	else

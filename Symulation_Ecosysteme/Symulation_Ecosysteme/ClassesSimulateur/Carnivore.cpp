@@ -205,7 +205,7 @@ void Carnivore::chooseMate()
 
 	if (m_meute = nullptr) {
 		for (auto const c : m_environnement->getCarnivores()) {
-			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex==Animal::Sex::Female) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
@@ -216,7 +216,7 @@ void Carnivore::chooseMate()
 	}
 	else {
 		for (auto const & c : m_meute->getMembres()) {
-			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex == Animal::Sex::Female) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
@@ -254,6 +254,8 @@ void Carnivore::accoucher()
 
 	nbProgenitures = dist(mt);
 
+	sex = dist(mt) % 2 == 0 ? Animal::Sex::Male : Animal::Sex::Female;
+
 	for (int i = 0; i < nbProgenitures; i++) {
 		x = m_coordonne.getX() - m_orientation.getUnitX()*DÉCALAGE_ACCOUCHEMENT*i;
 		y = m_coordonne.getY() - m_orientation.getUnitY()*DÉCALAGE_ACCOUCHEMENT*i;
@@ -271,12 +273,6 @@ void Carnivore::accoucher()
 		}
 	}
 }
-
-Vivant * Carnivore::getTarget()
-{
-	return m_proie;
-}
-
 
 Vivant * Carnivore::getTarget()
 {

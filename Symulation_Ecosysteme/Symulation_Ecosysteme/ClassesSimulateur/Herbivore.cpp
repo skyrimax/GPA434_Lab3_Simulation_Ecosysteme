@@ -183,7 +183,6 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
-
 }
 
 void Herbivore::chooseTarget()
@@ -243,7 +242,7 @@ void Herbivore::chooseMate()
 
 	if (m_meute == nullptr) {
 		for (auto const h : m_environnement->getHerbivores()) {
-			if (h->getEspece() == m_espece && h->getMate()==nullptr && h->getenceinte()==false && h->getSex == Animal::Sex::Female) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -254,7 +253,7 @@ void Herbivore::chooseMate()
 	}
 	else {
 		for (auto const & h : m_meute->getMembres()) {
-			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex == Animal::Sex::Female) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -293,6 +292,8 @@ void Herbivore::accoucher()
 	std::uniform_int_distribution<int> dist(m_nbProgenituresMin, m_nbProgenituresMax);
 
 	nbProgenitures = dist(mt);
+
+	sex = dist(mt) % 2 == 0 ? Animal::Sex::Male : Animal::Sex::Female;
 
 	for (int i = 0; i < nbProgenitures; i++) {
 		x = m_coordonne.getX() - m_orientation.getUnitX()*DÉCALAGE_ACCOUCHEMENT*i;
