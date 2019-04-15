@@ -15,6 +15,7 @@ ParameterWindow::ParameterWindow(QWidget *parent)
 
 ParameterWindow::~ParameterWindow()
 {
+
 }
 
 /*Affichage d'un message d'aide pour guider dans 
@@ -30,48 +31,5 @@ void ParameterWindow::showAide()
 
 	//Afficher le message
 	QMessageBox::about(this, u8R"(Aide aux paramètres)", aide);
-}
-
-/*Retourne la quantité de lapins pour débuter la simulation*/
-int ParameterWindow::getQteLapin()
-{
-	return qteLapins->value();
-}
-
-/*Retourne la quantité de chevreuils pour débuter la simulation*/
-int ParameterWindow::getQteChevreuil()
-{
-
-	return qteChevreuils->value();
-}
-
-/*Retourne la quantité de loups pour débuter la simulation*/
-int ParameterWindow::getQteLoup()
-{
-	return qteLoups->value();
-}
-
-/*Retourne la quantité de harde de chevreuil pour débuter la simulation*/
-int ParameterWindow::getQteHarde()
-{
-	return qteHardes->value();
-}
-
-/*Retourne la quantité de meute de loup pour débuter la simulation*/
-int ParameterWindow::getQteMeute()
-{
-	return qteMeutes->value();
-}
-
-/*Renvoie si la case pour le mode saison a été coché*/
-bool ParameterWindow::isSeasonCheck()
-{
-	return seasoncheckBox->isChecked();
-}
-
-/*Renvoie si la case pour le mode virus a été coché*/
-bool ParameterWindow::isVirusCheck()
-{
-	return viruscheckBox->isChecked();
 }
 

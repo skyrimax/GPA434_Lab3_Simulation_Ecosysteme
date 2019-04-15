@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "SimulationMainWindow.h"
 #include "ParameterWindow.h"
-
+#include <QRandomGenerator>
 
 
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), mQteChevreuils{ 1 }, mQteLapins{ 1 }, mQteLoups{ 1 }
+	, mQteMeuteLoups{ 1 }, mQteHardeChevreuil{ 1 }
 {
 	ui.setupUi(this);
 
@@ -19,11 +20,149 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
 	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
-	/*Connection entre le mTimer et la fonction qui va simuler l'écosystème,
-	à chaque 30 millisecondes, un signal sera "envoyé" vers la fonction
-	afin de mettre à jour les positions et les états.*/
-	connect(&mTimer, &QTimer::timeout, environnement, &Environnement::simulation);
+	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
+}
+
+
+
+void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement)
+{
+	for (int i = 0; i < LARGEUR_GRILLE; i++)
+	{
+		for (int j = 0; j < HAUTEUR_GRILLE; j++)
+		{
+			mGraphicsScene.addItem(new Terrain(
+				m_grid,
+				i,
+				j,
+				m_grid->getTerrain(i, j)->getType()));
+
+			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon) &&
+				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
+			{
+				Plante *plante = new Plante(
+					environnement, /*Ajouter non de plante ici*/ "Arbre",
+					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
+					randomCoordonne().getX(), randomCoordonne().getY(), /*Ajouter temps reproduction*/ 300);
+
+				environnement->addPlante(plante);
+				mGraphicsScene.addItem(plante);
+			}
+		}
 	}
+}
+
+
+void SimulationMainWindow::addHerbivore(Environnement *environnement)
+{
+	for (int i = 0; i < mQteChevreuils; i++)
+	{
+		Herbivore *Chevreuil = new Herbivore(
+			environnement,//Environnement
+			std::string("Chevreuil"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Plante"});
+		Chevreuil->setAge(10);
+
+
+		environnement->addHerbivore(Chevreuil);
+
+		mGraphicsScene.addItem(Chevreuil);
+	}
+	for (int i = 0; i < mQteLapins; i++)
+	{
+		Herbivore *Lapin = new Herbivore(
+			environnement,//Environnement
+			std::string("Lapin"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Plante"});
+		Lapin->setAge(10);
+		environnement->addHerbivore(Lapin);
+
+		mGraphicsScene.addItem(Lapin);
+	}
+}
+
+
+void SimulationMainWindow::addCarnivore(Environnement *environnement)
+{
+	for (int i = 0; i < mQteLoups; i++)
+	{
+		Carnivore *Loup = new Carnivore(
+			environnement,//Environnement
+			std::string("Loup"),//Espèce
+			100,//hp
+			100,//energy
+			10,//ageadulte
+			20,//agemax
+			randomCoordonne().getX(),//x
+			randomCoordonne().getY(),//y
+			2,//vitesse
+			4,//sprint
+			randomSex(),//sex
+			0,//nbProgenituremin
+			4,//nbprogenituremax
+			nullptr,//mere
+			nullptr,//meute
+			50,//timermort
+			10,//tempsgestation
+			5,//tempsreproduction
+			std::list<std::string> {"Chevreuil", "Lapin"});
+		Loup->setAge(10);
+		environnement->addCarnivore(Loup);//Ajout à l'environnement
+		mGraphicsScene.addItem(Loup);//Ajout à la scène
+	}
+}
+
+
+void SimulationMainWindow::simulation()
+{
+	environnement->simulation();
+}
+
+
+Animal::Sex SimulationMainWindow::randomSex()
+{
+	return Animal::Sex(QRandomGenerator::global()->bounded(0,2));
+}
+
+
+Coordonne SimulationMainWindow::randomCoordonne()
+{
+	return Coordonne(QRandomGenerator::global()->bounded(0, LARGEUR_GRILLE-1), QRandomGenerator::global()->bounded(0, HAUTEUR_GRILLE-1));
+}
 
 /*Fonction À Propos pour expliquer le programme*/
 void SimulationMainWindow::showAPropos()
@@ -54,18 +193,35 @@ void SimulationMainWindow::on_parameterButton_clicked()
 {
 	ParameterWindow dialog(this);
 
-	dialog.exec();
+	if (dialog.exec())
+	{
+		mQteChevreuils = dialog.qteChevreuils->value();
+		mQteLapins = dialog.qteLapins->value();
+		mQteLoups = dialog.qteLoups->value();
+		mQteMeuteLoups = dialog.qteMeutes->value();
+		mQteHardeChevreuil = dialog.qteHardes->value();
+	}
 }
 
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
+
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
 	ui.stopButton->setEnabled(true);
 	ui.pauseButton->setEnabled(true);
+	ui.startButton->setEnabled(false);
 
+	environnement = new Environnement(); //Génération d'un envirronement
+	m_grid = new Grid(); //Génération d'une grille
+
+	addTerrain(m_grid, environnement);//Ajout du terrain
+	addHerbivore(environnement);//Ajout des herbivores
+	addCarnivore(environnement);//Ajout des carnivores
+
+	ui.graphicsView->setScene(&mGraphicsScene);
 
 	mTimer.start(30);
 }
@@ -94,10 +250,10 @@ sur le bouton Par Étape*/
 void SimulationMainWindow::on_stepButton_clicked()
 {
 	/*1ere méthode avec la fonction advance de QGraphicsScene*/
-	mGraphicsScene.advance();
+	//mGraphicsScene.advance();
 
 	/*2ene méthode utilise directement la fonction simulatiom*/
-	environnement->simulation();
+	//environnement->simulation();
 }
 
 /*Bouton qui arrête la simulation en arrêtant le timer
@@ -107,4 +263,7 @@ void SimulationMainWindow::on_stopButton_clicked()
 	mGraphicsScene.clear();
 
 	mTimer.stop();
+
+	ui.parameterButton->setEnabled(true);
+	ui.startButton->setEnabled(true);
 }

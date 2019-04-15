@@ -13,7 +13,7 @@
 
 Environnement::~Environnement()
 {
-	for (auto p : m_plantes) {
+	/*for (auto p : m_plantes) {
 		delete p;
 		p = nullptr;
 	}
@@ -26,19 +26,19 @@ Environnement::~Environnement()
 	for (auto h : m_herbivores) {
 		delete h;
 		h = nullptr;
-	}
+	}*/
 
-	for (auto mc : m_meutesCarnivores) {
+	/*for (auto mc : m_meutesCarnivores) {
 		delete mc;
 		mc = nullptr;
-	}
+	}*/
 
 	for (auto c : m_carnivores) {
 		delete c;
 		c = nullptr;
 	}
 
-	for (auto mc : m_meutesCharognards) {
+	/*for (auto mc : m_meutesCharognards) {
 		delete mc;
 		mc = nullptr;
 	}
@@ -46,7 +46,7 @@ Environnement::~Environnement()
 	for (auto c : m_charognards) {
 		delete c;
 		c = nullptr;
-	}
+	}*/
 }
 
 /**
@@ -217,7 +217,7 @@ std::list<Vivant*>& Environnement::simulation() {
 			emptyMeute.push_back(meuteHerbivores);
 		}
 	}
-
+	
 	// Cycle de simulation des herbivore pas en meute
 	for (auto const & herbivore : m_herbivores)
 	{

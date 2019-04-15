@@ -301,9 +301,94 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>qteLapins</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>setQteLapins()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>-7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qteChevreuils</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>setQteChevreuil()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>225</x>
+     <y>-4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qteLoups</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>setQteLoups()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>160</x>
+     <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qteHardes</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>setQteHardeChevreuil()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>531</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>16</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qteMeutes</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>ParameterWindow</receiver>
+   <slot>setQteMeuteLoups()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>567</x>
+     <y>109</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAide()</slot>
   <slot>updateCharognardComboBox()</slot>
+  <slot>setQteLapins()</slot>
+  <slot>setQteChevreuil()</slot>
+  <slot>setQteLoups()</slot>
+  <slot>setQteHardeChevreuil()</slot>
+  <slot>setQteMeuteLoups()</slot>
  </slots>
 </ui>

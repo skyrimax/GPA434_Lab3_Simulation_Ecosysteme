@@ -17,6 +17,9 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 	Animal* mere, Meute* meute,
 	int timerMort, int tempsGestation, int tempsReproduction,
 	std::list<std::string> cible)
+	:Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
+		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
+		meute, timerMort, tempsGestation, tempsReproduction, cible), m_plante(nullptr)
 {
 	//Ajouté par Fred, création d'une flèce pour les herbivores
 	mshape << QPointF(0, 0)
@@ -24,22 +27,36 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 		<< QPointF(1, 0.)
 		<< QPointF(-0.25, -0.5);
 
-	sHerbivorBackgoundColor.setRgb(255,255,0);//Jaune
+	setPos(QPointF(x, y));
+	if (espece == "Chevreuil")
+	{
+		sHerbivorBackgoundColor.setRgb(255, 255, 0);//Jaune pour les chevreuils
+		setScale(5);
+	}
+	else
+	{
+		sHerbivorBackgoundColor.setRgb(255, 0, 127);//Rose pour les lapins
+		setScale(4);
+	}
 }
 
 
 QRectF Herbivore::boundingRect() const
 {
+	
 	//Ajouté par Fred,
-	return QRectF(-0.25, -0.5, 1.0 , 1.25);
+	return QRectF(-0.25 * scale(), -0.5 * scale(), 1.0 * scale(), 1.25 * scale());
+
 }
 
 void Herbivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
+	
 	//Ajouté par Fred
 	painter->setPen(Qt::NoPen);
 	painter->setBrush(sHerbivorBackgoundColor);
 	painter->drawPolygon(mshape);
+
 }
 
 void Herbivore::replenishEnergy()
@@ -73,7 +90,7 @@ void Herbivore::simulation()
 					replenishEnergy();
 				}
 			}
-			else
+			else if(m_mere != nullptr) //Condition ajouté par Fred
 			{
 				trackMother();
 			}
@@ -86,9 +103,12 @@ void Herbivore::simulation()
 			m_age++;
 		}
 		else if (m_age > m_ageAdulte) {
-			if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
-				m_coordonne) < AWARENESS_CIRCLE) {
-				flee();
+			if (m_closestPredateur!=nullptr)//Condition ajouté par Fred
+			{
+				if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
+					m_coordonne) < AWARENESS_CIRCLE) {
+					flee();
+				}
 			}
 			else if (m_hp < 0.9*m_hpMax) {
 				healing();
@@ -103,12 +123,15 @@ void Herbivore::simulation()
 			}
 			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
 				chooseMate();
-				trackMate();
-				if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
-					m_coordonne.getY() == m_mate->getCoordonne().getY()) {
-					reproduction();
+				if (m_mate!=nullptr)//Condition ajouté par Fred
+				{
+					trackMate();
+					if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
+						m_coordonne.getY() == m_mate->getCoordonne().getY()) {
+						reproduction();
 
-					m_mate->reproduction();
+						m_mate->reproduction();
+					}
 				}
 			}
 			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
@@ -160,6 +183,7 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
+
 }
 
 void Herbivore::chooseTarget()
@@ -243,6 +267,8 @@ void Herbivore::chooseMate()
 	if (mate->chooseMate(this)) {
 		m_mate = mate;
 	}
+
+	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Herbivore::trackMate()

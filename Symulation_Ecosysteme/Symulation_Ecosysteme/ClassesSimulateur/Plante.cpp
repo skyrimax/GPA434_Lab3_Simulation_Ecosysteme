@@ -33,8 +33,8 @@ Plante::Plante(Environnement * environnement, std::string espece, int hp, int en
 	m_timeToReproduction(timeToReproduction), m_timer(timeToReproduction), m_fruits(0), m_isBeingEaten(false)
 {
 	//Ajout par Fred
-	//Création d'un rectangle de 10 par 10 positioné à (x,y)
-	mshape.setRect(x, y, 10, 10);
+	//Création d'un rectangle de 5 par 5 positioné à (x,y)
+	mshape.setRect(x, y, 5, 5);
 
 	sPlantesBackgoundColor.setRgb(11, 102, 35);//vert
 }

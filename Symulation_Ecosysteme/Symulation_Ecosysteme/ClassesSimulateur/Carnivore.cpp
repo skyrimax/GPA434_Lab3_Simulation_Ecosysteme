@@ -26,13 +26,17 @@ Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, i
 		<< QPointF(1, 0.)
 		<< QPointF(-0.25, -0.5);
 
-	sCarnivoreBackgoundColor.setRgb(153, 0, 153);//Mauve
+	setPos(QPointF(x, y));
+	setScale(5);
+	sCarnivoreBackgoundColor.setRgb(255, 128, 0);//Orange
 }
 
+/*Ajouté par Fred*/
 bool Carnivore::isCharognard()
 {
 	return m_isCharognard;
 }
+
 
 QRectF Carnivore::boundingRect() const
 {
@@ -48,6 +52,7 @@ void Carnivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 	painter->drawPolygon(mshape);
 }
 
+
 void Carnivore::replenishEnergy()
 {
 	// ************** À IMPLANTER ***************
@@ -61,6 +66,8 @@ void Carnivore::seekEnergy()
 void Carnivore::simulation()
 {
 	// ************** À IMPLANTER ***************
+	
+	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Carnivore::chooseTarget()
@@ -106,7 +113,7 @@ void Carnivore::chooseTarget()
 			}
 		}
 
-		for (auto const proie : m_environnement->getCharognards) {
+		for (auto const proie : m_environnement->getCharognards()) {
 			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
 				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
 
@@ -190,6 +197,7 @@ void Carnivore::removeFromTarget()
 	}
 }
 
+
 void Carnivore::chooseMate()
 {
 	Animal* mate = nullptr;
@@ -263,6 +271,12 @@ void Carnivore::accoucher()
 		}
 	}
 }
+
+Vivant * Carnivore::getTarget()
+{
+	return m_proie;
+}
+
 
 Vivant * Carnivore::getTarget()
 {

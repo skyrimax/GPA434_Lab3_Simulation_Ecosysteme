@@ -24,7 +24,8 @@ public:
 	Terrain* getTerrain(int x, int y);
 private: 
 	Terrain *m_grid[LARGEUR_GRILLE][HAUTEUR_GRILLE];
-	Environnement* m_environnementProprietaire;
+	Environnement *m_environnementProprietaire;
+
 };
 
 #endif //_GRID_H

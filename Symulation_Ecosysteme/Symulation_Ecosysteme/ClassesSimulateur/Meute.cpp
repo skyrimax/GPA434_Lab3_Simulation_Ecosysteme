@@ -170,6 +170,7 @@ void Meute::setAlpha()
 			break;
 		}
 	}
+
 }
 
 

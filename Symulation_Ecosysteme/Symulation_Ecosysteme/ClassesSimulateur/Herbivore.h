@@ -11,6 +11,7 @@
 
  // Déclaration enticipée
 class Plante;
+class Meute;
 
 class Herbivore: public Animal {
 
@@ -26,6 +27,7 @@ public:
 		Animal* mere, Meute* meute,
 		int timerMort, int tempsGestation, int tempsReproduction,
 		std::list<std::string> cible);
+
 
 	// Fonctions membres virtuelles héritées de QGraphicsItem
 	virtual QRectF boundingRect() const;
@@ -49,7 +51,6 @@ public:
 	// Accesseur virtuel hérité de Animal
 	virtual Vivant* getTarget() override;
 
-protected: 
 private: 
     Plante* m_plante;
 	//Ajouté par Fred, la forme des herbivores

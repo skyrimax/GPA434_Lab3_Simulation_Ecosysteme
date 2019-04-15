@@ -5,6 +5,9 @@
 #include "ui_SimulationMainWindow.h"
 #include "ParameterWindow.h"
 #include "ClassesSimulateur/Environement.h"
+#include "ClassesSimulateur/Sex.h"
+
+class ParameterWindow;
 
 class SimulationMainWindow : public QMainWindow
 {
@@ -13,6 +16,15 @@ class SimulationMainWindow : public QMainWindow
 public:
 	SimulationMainWindow(QWidget *parent = Q_NULLPTR);
 
+	/*Fonction qui va ajouter un terrain*/
+	void addTerrain(Grid *m_grid, Environnement *environnement);
+	void addHerbivore(Environnement *environnement);
+	void addCarnivore(Environnement *environnement);
+
+	void simulation();
+
+	Animal::Sex randomSex();
+	Coordonne randomCoordonne();
 private:
 	Ui::SimulationMainWindowClass ui;
 
@@ -25,7 +37,15 @@ private:
 	QGraphicsScene mGraphicsScene;
 	//Création d'un environnement
 	Environnement *environnement;
+	//Pour la grille
+	Grid *m_grid;
 
+	int mQteChevreuils;
+	int mQteLapins;
+	int mQteLoups;
+	int mQteMeuteLoups;
+	int mQteHardeChevreuil;
+	
 private slots:
 	//Slots pour afficher le "À propos" du programme de simullation
 	void showAPropos();

@@ -42,7 +42,7 @@ Terrain::Terrain(Grid * grilleProprietaire, int x, int y, TypeTerrain type)
 /*	Ajout par Fred
 Création d'un rectangle de 1 par 1 positioné à (x,y)
 	qui représente le terrain à un point*/
-	mshape.setRect(x, y, 1, 1);
+	mshape.setRect(x, y, 10, 10);
 
 	sWaterBackgoundColor.setRgb(0,0,255);//bleu
 	sGrassBackgoundColor.setRgb(0, 255, 0);//Vert
@@ -63,7 +63,7 @@ void Terrain::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
 	{
 	case Terrain::TypeTerrain::Eau:
 		painter->setPen(Qt::NoPen);
-		painter->setBrush(sEarthBackgoundColor);
+		painter->setBrush(sWaterBackgoundColor);
 		painter->drawRect(mshape);
 		break;
 	case Terrain::TypeTerrain::Terre:

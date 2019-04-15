@@ -29,6 +29,7 @@ public:
 	// Destructeur
 	~Environnement();
     
+
 // Fonctions membres pour ajouter des éléments au listes
 	void addPlante(Plante *plante);
 	void addHerbivore(Herbivore *herbivore);
@@ -53,6 +54,7 @@ public:
 // Accesseurs d'éléments de la grille
 	Terrain* getTerrain(int x, int y);
 
+/*Fonction mis dans slots par Fred afin de pouvoir le connecter à un signal*/
 public slots:
 // Fonction commendant 
 	std::list<Vivant*>& simulation();

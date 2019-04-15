@@ -244,6 +244,11 @@ public:
         retranslateUi(ParameterWindow);
         QObject::connect(pretButton, SIGNAL(clicked()), ParameterWindow, SLOT(accept()));
         QObject::connect(helpButton, SIGNAL(clicked()), ParameterWindow, SLOT(showAide()));
+        QObject::connect(qteLapins, SIGNAL(valueChanged(int)), ParameterWindow, SLOT(setQteLapins()));
+        QObject::connect(qteChevreuils, SIGNAL(valueChanged(int)), ParameterWindow, SLOT(setQteChevreuil()));
+        QObject::connect(qteLoups, SIGNAL(valueChanged(int)), ParameterWindow, SLOT(setQteLoups()));
+        QObject::connect(qteHardes, SIGNAL(valueChanged(int)), ParameterWindow, SLOT(setQteHardeChevreuil()));
+        QObject::connect(qteMeutes, SIGNAL(valueChanged(int)), ParameterWindow, SLOT(setQteMeuteLoups()));
 
         QMetaObject::connectSlotsByName(ParameterWindow);
     } // setupUi
