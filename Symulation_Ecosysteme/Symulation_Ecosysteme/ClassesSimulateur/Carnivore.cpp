@@ -13,10 +13,12 @@
 
 Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax,
 	double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
-	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible)
+	Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible,
+	bool isCharognard)
 	: Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
 		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
-		meute, timerMort, tempsGestation, tempsReproduction, cible), m_proie(nullptr)
+		meute, timerMort, tempsGestation, tempsReproduction, cible),
+	m_isCharognard(isCharognard), m_proie(nullptr)
 {
 		//Ajouté par Fred, création d'une flèce pour les carnivores
 	mshape << QPointF(0, 0)
@@ -198,30 +200,45 @@ void Carnivore::removeFromTarget()
 
 void Carnivore::chooseMate()
 {
-	Carnivore* mate = nullptr;
+	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
-	std::list<Carnivore*> liste = m_environnement->getCarnivores();
+	if (m_meute = nullptr) {
+		for (auto const c : m_environnement->getCarnivores()) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
+				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
-	for (auto const h : liste) {
-		if (h->getEspece() == m_espece) {
-			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
-				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
+					mate = c;
+				}
+			}
+		}
+	}
+	else {
+		for (auto const & c : m_meute->getMembres()) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
+				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
-				mate = h;
+					mate = c;
+				}
 			}
 		}
 	}
 
-	m_mate = mate;
+	if (mate->chooseMate(this)) {
+		m_mate = mate;
+	}
 }
 
 void Carnivore::trackMate()
 {
+	m_isSprinting = false;
+
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	walk(this);
+	deplacer(m_vitesse, m_mate);
 }
 
 void Carnivore::accoucher()
@@ -237,6 +254,8 @@ void Carnivore::accoucher()
 
 	nbProgenitures = dist(mt);
 
+	sex = dist(mt) % 2 == 0 ? Animal::Sex::Male : Animal::Sex::Female;
+
 	for (int i = 0; i < nbProgenitures; i++) {
 		x = m_coordonne.getX() - m_orientation.getUnitX()*DÉCALAGE_ACCOUCHEMENT*i;
 		y = m_coordonne.getY() - m_orientation.getUnitY()*DÉCALAGE_ACCOUCHEMENT*i;
@@ -244,7 +263,7 @@ void Carnivore::accoucher()
 		Carnivore* enfant = new Carnivore(m_environnement, m_espece, m_hpMax, m_energyMax,
 			m_ageAdulte, m_ageMax, x, y, m_vitesse, m_sprint, sex, m_nbProgenituresMin,
 			m_nbProgenituresMax, this, m_meute, m_timerMort, m_tempsGestation,
-			m_tempsReproduction, m_cible);
+			m_tempsReproduction, m_cible, m_isCharognard);
 
 		if (m_meute == nullptr) {
 			m_environnement->addCarnivore(enfant);
@@ -254,7 +273,6 @@ void Carnivore::accoucher()
 		}
 	}
 }
-
 
 Vivant * Carnivore::getTarget()
 {

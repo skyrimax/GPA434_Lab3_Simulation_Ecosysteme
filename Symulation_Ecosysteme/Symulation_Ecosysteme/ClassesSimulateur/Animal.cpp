@@ -251,6 +251,8 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
+	setPos(QPointF(m_coordonne.getX(),
+		m_coordonne.getY()));
 }
 
 void Animal::deplacer(double vitesse, Vivant* cible) {
@@ -263,6 +265,9 @@ void Animal::deplacer(double vitesse, Vivant* cible) {
 
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
+
+			setPos(QPointF(m_coordonne.getX(),
+				m_coordonne.getY()));
 		}
 	}
 	else
@@ -370,4 +375,15 @@ void Animal::settimerGestation(int timer)
 void Animal::settimerMort(int timer)
 {
 	m_timerMort = timer;
+}
+
+bool Animal::chooseMate(Animal * mate)
+{
+	if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
+		m_mate = mate;
+
+		return true;
+	}
+
+	return false;
 }

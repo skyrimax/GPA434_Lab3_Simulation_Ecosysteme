@@ -139,7 +139,8 @@ void SimulationMainWindow::addCarnivore(Environnement *environnement)
 			50,//timermort
 			10,//tempsgestation
 			5,//tempsreproduction
-			std::list<std::string> {"Chevreuil", "Lapin"});
+			std::list<std::string> {"Chevreuil", "Lapin"},
+			false);
 		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 		mGraphicsScene.addItem(Loup);//Ajout à la scène

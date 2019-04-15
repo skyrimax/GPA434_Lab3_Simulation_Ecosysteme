@@ -185,11 +185,6 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
-
-	/*
-	QPointF change = this->mapToScene(10, 10);*/
-	QPointF change = pos() + QPointF(5, 5);
-	this->setPos(change);
 }
 
 void Herbivore::chooseTarget()
@@ -244,14 +239,12 @@ void Herbivore::removeFromTarget()
 
 void Herbivore::chooseMate()
 {
-	Herbivore* mate = nullptr;
+	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
 	if (m_meute == nullptr) {
-		std::list<Herbivore*> liste = m_environnement->getHerbivores();
-
-		for (auto const h : liste) {
-			if (h->getEspece() == m_espece) {
+		for (auto const h : m_environnement->getHerbivores()) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -261,19 +254,22 @@ void Herbivore::chooseMate()
 		}
 	}
 	else {
-		std::list<Animal*> liste = m_meute->getMembres();
-
-		for (auto const & h : liste) {
-			if (h->getEspece() == m_espece) {
+		for (auto const & h : m_meute->getMembres()) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
-					mate = static_cast<Herbivore*>(h);
+					mate =h;
 				}
 			}
 		}
 	}
-	m_mate = mate;
+
+	if (mate->chooseMate(this)) {
+		m_mate = mate;
+	}
+
+	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Herbivore::trackMate()
@@ -283,7 +279,7 @@ void Herbivore::trackMate()
 	m_orientation.setVX(m_mate->getCoordonne().getX() - m_coordonne.getX());
 	m_orientation.setVY(m_mate->getCoordonne().getY() - m_coordonne.getY());
 
-	deplacer(m_vitesse);
+	deplacer(m_vitesse, m_mate);
 }
 
 void Herbivore::accoucher()
@@ -298,6 +294,8 @@ void Herbivore::accoucher()
 	std::uniform_int_distribution<int> dist(m_nbProgenituresMin, m_nbProgenituresMax);
 
 	nbProgenitures = dist(mt);
+
+	sex = dist(mt) % 2 == 0 ? Animal::Sex::Male : Animal::Sex::Female;
 
 	for (int i = 0; i < nbProgenitures; i++) {
 		x = m_coordonne.getX() - m_orientation.getUnitX()*DÉCALAGE_ACCOUCHEMENT*i;

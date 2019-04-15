@@ -77,6 +77,7 @@ public:
 	void settimerReproduction(int timer);
 	void settimerGestation(int timer);
 	void settimerMort(int timer);
+	bool chooseMate(Animal* mate);
 	// Orientation setOrientation(Orientation orientation);
 
 	// Fonction membres spécifique à chaque type d'animaux

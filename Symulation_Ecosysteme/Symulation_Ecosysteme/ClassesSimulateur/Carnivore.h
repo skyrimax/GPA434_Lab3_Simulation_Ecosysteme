@@ -17,7 +17,8 @@ public:
 	Carnivore() = default;
 	Carnivore(Environnement* environnement, std::string espece, int hp, int energy, int ageAdulte, int ageMax,
 		double x, double y, double vitesse, double sprint, Sex sex, int nbProgenituresMin, int nbProgenituresMax,
-		Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible);
+		Animal * mere, Meute * meute, int timerMort, int tempsGestation, int tempsReproduction, std::list<std::string>cible,
+		bool isCharognard);
 
 	// Fonctions membres des carnivores
 	bool isCharognard();
