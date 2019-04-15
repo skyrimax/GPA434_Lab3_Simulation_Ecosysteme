@@ -31,7 +31,7 @@ Environnement::~Environnement()
 	/*for (auto mc : m_meutesCarnivores) {
 		delete mc;
 		mc = nullptr;
-	}*/
+	}*
 
 	for (auto c : m_carnivores) {
 		delete c;

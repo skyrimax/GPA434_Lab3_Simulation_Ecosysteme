@@ -6,6 +6,7 @@
 #include "Herbivore.h"
 #include "Environement.h"
 #include <QPainter>
+#include <QRandomGenerator>
 
 /**
  * Herbivore implementation
@@ -28,15 +29,16 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 		<< QPointF(-0.25, -0.5);
 
 	setPos(QPointF(x, y));
+	setScale(5);
+	setRotation(0);
+
 	if (espece == "Chevreuil")
 	{
 		sHerbivorBackgoundColor.setRgb(255, 255, 0);//Jaune pour les chevreuils
-		setScale(5);
 	}
 	else
 	{
 		sHerbivorBackgoundColor.setRgb(255, 0, 127);//Rose pour les lapins
-		setScale(4);
 	}
 }
 
@@ -184,6 +186,10 @@ void Herbivore::simulation()
 		}
 	}
 
+	/*
+	QPointF change = this->mapToScene(10, 10);*/
+	QPointF change = pos() + QPointF(5, 5);
+	this->setPos(change);
 }
 
 void Herbivore::chooseTarget()
@@ -267,7 +273,6 @@ void Herbivore::chooseMate()
 			}
 		}
 	}
-	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 	m_mate = mate;
 }
 
