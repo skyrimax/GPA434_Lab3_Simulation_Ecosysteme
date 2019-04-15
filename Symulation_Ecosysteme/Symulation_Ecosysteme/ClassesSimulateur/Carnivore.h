@@ -42,6 +42,9 @@ public:
 	virtual void trackMate() override;
 	virtual void accoucher() override;
 
+	// Accesseur virtuel hérité de Animal
+	virtual Vivant* getTarget() override;
+
 protected:
     Vivant* m_proie;
     bool m_isCharognard;

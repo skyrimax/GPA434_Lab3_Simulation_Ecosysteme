@@ -253,7 +253,7 @@ void Carnivore::accoucher()
 		Carnivore* enfant = new Carnivore(m_environnement, m_espece, m_hpMax, m_energyMax,
 			m_ageAdulte, m_ageMax, x, y, m_vitesse, m_sprint, sex, m_nbProgenituresMin,
 			m_nbProgenituresMax, this, m_meute, m_timerMort, m_tempsGestation,
-			m_tempsReproduction, m_cible);
+			m_tempsReproduction, m_cible, m_isCharognard);
 
 		if (m_meute == nullptr) {
 			m_environnement->addCarnivore(enfant);
@@ -262,4 +262,9 @@ void Carnivore::accoucher()
 			m_meute->addMembre(enfant);
 		}
 	}
+}
+
+Vivant * Carnivore::getTarget()
+{
+	return m_proie;
 }
