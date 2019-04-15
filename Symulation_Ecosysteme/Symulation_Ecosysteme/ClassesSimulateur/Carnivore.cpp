@@ -195,14 +195,25 @@ void Carnivore::chooseMate()
 	Carnivore* mate = nullptr;
 	int distance = INT_MAX;
 
-	std::list<Carnivore*> liste = m_environnement->getCarnivores();
+	if (m_meute = nullptr) {
+		for (auto const c : m_environnement->getCarnivores()) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex==Animal::Sex::Female) {
+				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
-	for (auto const h : liste) {
-		if (h->getEspece() == m_espece) {
-			if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
-				distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
+					mate = c;
+				}
+			}
+		}
+	}
+	else {
+		for (auto const & c : m_meute->getMembres()) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex == Animal::Sex::Female) {
+				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
+					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
-				mate = h;
+					mate = static_cast<Carnivore*>(c);
+				}
 			}
 		}
 	}

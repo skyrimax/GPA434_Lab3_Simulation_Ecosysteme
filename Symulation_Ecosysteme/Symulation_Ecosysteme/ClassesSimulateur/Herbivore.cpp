@@ -218,10 +218,8 @@ void Herbivore::chooseMate()
 	int distance = INT_MAX;
 
 	if (m_meute == nullptr) {
-		std::list<Herbivore*> liste = m_environnement->getHerbivores();
-
-		for (auto const h : liste) {
-			if (h->getEspece() == m_espece) {
+		for (auto const h : m_environnement->getHerbivores()) {
+			if (h->getEspece() == m_espece && h->getMate()==nullptr && h->getenceinte()==false && h->getSex == Animal::Sex::Female) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -231,10 +229,8 @@ void Herbivore::chooseMate()
 		}
 	}
 	else {
-		std::list<Animal*> liste = m_meute->getMembres();
-
-		for (auto const & h : liste) {
-			if (h->getEspece() == m_espece) {
+		for (auto const & h : m_meute->getMembres()) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex == Animal::Sex::Female) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
