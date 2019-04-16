@@ -6,7 +6,7 @@
 
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	: QMainWindow(parent), mQteChevreuils{ 1 }, mQteLapins{ 1 }, mQteLoups{ 1 }
-	, mQteMeuteLoups{ 1 }, mQteHardeChevreuil{ 1 }
+	, mQteMeuteLoups{ 0 }, mQteHardeChevreuil{ 0 }
 {
 	ui.setupUi(this);
 
@@ -23,8 +23,8 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	//connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
 }
 
-
-
+/*Fonction qui va ajouté le type de terrain à chaque case (500 X 500) 
+dans le QGraphicsView*/
 void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement)
 {
 	for (int i = 0; i < LARGEUR_GRILLE; i++)
@@ -35,29 +35,15 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 				m_grid,
 				i,
 				j,
-				m_grid->getTerrain(i, j)->getType()));
-
-			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
-			{
-				Plante *plante = new Plante(
-					environnement, /*Ajouter non de plante ici*/ "Arbre",
-					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-					randomCoordonne().getX(), randomCoordonne().getY(), /*Ajouter temps reproduction*/ 300);
-
-				environnement->addPlante(plante);
-				mGraphicsScene.addItem(plante);
-			}
+				m_grid->getTerrain(i, j)->getType())); //Ajout du type de terrain dans la scène
 		}
 	}
 }
 
-
+/*Fonction qui va ajouté les herbivores dans le QGraphicsView*/
 void SimulationMainWindow::addHerbivore(Environnement *environnement)
 {
-	for (int i = 0; i < mQteChevreuils; i++)
+	for (int i = 0; i < mQteChevreuils; i++)//Ajout des chevreuils
 	{
 		Herbivore *Chevreuil = new Herbivore(
 			environnement,//Environnement
@@ -86,7 +72,8 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 
 		mGraphicsScene.addItem(Chevreuil);
 	}
-	for (int i = 0; i < mQteLapins; i++)
+
+	for (int i = 0; i < mQteLapins; i++)//Ajout des lapins
 	{
 		Herbivore *Lapin = new Herbivore(
 			environnement,//Environnement
@@ -115,10 +102,10 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 	}
 }
 
-
+/*Fonction qui va ajouté les carnivores dans le QGraphicsView*/
 void SimulationMainWindow::addCarnivore(Environnement *environnement)
 {
-	for (int i = 0; i < mQteLoups; i++)
+	for (int i = 0; i < mQteLoups; i++)//Ajout des loups
 	{
 		Carnivore *Loup = new Carnivore(
 			environnement,//Environnement
@@ -141,6 +128,7 @@ void SimulationMainWindow::addCarnivore(Environnement *environnement)
 			5,//tempsreproduction
 			std::list<std::string> {"Chevreuil", "Lapin"},
 			false);
+
 		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 		mGraphicsScene.addItem(Loup);//Ajout à la scène
@@ -207,7 +195,7 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
-
+	mGraphicsScene.setSceneRect(0, 0, 500, 500);
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
@@ -221,9 +209,9 @@ void SimulationMainWindow::on_startButton_clicked()
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores
 
-	ui.graphicsView->setScene(&mGraphicsScene);
+	ui.graphicsView->setScene(&mGraphicsScene);//Ajout de la scène dans le QGraphicsView
 
-	mTimer.start(30);
+	mTimer.start(500);
 }
 
 /*Met la simulation en pause en arretant le timer*/

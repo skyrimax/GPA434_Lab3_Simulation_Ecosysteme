@@ -75,6 +75,7 @@ void Environnement::addHerbivore(Herbivore *herbivore) {
 	m_herbivores.push_back(herbivore);
 
 	m_vivants.push_back(herbivore);
+
 }
 
 /**

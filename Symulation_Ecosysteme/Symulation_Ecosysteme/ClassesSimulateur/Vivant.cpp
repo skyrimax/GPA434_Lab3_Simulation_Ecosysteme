@@ -13,7 +13,7 @@ Vivant::Vivant(Environnement * environnement, std::string espece, int hp,
 	m_energy(energy), m_energyMax(energy), m_age(0), m_ageAdulte(ageAdulte), m_ageMax(ageMax),
 	m_dead(false), m_toDelete(false), m_coordonne(x, y)
 {
-	setPos(x, y);
+
 }
 
 int& Vivant::getHp()

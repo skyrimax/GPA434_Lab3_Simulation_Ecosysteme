@@ -19,7 +19,6 @@
 #include "Meute.h"
 #include "Grid.h"
 
-// Déclaration enticipée
 
 class Environnement {
 public: 
