@@ -25,7 +25,7 @@ class Environnement {
 public: 
 
 	// Constructeur
-	Environnement()=default;
+	Environnement();
 	// Destructeur
 	~Environnement();
     
@@ -69,7 +69,7 @@ private:
     std::list<Carnivore*> m_charognards;
     std::list<Charogne*> m_charognes;
 	std::list<Vivant*> m_vivants;
-    Grid m_grille;
+    Grid* m_grille;
 };
 
 #endif //_ENVIRONEMENT_H

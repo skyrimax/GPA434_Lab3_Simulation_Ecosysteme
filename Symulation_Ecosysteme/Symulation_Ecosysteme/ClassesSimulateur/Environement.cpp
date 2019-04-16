@@ -11,42 +11,76 @@
  */
 
 
+Environnement::Environnement()
+{
+	m_grille = new Grid(this);
+}
+
 Environnement::~Environnement()
 {
-	/*for (auto p : m_plantes) {
+	for (auto & p : m_plantes) {
 		delete p;
+
+		m_vivants.remove(p);
+
 		p = nullptr;
 	}
 
-	for (auto mh : m_meutesHerbivores) {
+	for (auto & mh : m_meutesHerbivores) {
 		delete mh;
+
 		mh = nullptr;
 	}
 
-	for (auto h : m_herbivores) {
+	for (auto & h : m_herbivores) {
 		delete h;
+
+		m_vivants.remove(h);
+
 		h = nullptr;
-	}*/
-
-	/*for (auto mc : m_meutesCarnivores) {
-		delete mc;
-		mc = nullptr;
-	}*/
-
-	for (auto c : m_carnivores) {
-		delete c;
-		c = nullptr;
 	}
 
-	/*for (auto mc : m_meutesCharognards) {
+	for (auto & mc : m_meutesCarnivores) {
 		delete mc;
+
 		mc = nullptr;
 	}
 
-	for (auto c : m_charognards) {
+	for (auto & c : m_carnivores) {
 		delete c;
+
+		m_vivants.remove(c);
+
 		c = nullptr;
-	}*/
+	}
+
+	for (auto & mc : m_meutesCharognards) {
+		delete mc;
+
+		mc = nullptr;
+	}
+
+	for (auto & c : m_charognards) {
+		delete c;
+
+		m_vivants.remove(c);
+
+		c = nullptr;
+	}
+
+	for (auto & c : m_charognes) {
+		delete c;
+
+		m_vivants.remove(c);
+
+		c=nullptr;
+	}
+
+	for (auto & v : m_vivants) {
+		delete v;
+
+		v = nullptr;
+	}
 }
 
 /**
@@ -183,7 +217,7 @@ std::list<Charogne*>& Environnement::getCharognes() {
 
 Terrain * Environnement::getTerrain(int x, int y)
 {
-	return m_grille.getTerrain(x, y);
+	return m_grille->getTerrain(x, y);
 }
 
 /**
