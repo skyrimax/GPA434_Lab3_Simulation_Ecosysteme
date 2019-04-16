@@ -17,8 +17,11 @@ class Environnement;
 class Grid {
 public: 
     
+	// Constructeur de Grid utilisant le Bruit de Perlin
+	// pour une génération procédurale pseudo-aléatoire du terrain
 	Grid(Environnement* environnement);
-
+	// Destructeur de Grid
+	~Grid();
     
 	void updateTerrain();
 

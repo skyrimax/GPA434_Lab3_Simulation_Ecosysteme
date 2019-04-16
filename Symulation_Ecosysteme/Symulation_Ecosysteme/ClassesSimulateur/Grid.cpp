@@ -54,6 +54,17 @@ Grid::Grid(Environnement* environnement)
 	}
 }
 
+Grid::~Grid()
+{
+	for (int i = 0; i < LARGEUR_GRILLE; i++) {
+		for (int j = 0; j < HAUTEUR_GRILLE; j++) {
+			m_environnementProprietaire->removeItem(m_grid[i][j]);
+
+			delete m_grid[i][j];
+		}
+	}
+}
+
 
 void Grid::updateTerrain() {
 	for (int i = 0; i < LARGEUR_GRILLE; i++) {
