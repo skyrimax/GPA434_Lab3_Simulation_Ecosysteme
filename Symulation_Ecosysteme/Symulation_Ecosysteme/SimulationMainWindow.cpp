@@ -238,15 +238,11 @@ void SimulationMainWindow::on_stepButton_clicked()
 et en effacant le GraphicView*/
 void SimulationMainWindow::on_stopButton_clicked()
 {
-	//mGraphicsScene.clear();
-
 	mTimer.stop();
 
 	if (environnement != nullptr) {
 		delete environnement;
 	}
-
-	environnement->clear();
 
 	environnement = nullptr;
 

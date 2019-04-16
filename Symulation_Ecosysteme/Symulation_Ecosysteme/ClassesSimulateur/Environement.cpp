@@ -78,6 +78,8 @@ Environnement::~Environnement()
 	}
 
 	delete m_grille;
+
+	clear();
 }
 
 /**
