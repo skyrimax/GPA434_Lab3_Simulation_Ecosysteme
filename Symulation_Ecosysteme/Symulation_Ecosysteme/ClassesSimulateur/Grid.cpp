@@ -32,7 +32,7 @@ Grid::Grid(Environnement* environnement)
 			{
 				double noise;
 
-				noise = terrainGenerator.octavePerlin(i+0.3, j+0.8, 0.5, OCTAVES, PERSISTENCE);
+				noise = terrainGenerator.octavePerlin(i/LARGEUR_GRILLE, j/HAUTEUR_GRILLE, 0, OCTAVES, PERSISTENCE);
 
 				if (noise < THRESHOLD_EAU)
 					type = Terrain::TypeTerrain::Eau;

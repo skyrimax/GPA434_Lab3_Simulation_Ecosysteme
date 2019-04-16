@@ -205,7 +205,7 @@ void SimulationMainWindow::on_startButton_clicked()
 
 	environnement = new Environnement(); //Génération d'un envirronement
 
-	//addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
+	addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores
 
