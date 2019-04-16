@@ -45,7 +45,7 @@ public:
     {
         if (SimulationMainWindowClass->objectName().isEmpty())
             SimulationMainWindowClass->setObjectName(QString::fromUtf8("SimulationMainWindowClass"));
-        SimulationMainWindowClass->resize(762, 518);
+        SimulationMainWindowClass->resize(762, 520);
         centralWidget = new QWidget(SimulationMainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -57,6 +57,8 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setMinimumSize(QSize(500, 500));
+        graphicsView->setMaximumSize(QSize(600, 600));
 
         horizontalLayout->addWidget(graphicsView);
 

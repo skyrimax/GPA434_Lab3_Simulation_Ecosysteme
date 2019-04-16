@@ -27,6 +27,8 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 dans le QGraphicsView*/
 void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement)
 {
+	mGraphicsScene.setItemIndexMethod(QGraphicsScene::NoIndex);
+
 	for (int i = 0; i < LARGEUR_GRILLE; i++)
 	{
 		for (int j = 0; j < HAUTEUR_GRILLE; j++)
@@ -34,6 +36,8 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 			mGraphicsScene.addItem(environnement->getTerrain(i, j));
 		}
 	}
+	mGraphicsScene.setItemIndexMethod(QGraphicsScene::BspTreeIndex);
+
 }
 
 
@@ -183,6 +187,7 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
+
 	mGraphicsScene.setSceneRect(0, 0, 500, 500);
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
@@ -193,11 +198,10 @@ void SimulationMainWindow::on_startButton_clicked()
 
 	environnement = new Environnement(); //Génération d'un envirronement
 
-	addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
+	//addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
 
 	addVivants(environnement);
 
-	ui.graphicsView->setFixedSize(LARGEUR_GRILLE, HAUTEUR_GRILLE);
 	ui.graphicsView->setScene(&mGraphicsScene);//Ajout de la scène dans le QGraphicsView
 
 	mTimer.start(500);
@@ -237,12 +241,14 @@ void SimulationMainWindow::on_stepButton_clicked()
 et en effacant le GraphicView*/
 void SimulationMainWindow::on_stopButton_clicked()
 {
-	mGraphicsScene.clear();
-
 	mTimer.stop();
+
 
 	ui.parameterButton->setEnabled(true);
 	ui.startButton->setEnabled(true);
 
 	environnement->~Environnement();
+
+	mGraphicsScene.clear();
+
 }
