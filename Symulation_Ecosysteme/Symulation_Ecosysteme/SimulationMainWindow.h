@@ -41,8 +41,6 @@ private:
 	QGraphicsScene mGraphicsScene;
 	//Création d'un environnement
 	Environnement *environnement;
-	//Pour la grille
-	Grid *m_grid;
 
 	//Attributs pour les quantité de départ
 	int mQteChevreuils;

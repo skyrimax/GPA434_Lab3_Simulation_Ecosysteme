@@ -10,7 +10,8 @@
 /**
  * Grid implementation
  */
-Grid::Grid()
+Grid::Grid(Environnement* environnement)
+	: m_environnementProprietaire(environnement)
 {
 
 	PerlinNoiseGenerator terrainGenerator;

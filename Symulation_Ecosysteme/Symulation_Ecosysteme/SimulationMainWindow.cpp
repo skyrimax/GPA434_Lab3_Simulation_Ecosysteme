@@ -17,9 +17,10 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	ui.stepButton->setEnabled(false);
 	ui.stopButton->setEnabled(false);
 
-	/*Connexion du signal timeout du mTimer et donc lorsque le timer
-	termine, un signal est envoyé au slot de la simulation de SimulationMainWindow*/
-	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
+	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
+	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
+
+	//connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
 }
 
 /*Fonction qui va ajouté le type de terrain à chaque case (500 X 500) 
@@ -170,7 +171,7 @@ Dans le cadre du cours :
 	- GPA434 - Ingénierie des systèmes orientés-objet
 	- Laboratoire 3
 
-Version 1.0)---" };
+Version 0.1)---" };
 
 	//Afficher le message
 	QMessageBox::about(this, u8R"(À propos)", aboutProgramm);
@@ -203,9 +204,8 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.startButton->setEnabled(false);
 
 	environnement = new Environnement(); //Génération d'un envirronement
-	m_grid = environnement->getGrid(); //Génération d'une grille   attente pour l'Accesseur de grid
-	
-	addTerrain(m_grid, environnement);//Ajout du terrain
+
+	addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores
 
