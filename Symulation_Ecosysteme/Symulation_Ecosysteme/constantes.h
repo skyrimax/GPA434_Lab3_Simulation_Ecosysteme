@@ -18,7 +18,7 @@
 #define THRESHOLD_PLANTE 1.0
 
 // Constraintes relatant à la fonction de bruit pour la génération du terrain
-#define OCTAVES 6
+#define OCTAVES 6.0
 #define PERSISTENCE 0.2
 
 // Constantes relatant aux plantes

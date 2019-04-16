@@ -10,10 +10,14 @@
  * Environement implementation
  */
 
+Environnement::Environnement()
+{
+
+}
 
 Environnement::~Environnement()
 {
-	/*for (auto p : m_plantes) {
+	for (auto p : m_plantes) {
 		delete p;
 		p = nullptr;
 	}
@@ -26,19 +30,19 @@ Environnement::~Environnement()
 	for (auto h : m_herbivores) {
 		delete h;
 		h = nullptr;
-	}*/
+	}
 
-	/*for (auto mc : m_meutesCarnivores) {
+	for (auto mc : m_meutesCarnivores) {
 		delete mc;
 		mc = nullptr;
-	}*
+	}
 
 	for (auto c : m_carnivores) {
 		delete c;
 		c = nullptr;
 	}
 
-	/*for (auto mc : m_meutesCharognards) {
+	for (auto mc : m_meutesCharognards) {
 		delete mc;
 		mc = nullptr;
 	}
@@ -46,7 +50,7 @@ Environnement::~Environnement()
 	for (auto c : m_charognards) {
 		delete c;
 		c = nullptr;
-	}*/
+	}
 }
 
 /**
@@ -57,6 +61,7 @@ void Environnement::addHerbivore(Herbivore *herbivore) {
 	m_herbivores.push_back(herbivore);
 
 	m_vivants.push_back(herbivore);
+
 }
 
 /**
@@ -184,6 +189,11 @@ std::list<Charogne*>& Environnement::getCharognes() {
 Terrain * Environnement::getTerrain(int x, int y)
 {
 	return m_grille.getTerrain(x, y);
+}
+
+Grid* Environnement::getGrid()
+{
+	return &m_grille;
 }
 
 /**

@@ -35,21 +35,6 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 				i,
 				j,
 				m_grid->getTerrain(i, j)->getType())); //Ajout du type de terrain dans la scène
-
-			if ((m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Eau) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Terre) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Gazon) &&
-				(m_grid->getTerrain(i, j)->getType() != Terrain::TypeTerrain::Frontiere))
-			{
-				/*Ajout de plante sur les cases libres*/
-				Plante *plante = new Plante(
-					environnement, /*Ajouter non de plante ici*/ "Arbre",
-					/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
-					randomCoordonne().getX(), randomCoordonne().getY(), /*Ajouter temps reproduction*/ 300);
-
-				environnement->addPlante(plante);//Ajout de la plante dans l'environnement
-				mGraphicsScene.addItem(plante);//Ajout de plante dans la scène
-			}
 		}
 	}
 }
@@ -142,6 +127,7 @@ void SimulationMainWindow::addCarnivore(Environnement *environnement)
 			5,//tempsreproduction
 			std::list<std::string> {"Chevreuil", "Lapin"},
 			false);
+
 		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 		mGraphicsScene.addItem(Loup);//Ajout à la scène
@@ -217,8 +203,8 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.startButton->setEnabled(false);
 
 	environnement = new Environnement(); //Génération d'un envirronement
-	m_grid = new Grid(); //Génération d'une grille
-
+	m_grid = environnement->getGrid(); //Génération d'une grille   attente pour l'Accesseur de grid
+	
 	addTerrain(m_grid, environnement);//Ajout du terrain
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores

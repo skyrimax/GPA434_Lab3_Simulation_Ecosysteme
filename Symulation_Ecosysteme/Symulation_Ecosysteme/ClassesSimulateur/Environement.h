@@ -19,13 +19,12 @@
 #include "Meute.h"
 #include "Grid.h"
 
-// Déclaration enticipée
 
 class Environnement {
 public: 
 
 	// Constructeur
-	Environnement()=default;
+	Environnement();
 	// Destructeur
 	~Environnement();
     
@@ -53,9 +52,8 @@ public:
 
 // Accesseurs d'éléments de la grille
 	Terrain* getTerrain(int x, int y);
+	Grid* getGrid();
 
-/*Fonction mis dans slots par Fred afin de pouvoir le connecter à un signal*/
-public slots:
 // Fonction commendant 
 	std::list<Vivant*>& simulation();
 

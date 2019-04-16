@@ -385,13 +385,12 @@ void Animal::settimerMort(int timer)
 
 bool Animal::chooseMate(Animal * mate)
 {
-	if (m_espece != "")/*Ajout par Fred, temporairement*/
-	{
-		if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
-			m_mate = mate;
+
+	if (m_espece == mate->getEspece() && m_sex != mate->getSex() && m_mate == nullptr) {
+		m_mate = mate;
 			
-			return true;
-		}
+		return true;
 	}
+
 	return false;
 }
