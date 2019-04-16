@@ -50,6 +50,8 @@ Grid::Grid(Environnement* environnement)
 			}
 
 			m_grid[i][j] = new Terrain(this, i, j, type);
+
+			m_environnementProprietaire->addItem(m_grid[i][j]);
 		}
 	}
 }
