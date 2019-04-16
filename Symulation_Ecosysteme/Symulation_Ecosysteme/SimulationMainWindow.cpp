@@ -237,16 +237,16 @@ void SimulationMainWindow::on_stepButton_clicked()
 et en effacant le GraphicView*/
 void SimulationMainWindow::on_stopButton_clicked()
 {
-	mGraphicsScene.clear();
+	//mGraphicsScene.clear();
 
 	mTimer.stop();
 
-	delete environnement;
+	if (environnement != nullptr) {
+		delete environnement;
+	}
 
 	environnement = nullptr;
 
 	ui.parameterButton->setEnabled(true);
 	ui.startButton->setEnabled(true);
-
-	environnement->~Environnement();
 }

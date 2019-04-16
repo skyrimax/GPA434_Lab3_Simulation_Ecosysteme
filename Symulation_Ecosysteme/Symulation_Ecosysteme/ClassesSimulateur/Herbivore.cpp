@@ -20,7 +20,8 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 	std::list<std::string> cible)
 	:Animal(environnement, espece, hp, energy, ageAdulte, ageMax, x, y,
 		vitesse, sprint, sex, nbProgenituresMin, nbProgenituresMax, mere,
-		meute, timerMort, tempsGestation, tempsReproduction, cible), m_plante(nullptr)
+		meute, timerMort, tempsGestation, tempsReproduction, cible),
+	m_plante(nullptr)
 {
 	//Ajouté par Fred, création d'une flèce pour les herbivores
 	mshape << QPointF(0, 0)

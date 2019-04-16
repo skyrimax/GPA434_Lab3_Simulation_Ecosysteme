@@ -18,6 +18,7 @@ class Grid {
 public: 
     
 	Grid(Environnement* environnement);
+
     
 	void updateTerrain();
 

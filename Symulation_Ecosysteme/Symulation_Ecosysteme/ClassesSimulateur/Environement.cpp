@@ -65,6 +65,8 @@ Environnement::~Environnement()
 	for (auto const & v : m_vivants) {
 		delete v;
 	}
+
+	delete m_grille;
 }
 
 /**
