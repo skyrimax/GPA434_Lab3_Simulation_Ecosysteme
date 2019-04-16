@@ -118,9 +118,13 @@ void Herbivore::simulation()
 			else if (m_hp < 0.9*m_hpMax) {
 				healing();
 			}
-			else if (m_energy < 0.1*m_energyMax) {
-				seekEnergy();
+			else if (m_energy < 0.1*m_energyMax || m_plante != nullptr) {
+				if (m_plante == nullptr) {
+					seekEnergy();
+				}
+
 				trackTarget();
+
 				if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
 					m_coordonne.getY() == m_plante->getCoordonne().getY()) {
 					replenishEnergy();
@@ -148,8 +152,10 @@ void Herbivore::simulation()
 					}
 				}
 
-				if (needToFindFood) {
-					seekEnergy();
+				if (needToFindFood || m_plante != nullptr) {
+					if (m_plante == nullptr) {
+						seekEnergy();
+					}
 
 					for (auto const enfant : m_enfant) {
 						enfant->chooseTarget(m_plante);

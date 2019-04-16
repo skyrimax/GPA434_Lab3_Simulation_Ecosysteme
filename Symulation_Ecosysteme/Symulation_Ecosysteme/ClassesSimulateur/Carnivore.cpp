@@ -78,7 +78,104 @@ void Carnivore::seekEnergy()
 void Carnivore::simulation()
 {
 	closestPredateur();
+	if (!isDead()) {
+		if (m_age < m_ageAdulte) {
+			if (m_proie != nullptr) {
+				trackTarget();
+				if (m_coordonne.getX() == m_proie->getCoordonne().getX(),
+					m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+					replenishEnergy();
+				}
+			}
+			else if (m_mere != nullptr) //Condition ajouté par Fred
+			{
+				trackMother();
+			}
 
+			m_age++;
+		}
+		else if (m_age == m_ageAdulte) {
+			devenirAdulte();
+
+			m_age++;
+		}
+		else if (m_age > m_ageAdulte) {
+			if (m_closestPredateur != nullptr)//Condition ajouté par Fred
+			{
+				if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
+					m_coordonne) < AWARENESS_CIRCLE) {
+					flee();
+				}
+			}
+			else if (m_hp < 0.9*m_hpMax) {
+				healing();
+			}
+			else if (m_energy < 0.1*m_energyMax || m_proie != nullptr) {
+				if (m_proie == nullptr) {
+					seekEnergy();
+				}
+
+				trackTarget();
+
+				if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
+					m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+					replenishEnergy();
+				}
+			}
+
+			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
+				chooseMate();
+				if (m_mate != nullptr)//Condition ajouté par Fred
+				{
+					trackMate();
+					if (m_coordonne.getX() == m_mate->getCoordonne().getX() &&
+						m_coordonne.getY() == m_mate->getCoordonne().getY()) {
+						reproduction();
+
+						m_mate->reproduction();
+					}
+				}
+			}
+			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
+				bool needToFindFood = false;
+
+				for (auto const enfant : m_enfant) {
+					if (enfant->isHungry()) {
+						needToFindFood = true;
+					}
+				}
+
+				if (needToFindFood || m_proie != nullptr) {
+					if (m_proie == nullptr) {
+						seekEnergy();
+					}
+
+					for (auto const enfant : m_enfant) {
+						enfant->chooseTarget(m_proie);
+					}
+
+					trackTarget();
+					if (m_coordonne.getX() == m_proie->getCoordonne().getX(),
+						m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+						replenishEnergy();
+					}
+				}
+			}
+		}
+	}
+	else {
+		if (m_dead) {
+			if (m_timerMort > 0) {
+				m_timerMort--;
+			}
+			else {
+				devenirCharogne();
+			}
+		}
+		else {
+			dying();
+		}
+	}
 }
 
 void Carnivore::chooseTarget()
