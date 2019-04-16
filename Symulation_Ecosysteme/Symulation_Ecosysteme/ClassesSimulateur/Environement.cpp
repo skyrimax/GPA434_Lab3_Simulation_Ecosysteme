@@ -22,18 +22,20 @@ Environnement::~Environnement()
 		delete p;
 
 		m_vivants.remove(p);
+
+		removeItem(p);
 	}
 
-	for (auto & mh : m_meutesHerbivores) {
+	for (auto const & mh : m_meutesHerbivores) {
 		delete mh;
-
-		mh = nullptr;
 	}
 
 	for (auto const & h : m_herbivores) {
 		delete h;
 
 		m_vivants.remove(h);
+
+		removeItem(h);
 	}
 
 	for (auto const & mc : m_meutesCarnivores) {
@@ -44,6 +46,8 @@ Environnement::~Environnement()
 		delete c;
 
 		m_vivants.remove(c);
+
+		removeItem(c);
 	}
 
 	for (auto const & mc : m_meutesCharognards) {
@@ -54,16 +58,22 @@ Environnement::~Environnement()
 		delete c;
 
 		m_vivants.remove(c);
+
+		removeItem(c);
 	}
 
 	for (auto const & c : m_charognes) {
 		delete c;
 
 		m_vivants.remove(c);
+
+		removeItem(c);
 	}
 
 	for (auto const & v : m_vivants) {
 		delete v;
+
+		removeItem(v);
 	}
 
 	delete m_grille;
@@ -78,6 +88,7 @@ void Environnement::addHerbivore(Herbivore *herbivore) {
 
 	m_vivants.push_back(herbivore);
 
+	addItem(herbivore);
 }
 
 /**
@@ -96,6 +107,8 @@ void Environnement::addCarnivore(Carnivore *carnivore) {
 	m_carnivores.push_back(carnivore);
 
 	m_vivants.push_back(carnivore);
+
+	addItem(carnivore);
 }
 
 /**
@@ -114,6 +127,8 @@ void Environnement::addCharognards(Carnivore *charognard) {
 	m_charognards.push_back(charognard);
 
 	m_vivants.push_back(charognard);
+
+	addItem(charognard);
 }
 
 /**
@@ -129,11 +144,15 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
 	 m_charognes.push_back(charogne);
 
 	 m_vivants.push_back(charogne);
+
+	 addItem(charogne);
  }
 
  void Environnement::addVivant(Vivant * vivant)
  {
 	 m_vivants.push_back(vivant);
+
+	 addItem(vivant);
  }
 
 /**
@@ -144,6 +163,8 @@ void Environnement::addPlante(Plante *plante) {
 	m_plantes.push_back(plante);
 
 	m_vivants.push_back(plante);
+
+	addItem(plante);
 }
 
 /**
@@ -222,7 +243,7 @@ Grid * Environnement::getGrille()
 /**
  * @return void
  */
-std::list<Vivant*>& Environnement::simulation() {
+void Environnement::simulation() {
 	std::list<Vivant*> toDie;
 	std::list<Animal*> meuteToDie;
 	std::list<Meute*> emptyMeute;
@@ -309,8 +330,10 @@ std::list<Vivant*>& Environnement::simulation() {
 		}
 	}
 	
+	// Cycle de néttoyage des morts
 	for (auto const & mort : toDie) {
 		m_vivants.remove(mort);
+		removeItem(mort);
 
 		if (typeid(*mort) == typeid(Herbivore) || typeid(*mort) == typeid(Carnivore)) {
 			Animal* animalMort = static_cast<Animal*>(mort);
@@ -359,6 +382,4 @@ std::list<Vivant*>& Environnement::simulation() {
 			m_meutesCharognards.remove(meute);
 		}
 	}
-
-	return m_vivants;
 }

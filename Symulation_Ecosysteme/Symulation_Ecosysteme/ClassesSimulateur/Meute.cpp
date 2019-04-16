@@ -154,6 +154,8 @@ void Meute::addMembre(Animal * membre)
 	m_membres.push_back(membre);
 
 	m_environnement->addVivant(membre);
+
+	m_environnement->addItem(membre);
 }
 
 Animal * Meute::getAlpha()

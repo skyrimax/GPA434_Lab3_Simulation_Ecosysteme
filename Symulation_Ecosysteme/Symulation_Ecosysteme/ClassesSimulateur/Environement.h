@@ -10,6 +10,7 @@
 
 // Librairie Qt
 #include <qgraphicsitem.h>
+#include <qgraphicsscene.h>
 
 // Header files du simulateur
 #include "Plante.h"
@@ -20,7 +21,7 @@
 #include "Grid.h"
 
 
-class Environnement {
+class Environnement: public QGraphicsScene {
 public: 
 
 	// Constructeur
@@ -58,7 +59,7 @@ public:
 	Grid* getGrille();
 
 	// Fonction commendant la simulation du monde
-	std::list<Vivant*>& simulation();
+	void simulation();
 
 private: 
     std::list<Plante*> m_plantes;

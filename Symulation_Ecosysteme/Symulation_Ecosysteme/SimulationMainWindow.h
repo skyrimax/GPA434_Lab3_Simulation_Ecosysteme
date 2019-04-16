@@ -37,7 +37,7 @@ private:
 	Un signal*/
 	QTimer mTimer;
 	//Créattion de la scène
-	QGraphicsScene mGraphicsScene;
+	//QGraphicsScene mGraphicsScene;
 	//Création d'un environnement
 	Environnement *environnement;
 

@@ -31,7 +31,7 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 	{
 		for (int j = 0; j < HAUTEUR_GRILLE; j++)
 		{
-			mGraphicsScene.addItem(environnement->getTerrain(i, j));
+			//mGraphicsScene.addItem(environnement->getTerrain(i, j));
 		}
 	}
 }
@@ -118,10 +118,10 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 	}
 
-	for (auto & p : environnement->getVivants()) {
+	/*for (auto & p : environnement->getVivants()) {
 
 		mGraphicsScene.addItem(p);
-	}
+	}*/
 }
 
 void SimulationMainWindow::simulation()
@@ -183,7 +183,7 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
-	mGraphicsScene.setSceneRect(0, 0, 500, 500);
+	environnement->setSceneRect(0, 0, 500, 500);
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
@@ -198,7 +198,7 @@ void SimulationMainWindow::on_startButton_clicked()
 	addVivants(environnement);
 
 	ui.graphicsView->setFixedSize(LARGEUR_GRILLE, HAUTEUR_GRILLE);
-	ui.graphicsView->setScene(&mGraphicsScene);//Ajout de la scène dans le QGraphicsView
+	ui.graphicsView->setScene(environnement);//Ajout de la scène dans le QGraphicsView
 
 	mTimer.start(500);
 }
@@ -244,6 +244,8 @@ void SimulationMainWindow::on_stopButton_clicked()
 	if (environnement != nullptr) {
 		delete environnement;
 	}
+
+	environnement->clear();
 
 	environnement = nullptr;
 
