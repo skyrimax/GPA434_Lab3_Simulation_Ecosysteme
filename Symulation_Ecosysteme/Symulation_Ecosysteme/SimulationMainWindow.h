@@ -47,6 +47,9 @@ private:
 	int mQteLoups;
 	int mQteMeuteLoups;
 	int mQteHardeChevreuil;
+
+	//Atribut pour géré le départ de la simulation
+	bool simulationEnCours;
 	
 
 private slots:

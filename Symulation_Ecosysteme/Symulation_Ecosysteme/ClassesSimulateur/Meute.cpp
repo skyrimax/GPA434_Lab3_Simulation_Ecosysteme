@@ -11,6 +11,24 @@
   * Meute implementation
   */
 
+Meute::Meute(Environnement* environnement)
+	: faim(false), m_alpha(nullptr), m_environnement(environnement)
+{
+}
+
+Meute::~Meute()
+{
+	for (auto const & membre : m_membres) {
+		m_environnement->removeItem(membre);
+
+		if (membre == m_alpha) {
+			m_alpha = nullptr;
+		}
+
+		delete membre;
+	}
+}
+
 std::list<Animal*>& Meute::getMembres()
 {
 	return m_membres;
@@ -154,6 +172,8 @@ void Meute::addMembre(Animal * membre)
 	m_membres.push_back(membre);
 
 	m_environnement->addVivant(membre);
+
+	m_environnement->addItem(membre);
 }
 
 Animal * Meute::getAlpha()

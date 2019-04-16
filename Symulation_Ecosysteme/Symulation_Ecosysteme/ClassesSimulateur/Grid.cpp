@@ -32,7 +32,7 @@ Grid::Grid(Environnement* environnement)
 			{
 				double noise;
 
-				noise = terrainGenerator.octavePerlin(i, j, 0.5, OCTAVES, PERSISTENCE);
+				noise = terrainGenerator.octavePerlin(i*10.0/LARGEUR_GRILLE, j*10.0/HAUTEUR_GRILLE, 0.0, OCTAVES, PERSISTENCE);
 
 				if (noise < THRESHOLD_EAU)
 					type = Terrain::TypeTerrain::Eau;
@@ -50,6 +50,19 @@ Grid::Grid(Environnement* environnement)
 			}
 
 			m_grid[i][j] = new Terrain(this, i, j, type);
+
+			m_environnementProprietaire->addItem(m_grid[i][j]);
+		}
+	}
+}
+
+Grid::~Grid()
+{
+	for (int i = 0; i < LARGEUR_GRILLE; i++) {
+		for (int j = 0; j < HAUTEUR_GRILLE; j++) {
+			m_environnementProprietaire->removeItem(m_grid[i][j]);
+
+			delete m_grid[i][j];
 		}
 	}
 }

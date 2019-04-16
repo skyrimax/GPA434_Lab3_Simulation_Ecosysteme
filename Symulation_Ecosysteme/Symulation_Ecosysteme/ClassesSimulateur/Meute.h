@@ -19,6 +19,11 @@ class Environnement;
 class Meute {
 public:
 
+	// Constructeur de Meute
+	Meute(Environnement* environnement);
+	// Destructeur de Meute
+	~Meute();
+
 	std::list<Animal*>& getMembres();
 	std::list<Animal*> simulation();
 	void addMembre(Animal* membre);

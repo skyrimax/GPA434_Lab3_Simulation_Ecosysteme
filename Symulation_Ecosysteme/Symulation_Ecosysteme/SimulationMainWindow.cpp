@@ -5,8 +5,8 @@
 
 
 SimulationMainWindow::SimulationMainWindow(QWidget *parent)
-	: QMainWindow(parent), mQteChevreuils{ 1 }, mQteLapins{ 1 }, mQteLoups{ 1 }
-	, mQteMeuteLoups{ 0 }, mQteHardeChevreuil{ 0 }
+	: QMainWindow(parent), mQteChevreuils{ 1 }, mQteLapins{ 1 }, mQteLoups{ 1 },
+	mQteMeuteLoups{ 0 }, mQteHardeChevreuil{ 0 }, simulationEnCours{false}
 {
 	ui.setupUi(this);
 
@@ -20,7 +20,7 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
 	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
-	//connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
+	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
 }
 
 /*Fonction qui va ajouté le type de terrain à chaque case (500 X 500) 
@@ -121,16 +121,21 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 	}
-
-	for (auto & p : environnement->getVivants()) {
-
-		mGraphicsScene.addItem(p);
-	}
 }
 
 void SimulationMainWindow::simulation()
 {
-	environnement->simulation();
+	mTimer.stop();
+
+	if (!simulationEnCours) {
+		simulationEnCours = true;
+
+		mTimer.start(30);
+
+		environnement->simulation();
+
+		simulationEnCours = false;
+	}
 }
 
 
@@ -199,10 +204,12 @@ void SimulationMainWindow::on_startButton_clicked()
 	environnement = new Environnement(); //Génération d'un envirronement
 
 	//addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
+	environnement->setSceneRect(0, 0, 500, 500);
 
 	addVivants(environnement);
 
-	ui.graphicsView->setScene(&mGraphicsScene);//Ajout de la scène dans le QGraphicsView
+	ui.graphicsView->setFixedSize(LARGEUR_GRILLE, HAUTEUR_GRILLE);
+	ui.graphicsView->setScene(environnement);//Ajout de la scène dans le QGraphicsView
 
 	mTimer.start(500);
 }
@@ -243,12 +250,12 @@ void SimulationMainWindow::on_stopButton_clicked()
 {
 	mTimer.stop();
 
+	if (environnement != nullptr) {
+		delete environnement;
+	}
+
+	environnement = nullptr;
 
 	ui.parameterButton->setEnabled(true);
 	ui.startButton->setEnabled(true);
-
-	environnement->~Environnement();
-
-	mGraphicsScene.clear();
-
 }

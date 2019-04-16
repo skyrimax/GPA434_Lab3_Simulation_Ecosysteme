@@ -12,75 +12,74 @@
 
 
 Environnement::Environnement()
+	: QGraphicsScene()
 {
 	m_grille = new Grid(this);
 }
 
 Environnement::~Environnement()
 {
-	for (auto & p : m_plantes) {
-		delete p;
-
+	for (auto const & p : m_plantes) {
 		m_vivants.remove(p);
 
-		p = nullptr;
+		removeItem(p);
+
+		delete(p);
 	}
 
-	for (auto & mh : m_meutesHerbivores) {
+	for (auto const & mh : m_meutesHerbivores) {
 		delete mh;
-
-		mh = nullptr;
 	}
 
-	for (auto & h : m_herbivores) {
-		delete h;
-
+	for (auto const & h : m_herbivores) {
 		m_vivants.remove(h);
 
-		h = nullptr;
+		removeItem(h);
+
+		delete h;
 	}
 
-	for (auto & mc : m_meutesCarnivores) {
+	for (auto const & mc : m_meutesCarnivores) {
 		delete mc;
-
-		mc = nullptr;
 	}
 
-	for (auto & c : m_carnivores) {
-		delete c;
-
+	for (auto const & c : m_carnivores) {
 		m_vivants.remove(c);
 
-		c = nullptr;
+		removeItem(c);
+
+		delete c;
 	}
 
-	for (auto & mc : m_meutesCharognards) {
+	for (auto const & mc : m_meutesCharognards) {
 		delete mc;
-
-		mc = nullptr;
 	}
 
-	for (auto & c : m_charognards) {
-		delete c;
-
+	for (auto const & c : m_charognards) {
 		m_vivants.remove(c);
 
-		c = nullptr;
+		removeItem(c);
+
+		delete c;
 	}
 
-	for (auto & c : m_charognes) {
-		delete c;
-
+	for (auto const & c : m_charognes) {
 		m_vivants.remove(c);
 
-		c=nullptr;
+		removeItem(c);
+
+		delete c;
 	}
 
-	for (auto & v : m_vivants) {
+	for (auto const & v : m_vivants) {
+		removeItem(v);
+
 		delete v;
-
-		v = nullptr;
 	}
+
+	delete m_grille;
+
+	clear();
 }
 
 /**
@@ -92,6 +91,7 @@ void Environnement::addHerbivore(Herbivore *herbivore) {
 
 	m_vivants.push_back(herbivore);
 
+	addItem(herbivore);
 }
 
 /**
@@ -110,6 +110,8 @@ void Environnement::addCarnivore(Carnivore *carnivore) {
 	m_carnivores.push_back(carnivore);
 
 	m_vivants.push_back(carnivore);
+
+	addItem(carnivore);
 }
 
 /**
@@ -128,6 +130,8 @@ void Environnement::addCharognards(Carnivore *charognard) {
 	m_charognards.push_back(charognard);
 
 	m_vivants.push_back(charognard);
+
+	addItem(charognard);
 }
 
 /**
@@ -143,11 +147,15 @@ void Environnement::addCharogardsPack(Meute *meuteCharognards) {
 	 m_charognes.push_back(charogne);
 
 	 m_vivants.push_back(charogne);
+
+	 addItem(charogne);
  }
 
  void Environnement::addVivant(Vivant * vivant)
  {
 	 m_vivants.push_back(vivant);
+
+	 addItem(vivant);
  }
 
 /**
@@ -158,6 +166,8 @@ void Environnement::addPlante(Plante *plante) {
 	m_plantes.push_back(plante);
 
 	m_vivants.push_back(plante);
+
+	addItem(plante);
 }
 
 /**
@@ -236,7 +246,7 @@ Grid * Environnement::getGrille()
 /**
  * @return void
  */
-std::list<Vivant*>& Environnement::simulation() {
+void Environnement::simulation() {
 	std::list<Vivant*> toDie;
 	std::list<Animal*> meuteToDie;
 	std::list<Meute*> emptyMeute;
@@ -323,8 +333,10 @@ std::list<Vivant*>& Environnement::simulation() {
 		}
 	}
 	
+	// Cycle de néttoyage des morts
 	for (auto const & mort : toDie) {
 		m_vivants.remove(mort);
+		removeItem(mort);
 
 		if (typeid(*mort) == typeid(Herbivore) || typeid(*mort) == typeid(Carnivore)) {
 			Animal* animalMort = static_cast<Animal*>(mort);
@@ -373,6 +385,4 @@ std::list<Vivant*>& Environnement::simulation() {
 			m_meutesCharognards.remove(meute);
 		}
 	}
-
-	return m_vivants;
 }
