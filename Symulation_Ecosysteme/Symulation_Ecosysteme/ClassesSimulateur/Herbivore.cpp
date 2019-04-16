@@ -61,10 +61,14 @@ void Herbivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 
 void Herbivore::replenishEnergy()
 {
-	if (m_energy<m_energyMax && m_plante->getEnergy()>0) {
-		m_plante->receiveDamages(1);
-
+	if (m_energy < m_energyMax && m_plante != nullptr) {
 		m_energy += 1 * COUT_FRUIT;
+
+		if (m_energy >= m_energyMax) {
+			m_energy = m_energyMax;
+		}
+
+		m_plante->receiveDamages(1);
 	}
 	else {
 		m_plante = nullptr;
@@ -81,6 +85,7 @@ void Herbivore::seekEnergy()
 void Herbivore::simulation()
 {
 	closestPredateur();
+
 	if (!isDead()) {
 		if (m_age < m_ageAdulte) {
 			if (m_plante != nullptr) {
@@ -263,11 +268,11 @@ void Herbivore::chooseMate()
 		}
 	}
 
-	if (mate->chooseMate(this)) {
-		m_mate = mate;
+	if (mate != nullptr) {
+		if (mate->chooseMate(this)) {
+			m_mate = mate;
+		}
 	}
-
-	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
 }
 
 void Herbivore::trackMate()

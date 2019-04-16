@@ -55,19 +55,30 @@ void Carnivore::paint(QPainter * painter, const QStyleOptionGraphicsItem * optio
 
 void Carnivore::replenishEnergy()
 {
-	// ************** À IMPLANTER ***************
+	if (m_energy < m_energyMax && m_proie != nullptr) {
+		m_energy += 1 * COUT_GUERISON;
+
+		if (m_energy >= m_energyMax) {
+			m_energy = m_energyMax;
+		}
+	}
+	else
+	{
+		m_proie = nullptr;
+	}
 }
 
 void Carnivore::seekEnergy()
 {
-	// ************** À IMPLANTER ***************
+	if (m_proie == nullptr) {
+		chooseTarget();
+	}
 }
 
 void Carnivore::simulation()
 {
-	// ************** À IMPLANTER ***************
-	
-	setPos(QPointF(m_coordonne.getX()+1,m_coordonne.getY()+1));
+	closestPredateur();
+
 }
 
 void Carnivore::chooseTarget()
@@ -203,7 +214,7 @@ void Carnivore::chooseMate()
 	Animal* mate = nullptr;
 	int distance = INT_MAX;
 
-	if (m_meute = nullptr) {
+	if (m_meute == nullptr) {
 		for (auto const c : m_environnement->getCarnivores()) {
 			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
@@ -226,8 +237,10 @@ void Carnivore::chooseMate()
 		}
 	}
 
-	if (mate->chooseMate(this)) {
-		m_mate = mate;
+	if (mate != nullptr) {
+		if (mate->chooseMate(this)) {
+			m_mate = mate;
+		}
 	}
 }
 
