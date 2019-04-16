@@ -49,6 +49,7 @@ public:
 	std::list<Meute*>& getMeutesCharognards();
 	std::list<Carnivore*>& getCharognards();
 	std::list<Charogne*>& getCharognes();
+	std::list<Vivant*>& getVivants(); //Ajouté par Fred, avoir accès à la liste depuis la MainWindow
 
 	// Accesseurs d'éléments de la grille
 	Terrain* getTerrain(int x, int y);

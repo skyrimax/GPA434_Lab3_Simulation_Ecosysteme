@@ -193,6 +193,12 @@ std::list<Carnivore*>& Environnement::getCharognards() {
     return m_charognards;
 }
 
+
+std::list<Vivant*>& Environnement::getVivants()
+{
+	return m_vivants;
+}
+
 /**
 * @return list<Charogne*>
 */
@@ -209,6 +215,7 @@ Grid * Environnement::getGrille()
 {
 	return m_grille;
 }
+
 
 /**
  * @return void

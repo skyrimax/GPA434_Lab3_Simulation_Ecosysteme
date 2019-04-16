@@ -42,7 +42,7 @@ Terrain::Terrain(Grid * grilleProprietaire, int x, int y, TypeTerrain type)
 /*	Ajout par Fred
 Création d'un rectangle de 1 par 1 positioné à (x,y)
 	qui représente le terrain à un point*/
-	mshape.setRect(x, y, 10, 10);
+	mshape.setRect(x, y, 5, 5);
 
 	sWaterBackgoundColor.setRgb(0,0,255);//bleu
 	sGrassBackgoundColor.setRgb(0, 255, 0);//Vert
