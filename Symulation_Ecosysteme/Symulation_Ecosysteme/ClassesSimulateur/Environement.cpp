@@ -18,12 +18,10 @@ Environnement::Environnement()
 
 Environnement::~Environnement()
 {
-	for (auto & p : m_plantes) {
+	for (auto const & p : m_plantes) {
 		delete p;
 
 		m_vivants.remove(p);
-
-		p = nullptr;
 	}
 
 	for (auto & mh : m_meutesHerbivores) {
@@ -32,54 +30,40 @@ Environnement::~Environnement()
 		mh = nullptr;
 	}
 
-	for (auto & h : m_herbivores) {
+	for (auto const & h : m_herbivores) {
 		delete h;
 
 		m_vivants.remove(h);
-
-		h = nullptr;
 	}
 
-	for (auto & mc : m_meutesCarnivores) {
+	for (auto const & mc : m_meutesCarnivores) {
 		delete mc;
-
-		mc = nullptr;
 	}
 
-	for (auto & c : m_carnivores) {
+	for (auto const & c : m_carnivores) {
 		delete c;
 
 		m_vivants.remove(c);
-
-		c = nullptr;
 	}
 
-	for (auto & mc : m_meutesCharognards) {
+	for (auto const & mc : m_meutesCharognards) {
 		delete mc;
-
-		mc = nullptr;
 	}
 
-	for (auto & c : m_charognards) {
+	for (auto const & c : m_charognards) {
 		delete c;
 
 		m_vivants.remove(c);
-
-		c = nullptr;
 	}
 
-	for (auto & c : m_charognes) {
+	for (auto const & c : m_charognes) {
 		delete c;
 
 		m_vivants.remove(c);
-
-		c=nullptr;
 	}
 
-	for (auto & v : m_vivants) {
+	for (auto const & v : m_vivants) {
 		delete v;
-
-		v = nullptr;
 	}
 }
 
