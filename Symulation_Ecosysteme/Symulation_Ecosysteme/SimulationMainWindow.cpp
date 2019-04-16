@@ -31,18 +31,15 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 	{
 		for (int j = 0; j < HAUTEUR_GRILLE; j++)
 		{
-			mGraphicsScene.addItem(new Terrain(
-				m_grid,
-				i,
-				j,
-				m_grid->getTerrain(i, j)->getType())); //Ajout du type de terrain dans la scène
+			mGraphicsScene.addItem(environnement->getTerrain(i, j));
 		}
 	}
 }
 
-/*Fonction qui va ajouté les herbivores dans le QGraphicsView*/
-void SimulationMainWindow::addHerbivore(Environnement *environnement)
+
+void SimulationMainWindow::addVivants(Environnement *environnement)
 {
+	//Les 3 boucles For sont temporaire
 	for (int i = 0; i < mQteChevreuils; i++)//Ajout des chevreuils
 	{
 		Herbivore *Chevreuil = new Herbivore(
@@ -66,13 +63,8 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 			5,//tempsreproduction
 			std::list<std::string> {"Plante"});
 		Chevreuil->setAge(10);
-
-
 		environnement->addHerbivore(Chevreuil);
-
-		mGraphicsScene.addItem(Chevreuil);
 	}
-
 	for (int i = 0; i < mQteLapins; i++)//Ajout des lapins
 	{
 		Herbivore *Lapin = new Herbivore(
@@ -97,14 +89,7 @@ void SimulationMainWindow::addHerbivore(Environnement *environnement)
 			std::list<std::string> {"Plante"});
 		Lapin->setAge(10);
 		environnement->addHerbivore(Lapin);
-
-		mGraphicsScene.addItem(Lapin);
 	}
-}
-
-/*Fonction qui va ajouté les carnivores dans le QGraphicsView*/
-void SimulationMainWindow::addCarnivore(Environnement *environnement)
-{
 	for (int i = 0; i < mQteLoups; i++)//Ajout des loups
 	{
 		Carnivore *Loup = new Carnivore(
@@ -131,10 +116,13 @@ void SimulationMainWindow::addCarnivore(Environnement *environnement)
 
 		Loup->setAge(10);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
-		mGraphicsScene.addItem(Loup);//Ajout à la scène
+	}
+
+	for (auto & p : environnement->getVivants()) {
+
+		mGraphicsScene.addItem(p);
 	}
 }
-
 
 void SimulationMainWindow::simulation()
 {
@@ -206,9 +194,10 @@ void SimulationMainWindow::on_startButton_clicked()
 	environnement = new Environnement(); //Génération d'un envirronement
 
 	addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
-	addHerbivore(environnement);//Ajout des herbivores
-	addCarnivore(environnement);//Ajout des carnivores
 
+	addVivants(environnement);
+
+	ui.graphicsView->setFixedSize(LARGEUR_GRILLE, HAUTEUR_GRILLE);
 	ui.graphicsView->setScene(&mGraphicsScene);//Ajout de la scène dans le QGraphicsView
 
 	mTimer.start(500);
@@ -254,4 +243,6 @@ void SimulationMainWindow::on_stopButton_clicked()
 
 	ui.parameterButton->setEnabled(true);
 	ui.startButton->setEnabled(true);
+
+	environnement->~Environnement();
 }

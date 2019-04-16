@@ -18,8 +18,7 @@ public:
 
 	/*Fonction qui va ajouter un terrain*/
 	void addTerrain(Grid *m_grid, Environnement *environnement);
-	void addHerbivore(Environnement *environnement);
-	void addCarnivore(Environnement *environnement);
+	void addVivants(Environnement *environnement);
 
 	Animal::Sex randomSex();//Génère un sexe aléatoire
 	Coordonne randomCoordonne();//Génère une coordonné de départ
