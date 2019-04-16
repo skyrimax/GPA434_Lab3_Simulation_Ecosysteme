@@ -189,7 +189,9 @@ void Plante::reproduction()
 		} while (m_fruits>0 && !hasReproduced);
 	}
 
-	m_timer = m_timeToReproduction;
+	if (hasReproduced) {
+		m_timer = m_timeToReproduction;
+	}
 }
 
 /*Fonction de simulation des plantes :
