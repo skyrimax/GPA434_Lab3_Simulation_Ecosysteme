@@ -30,7 +30,7 @@ public:
 	~Environnement();
     
 
-// Fonctions membres pour ajouter des éléments au listes
+	// Fonctions membres pour ajouter des éléments au listes
 	void addPlante(Plante *plante);
 	void addHerbivore(Herbivore *herbivore);
 	void addHerbivorePack(Meute *meuteHerbivores);
@@ -41,7 +41,7 @@ public:
 	void addCharogne(Charogne* charogne);
 	void addVivant(Vivant* vivant);
     
-// Accesseur des listes d'éléments
+	// Accesseur des listes d'éléments
 	std::list<Plante*>& getPlantes();
 	std::list<Meute*>& getMeutesHerbivores();
 	std::list<Herbivore*>& getHerbivores();
@@ -51,12 +51,13 @@ public:
 	std::list<Carnivore*>& getCharognards();
 	std::list<Charogne*>& getCharognes();
 
-// Accesseurs d'éléments de la grille
+	// Accesseurs d'éléments de la grille
 	Terrain* getTerrain(int x, int y);
 
-/*Fonction mis dans slots par Fred afin de pouvoir le connecter à un signal*/
-public slots:
-// Fonction commendant 
+	// Accesseur de la grille
+	Grid* getGrille();
+
+	// Fonction commendant la simulation du monde
 	std::list<Vivant*>& simulation();
 
 private: 

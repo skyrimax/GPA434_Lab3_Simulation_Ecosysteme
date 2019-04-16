@@ -220,6 +220,11 @@ Terrain * Environnement::getTerrain(int x, int y)
 	return m_grille->getTerrain(x, y);
 }
 
+Grid * Environnement::getGrille()
+{
+	return m_grille;
+}
+
 /**
  * @return void
  */
