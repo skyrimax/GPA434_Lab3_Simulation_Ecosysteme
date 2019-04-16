@@ -12,6 +12,7 @@
 
 
 Environnement::Environnement()
+	: QGraphicsScene()
 {
 	m_grille = new Grid(this);
 }

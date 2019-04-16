@@ -31,7 +31,7 @@ void SimulationMainWindow::addTerrain(Grid *m_grid, Environnement *environnement
 	{
 		for (int j = 0; j < HAUTEUR_GRILLE; j++)
 		{
-			//mGraphicsScene.addItem(environnement->getTerrain(i, j));
+			mGraphicsScene.addItem(environnement->getTerrain(i, j));
 		}
 	}
 }
@@ -183,7 +183,6 @@ void SimulationMainWindow::on_parameterButton_clicked()
 /*Début de la simulation en appuyant sur start*/
 void SimulationMainWindow::on_startButton_clicked()
 {
-	environnement->setSceneRect(0, 0, 500, 500);
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
@@ -194,6 +193,8 @@ void SimulationMainWindow::on_startButton_clicked()
 	environnement = new Environnement(); //Génération d'un envirronement
 
 	//addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
+
+	environnement->setSceneRect(0, 0, 500, 500);
 
 	addVivants(environnement);
 
