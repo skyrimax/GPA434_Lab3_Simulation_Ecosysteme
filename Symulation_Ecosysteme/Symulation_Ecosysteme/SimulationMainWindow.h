@@ -37,8 +37,6 @@ private:
 	QGraphicsScene mGraphicsScene;
 	//Création d'un environnement
 	Environnement *environnement;
-	//Pour la grille
-	Grid *m_grid;
 
 	int mQteChevreuils;
 	int mQteLapins;

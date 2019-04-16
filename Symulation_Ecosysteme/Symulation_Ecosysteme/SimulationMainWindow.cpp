@@ -20,7 +20,7 @@ SimulationMainWindow::SimulationMainWindow(QWidget *parent)
 	/*1ere méthode envoit un signal à la fonction advance de QGrpahicScene*/
 	//connect(&mTimer, &QTimer::timeout, &mGraphicsScene, &QGraphicsScene::advance);
 
-	connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
+	//connect(&mTimer, &QTimer::timeout, this, &SimulationMainWindow::simulation);
 }
 
 
@@ -183,7 +183,7 @@ Dans le cadre du cours :
 	- GPA434 - Ingénierie des systèmes orientés-objet
 	- Laboratoire 3
 
-Version 1.0)---" };
+Version 0.1)---" };
 
 	//Afficher le message
 	QMessageBox::about(this, u8R"(À propos)", aboutProgramm);
@@ -216,9 +216,8 @@ void SimulationMainWindow::on_startButton_clicked()
 	ui.startButton->setEnabled(false);
 
 	environnement = new Environnement(); //Génération d'un envirronement
-	m_grid = new Grid(); //Génération d'une grille
 
-	addTerrain(m_grid, environnement);//Ajout du terrain
+	addTerrain(environnement->getGrille(), environnement);//Ajout du terrain
 	addHerbivore(environnement);//Ajout des herbivores
 	addCarnivore(environnement);//Ajout des carnivores
 
