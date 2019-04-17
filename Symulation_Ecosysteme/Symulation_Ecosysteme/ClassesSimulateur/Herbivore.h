@@ -53,8 +53,6 @@ public:
 
 private: 
     Plante* m_plante;
-	//Ajouté par Fred, la forme des herbivores
-	QPolygonF mshape;
 	//Ajouté par Fred, couleur des herbivores
 	QColor sHerbivorBackgoundColor;
 };

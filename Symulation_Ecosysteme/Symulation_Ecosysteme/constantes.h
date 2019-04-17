@@ -38,6 +38,7 @@
 #define AWARENESS_CIRCLE 30
 #define DISTANCE_ALPHA 20
 #define CONSOMMATION_DEPLACEMENT 1
+#define CONSOMMATION_IDLE 1
 
 // Constantes relatant aux charognes
 #define AGE_MAX_CHAROGNE 300

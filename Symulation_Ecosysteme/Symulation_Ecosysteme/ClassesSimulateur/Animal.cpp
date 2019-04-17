@@ -19,12 +19,25 @@ Animal::Animal(Environnement * environnement, std::string espece, int hp, int en
 	std::list<std::string> cible)
 	: Vivant(environnement, espece, hp, energy, ageAdulte, ageMax, x, y),
 	m_vitesse(vitesse), m_sprint(sprint), m_sex(sex), m_isSprinting(false),
-	m_aEnfant(false), m_nbProgenituresMin(nbProgenituresMin),
+	m_aEnfant(false), m_enceinte(false), m_nbProgenituresMin(nbProgenituresMin),
 	m_nbProgenituresMax(nbProgenituresMax), m_closestPredateur(nullptr),
 	m_mate(nullptr), m_mere(mere), m_meute(meute),
-	m_timerMort(timerMort), m_tempsGestation(tempsGestation),
-	m_tempsReproduction(tempsReproduction), m_cible(cible), m_enceinte(false)
+	m_timerMort(timerMort), m_timerGestation(0), m_tempsGestation(tempsGestation),
+	m_timerReproduction(0), m_tempsReproduction(tempsReproduction), m_cible(cible)
 {
+	//Ajouté par Fred, création d'une flèce pour les animaux
+	mshape << QPointF(0, 0)
+		<< QPointF(-0.25, 0.5)
+		<< QPointF(1, 0.)
+		<< QPointF(-0.25, -0.5);
+
+	setPos(QPointF(x, y));
+	setScale(5);
+
+	m_orientation.setVX(1);
+	m_orientation.setVY(0);
+
+	setRotation(m_orientation.getDirection());
 }
 
 Meute * Animal::getMeute()
