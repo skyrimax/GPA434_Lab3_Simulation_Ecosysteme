@@ -20,14 +20,6 @@ Carnivore::Carnivore(Environnement* environnement, std::string espece, int hp, i
 		meute, timerMort, tempsGestation, tempsReproduction, cible),
 	m_isCharognard(isCharognard), m_proie(nullptr)
 {
-		//Ajouté par Fred, création d'une flèce pour les carnivores
-	mshape << QPointF(0, 0)
-		<< QPointF(-0.25, 0.5)
-		<< QPointF(1, 0.)
-		<< QPointF(-0.25, -0.5);
-
-	setPos(QPointF(x, y));
-	setScale(5);
 	sCarnivoreBackgoundColor.setRgb(255, 128, 0);//Orange
 }
 
@@ -115,11 +107,13 @@ void Carnivore::simulation()
 					seekEnergy();
 				}
 
-				trackTarget();
+				if (m_proie != nullptr) {
+					trackTarget();
 
-				if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
-					m_coordonne.getY() == m_proie->getCoordonne().getY()) {
-					replenishEnergy();
+					if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
+						m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+						replenishEnergy();
+					}
 				}
 			}
 
@@ -135,6 +129,9 @@ void Carnivore::simulation()
 						m_mate->reproduction();
 					}
 				}
+			}
+			else if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female) {
+				accoucher();
 			}
 			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
 				bool needToFindFood = false;
@@ -160,6 +157,16 @@ void Carnivore::simulation()
 						replenishEnergy();
 					}
 				}
+			}
+		}
+
+		m_energy -= CONSOMMATION_IDLE;
+		if (m_energy < 0) {
+			m_energy = 0;
+
+			m_hp -= CONSOMMATION_IDLE;
+			if (m_hp < 0) {
+				m_hp = 0;
 			}
 		}
 	}
@@ -270,6 +277,12 @@ void Carnivore::chooseTarget()
 		}
 	}
 
+	if (closestProie != nullptr) {
+		if (typeid(closestProie) == typeid(Herbivore) || typeid(closestProie) == typeid(Carnivore)) {
+			static_cast<Animal*>(closestProie)->getPredateur().push_back(this);
+		}
+	}
+
 	m_proie = closestProie;
 }
 
@@ -313,7 +326,7 @@ void Carnivore::chooseMate()
 
 	if (m_meute == nullptr) {
 		for (auto const c : m_environnement->getCarnivores()) {
-			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex && c->gettimerReproduction() == 0) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
@@ -324,7 +337,7 @@ void Carnivore::chooseMate()
 	}
 	else {
 		for (auto const & c : m_meute->getMembres()) {
-			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex) {
+			if (c->getEspece() == m_espece && c->getMate() == nullptr && c->getenceinte() == false && c->getSex() != m_sex && c->gettimerReproduction() == 0) {
 				if (distanceEntre2Points(m_coordonne, c->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, c->getCoordonne());
 
@@ -382,6 +395,8 @@ void Carnivore::accoucher()
 			m_meute->addMembre(enfant);
 		}
 	}
+
+	m_enceinte = false;
 }
 
 Vivant * Carnivore::getTarget()

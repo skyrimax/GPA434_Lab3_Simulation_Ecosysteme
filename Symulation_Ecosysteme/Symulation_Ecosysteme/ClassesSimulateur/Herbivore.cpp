@@ -23,16 +23,6 @@ Herbivore::Herbivore(Environnement* environnement, std::string espece, int hp,
 		meute, timerMort, tempsGestation, tempsReproduction, cible),
 	m_plante(nullptr)
 {
-	//Ajouté par Fred, création d'une flèce pour les herbivores
-	mshape << QPointF(0, 0)
-		<< QPointF(-0.25, 0.5)
-		<< QPointF(1, 0.)
-		<< QPointF(-0.25, -0.5);
-
-	setPos(QPointF(x, y));
-	setScale(5);
-	setRotation(0);
-
 	if (espece == "Chevreuil")
 	{
 		sHerbivorBackgoundColor.setRgb(255, 255, 0);//Jaune pour les chevreuils
@@ -126,11 +116,13 @@ void Herbivore::simulation()
 					seekEnergy();
 				}
 
-				trackTarget();
+				if (m_plante != nullptr) {
+					trackTarget();
 
-				if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
-					m_coordonne.getY() == m_plante->getCoordonne().getY()) {
-					replenishEnergy();
+					if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
+						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
+						replenishEnergy();
+					}
 				}
 			}
 			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
@@ -145,6 +137,9 @@ void Herbivore::simulation()
 						m_mate->reproduction();
 					}
 				}
+			}
+			else if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female) {
+				accoucher();
 			}
 			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
 				bool needToFindFood = false;
@@ -183,6 +178,16 @@ void Herbivore::simulation()
 			if (m_enceinte && m_timerGestation > 0)
 				m_timerGestation--;
 		}
+
+		m_energy -= CONSOMMATION_IDLE;
+		if (m_energy < 0) {
+			m_energy = 0;
+
+			m_hp -= CONSOMMATION_IDLE;
+			if (m_hp < 0) {
+				m_hp = 0;
+			}
+		}
 	}
 	else {
 		if (m_dead) {
@@ -218,7 +223,9 @@ void Herbivore::chooseTarget()
 		}
 	}
 
-	closestPlante->getIsEatenBy().push_back(this);
+	if (closestPlante != nullptr) {
+		closestPlante->getIsEatenBy().push_back(this);
+	}
 
 	m_plante = closestPlante;
 }
@@ -257,7 +264,7 @@ void Herbivore::chooseMate()
 
 	if (m_meute == nullptr) {
 		for (auto const h : m_environnement->getHerbivores()) {
-			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex && h->gettimerReproduction() == 0) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -268,7 +275,7 @@ void Herbivore::chooseMate()
 	}
 	else {
 		for (auto const & h : m_meute->getMembres()) {
-			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex) {
+			if (h->getEspece() == m_espece && h->getMate() == nullptr && h->getenceinte() == false && h->getSex() != m_sex && h->gettimerReproduction() == 0) {
 				if (distanceEntre2Points(m_coordonne, h->getCoordonne()) < distance) {
 					distance = distanceEntre2Points(m_coordonne, h->getCoordonne());
 
@@ -326,6 +333,8 @@ void Herbivore::accoucher()
 			m_meute->addMembre(enfant);
 		}
 	}
+
+	m_enceinte = false;
 }
 
 Vivant * Herbivore::getTarget()

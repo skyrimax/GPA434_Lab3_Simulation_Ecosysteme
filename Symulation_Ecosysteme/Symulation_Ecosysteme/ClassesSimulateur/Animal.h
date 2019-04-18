@@ -121,7 +121,9 @@ protected:
 	int m_timerReproduction;
 	int m_tempsReproduction;
 	std::list<std::string> m_cible;
-	
+
+	//Ajouté par Fred, la forme des animaux
+	QPolygonF mshape;
 };
 
 #endif //_ANIMAL_H
