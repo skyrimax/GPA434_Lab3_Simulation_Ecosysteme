@@ -35,7 +35,7 @@ Plante::Plante(Environnement * environnement, std::string espece, int hp, int en
 	//Ajout par Fred
 	//Création d'un rectangle de 5 par 5 positioné à (x,y)
 	mshape.setRect(x, y, 5, 5);
-
+	setZValue(0);
 	sPlantesBackgoundColor.setRgb(11, 102, 35);//vert
 }
 

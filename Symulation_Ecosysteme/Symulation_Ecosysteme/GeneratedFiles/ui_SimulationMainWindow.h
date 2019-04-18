@@ -29,8 +29,10 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
     QGraphicsView *graphicsView;
+    QSpacerItem *horizontalSpacer;
     QFrame *line;
     QVBoxLayout *verticalLayout;
+    QSpacerItem *verticalSpacer_3;
     QPushButton *parameterButton;
     QSpacerItem *verticalSpacer_2;
     QPushButton *startButton;
@@ -40,12 +42,15 @@ public:
     QPushButton *stopButton;
     QSpacerItem *verticalSpacer;
     QPushButton *AProposButton;
+    QSpacerItem *verticalSpacer_4;
+    QFrame *line_2;
+    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QMainWindow *SimulationMainWindowClass)
     {
         if (SimulationMainWindowClass->objectName().isEmpty())
             SimulationMainWindowClass->setObjectName(QString::fromUtf8("SimulationMainWindowClass"));
-        SimulationMainWindowClass->resize(762, 520);
+        SimulationMainWindowClass->resize(762, 555);
         centralWidget = new QWidget(SimulationMainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -59,8 +64,14 @@ public:
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
         graphicsView->setMinimumSize(QSize(500, 500));
         graphicsView->setMaximumSize(QSize(600, 600));
+        graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
         horizontalLayout->addWidget(graphicsView);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
 
         line = new QFrame(centralWidget);
         line->setObjectName(QString::fromUtf8("line"));
@@ -72,6 +83,10 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_3);
+
         parameterButton = new QPushButton(centralWidget);
         parameterButton->setObjectName(QString::fromUtf8("parameterButton"));
 
@@ -115,11 +130,26 @@ public:
 
         verticalLayout->addWidget(AProposButton);
 
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer_4);
+
 
         horizontalLayout->addLayout(verticalLayout);
 
 
         horizontalLayout_2->addLayout(horizontalLayout);
+
+        line_2 = new QFrame(centralWidget);
+        line_2->setObjectName(QString::fromUtf8("line_2"));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout_2->addWidget(line_2);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
 
         SimulationMainWindowClass->setCentralWidget(centralWidget);
 

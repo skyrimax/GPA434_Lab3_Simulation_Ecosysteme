@@ -62,6 +62,7 @@ void Herbivore::replenishEnergy()
 		}
 
 		m_plante->receiveDamages(1);
+		
 	}
 	else {
 		m_plante = nullptr;
@@ -122,6 +123,7 @@ void Herbivore::simulation()
 					if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
 						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
 						replenishEnergy();
+
 					}
 				}
 			}
@@ -202,7 +204,8 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
-	//setPos(pos() + QPointF(10, 10));//Peut faire bouger dans le GraphicView
+	setPos(m_coordonne.getX(), m_coordonne.getY());
+
 }
 
 void Herbivore::chooseTarget()

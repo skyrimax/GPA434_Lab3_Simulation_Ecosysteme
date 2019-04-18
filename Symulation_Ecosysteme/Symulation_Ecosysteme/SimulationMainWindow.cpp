@@ -63,7 +63,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			900,//tempsreproduction
 			std::list<std::string> {"Plante"});
 		Chevreuil->setAge(600);
-		//Chevreuil->setEnergy(8);
+		Chevreuil->setEnergy(200);
 		environnement->addHerbivore(Chevreuil);
 
 	}
@@ -90,7 +90,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			900,//tempsreproduction
 			std::list<std::string> {"Plante"});
 		Lapin->setAge(600);
-		//Lapin->setEnabled(8);
+		Lapin->setEnergy(200);
 		environnement->addHerbivore(Lapin);
 	}
 	for (int i = 0; i < mQteLoups; i++)//Ajout des loups
@@ -118,7 +118,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			false);
 
 		Loup->setAge(600);
-		//Loup->setEnergy(8);
+		Loup->setEnergy(200);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 	}
 
@@ -126,15 +126,14 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 
 void SimulationMainWindow::simulation()
 {
-	//mTimer.stop();
+	mTimer.stop();
 
 	if (!simulationEnCours) {
 		simulationEnCours = true;
 
-		//mTimer.start(30);
+		mTimer.start(30);
 
 		environnement->simulation();
-		mGraphicsScene.update();
 
 		simulationEnCours = false;
 	}
@@ -195,7 +194,6 @@ void SimulationMainWindow::on_parameterButton_clicked()
 void SimulationMainWindow::on_startButton_clicked()
 {
 
-	mGraphicsScene.setSceneRect(0, 0, 500, 500);
 	/*Blocage du bouton paramètre et débloquage
 	du bouton stop et pause.*/
 	ui.parameterButton->setEnabled(false);
@@ -238,11 +236,8 @@ void SimulationMainWindow::on_resumButton_clicked()
 sur le bouton Par Étape*/
 void SimulationMainWindow::on_stepButton_clicked()
 {
-	/*1ere méthode avec la fonction advance de QGraphicsScene*/
-	//mGraphicsScene.advance();
-
 	/*2ene méthode utilise directement la fonction simulatiom*/
-	//environnement->simulation();
+	environnement->simulation();
 }
 
 /*Bouton qui arrête la simulation en arrêtant le timer

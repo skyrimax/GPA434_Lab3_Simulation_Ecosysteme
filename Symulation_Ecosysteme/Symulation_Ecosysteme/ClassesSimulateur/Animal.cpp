@@ -191,16 +191,12 @@ void Animal::wander() {
 
 	m_isSprinting = false;
 
-	angle = 1;
-	//angle = m_orientation.getDirection();
+	angle = m_orientation.getDirection();
 	angle += dist(mt);
-	
-	m_coordonne.setX(m_coordonne.getX()+sin(angle*M_PI / 360));//Ajout par Fred
-	m_coordonne.setY(m_coordonne.getY()+sin(angle*M_PI / 360));//Ajout par Fred
-	/*
+
 	m_coordonne.setX(sin(angle*M_PI / 360));
 	m_coordonne.setY(sin(angle*M_PI / 360));
-	*/
+	
 
 	this->deplacer(m_vitesse);
 }
@@ -270,7 +266,6 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
-	setPos(m_coordonne.getX(), m_coordonne.getY());
 }
 
 void Animal::deplacer(double vitesse, Vivant* cible) {
@@ -284,8 +279,7 @@ void Animal::deplacer(double vitesse, Vivant* cible) {
 			m_energy -= distanceEntre2Points(m_coordonne, cible->getCoordonne())
 				*CONSOMMATION_DEPLACEMENT;
 
-			setPos(pos() + QPointF(m_coordonne.getX(),
-				m_coordonne.getY()));
+
 		}
 	}
 	else

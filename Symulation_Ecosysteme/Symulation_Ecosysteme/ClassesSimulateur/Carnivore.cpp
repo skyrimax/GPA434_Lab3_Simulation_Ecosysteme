@@ -183,6 +183,8 @@ void Carnivore::simulation()
 			dying();
 		}
 	}
+	setPos(m_coordonne.getX(), m_coordonne.getY());
+
 }
 
 void Carnivore::chooseTarget()
