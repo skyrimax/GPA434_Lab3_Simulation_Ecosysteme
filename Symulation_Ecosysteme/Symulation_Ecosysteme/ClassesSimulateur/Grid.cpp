@@ -41,7 +41,7 @@ Grid::Grid(Environnement* environnement)
 				else if (noise < THRESHOLD_GAZON)
 					type = Terrain::TypeTerrain::Gazon;
 				else if (noise < THRESHOLD_PLANTE) {
-					m_environnementProprietaire->addPlante(new Plante(m_environnementProprietaire, /*Ajouter non de plante ici*/ "Arbre",
+					m_environnementProprietaire->addPlante(new Plante(m_environnementProprietaire, /*Ajouter non de plante ici*/ "Plante",
 						/*Ajouter hp ici*/ 1, /*Ajouter energy*/1, /*Ajouter age adulte*/ 10, /*Ajouter age max*/100,
 						i, j, /*Ajouter temps reproduction*/ 300));
 

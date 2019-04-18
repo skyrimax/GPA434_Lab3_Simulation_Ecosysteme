@@ -197,6 +197,7 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
+	//setPos(pos() + QPointF(10, 10));//Peut faire bouger dans le GraphicView
 }
 
 void Herbivore::chooseTarget()
