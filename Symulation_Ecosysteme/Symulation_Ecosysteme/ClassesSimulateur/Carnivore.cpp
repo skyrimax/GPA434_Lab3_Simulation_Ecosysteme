@@ -107,11 +107,13 @@ void Carnivore::simulation()
 					seekEnergy();
 				}
 
-				trackTarget();
+				if (m_proie != nullptr) {
+					trackTarget();
 
-				if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
-					m_coordonne.getY() == m_proie->getCoordonne().getY()) {
-					replenishEnergy();
+					if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
+						m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+						replenishEnergy();
+					}
 				}
 			}
 
@@ -272,6 +274,12 @@ void Carnivore::chooseTarget()
 					}
 				}
 			}
+		}
+	}
+
+	if (closestProie != nullptr) {
+		if (typeid(closestProie) == typeid(Herbivore) || typeid(closestProie) == typeid(Carnivore)) {
+			static_cast<Animal*>(closestProie)->getPredateur().push_back(this);
 		}
 	}
 

@@ -270,8 +270,7 @@ void Animal::deplacer(double vitesse)
 
 	m_coordonne = nextCoordonne;
 
-	setPos(pos()+QPointF(m_coordonne.getX(),
-		m_coordonne.getY()));
+	setPos(m_coordonne.getX(), m_coordonne.getY());
 }
 
 void Animal::deplacer(double vitesse, Vivant* cible) {

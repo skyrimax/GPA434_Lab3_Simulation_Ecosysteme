@@ -116,11 +116,13 @@ void Herbivore::simulation()
 					seekEnergy();
 				}
 
-				trackTarget();
+				if (m_plante != nullptr) {
+					trackTarget();
 
-				if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
-					m_coordonne.getY() == m_plante->getCoordonne().getY()) {
-					replenishEnergy();
+					if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
+						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
+						replenishEnergy();
+					}
 				}
 			}
 			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
@@ -220,7 +222,9 @@ void Herbivore::chooseTarget()
 		}
 	}
 
-	closestPlante->getIsEatenBy().push_back(this);
+	if (closestPlante != nullptr) {
+		closestPlante->getIsEatenBy().push_back(this);
+	}
 
 	m_plante = closestPlante;
 }
