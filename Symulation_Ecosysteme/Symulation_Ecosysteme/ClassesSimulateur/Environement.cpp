@@ -1,6 +1,9 @@
-/**
- * Project Untitled
- */
+/*
+Environnement est la classe qui va contenir tous les éléments de notre écosystème,
+c'est à dire les animaux, les plantes et le terrain. C'est dans celui-ci que la
+simulation de nos entités sera effectué. C'est également par celui-ci que le programme
+va passer pour ajouter ou enlever les entités de notre écosystème.
+*/
 
 #include "stdafx.h"
 
