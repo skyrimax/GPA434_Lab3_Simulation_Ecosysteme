@@ -189,7 +189,7 @@ void Plante::reproduction()
 		} while (m_fruits>0 && !hasReproduced);
 	}
 
-	if (hasReproduced) {
+	if (hasReproduced || m_fruits == 0) {
 		m_timer = m_timeToReproduction;
 	}
 }

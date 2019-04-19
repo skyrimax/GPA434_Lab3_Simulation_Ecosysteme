@@ -63,7 +63,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			900,//tempsreproduction
 			std::list<std::string> {"Plante"});
 		Chevreuil->setAge(600);
-		Chevreuil->setEnergy(200);
+		//Chevreuil->setEnergy(1500);
 		environnement->addHerbivore(Chevreuil);
 
 	}
@@ -90,7 +90,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			900,//tempsreproduction
 			std::list<std::string> {"Plante"});
 		Lapin->setAge(600);
-		Lapin->setEnergy(200);
+		//Lapin->setEnergy(1500);
 		environnement->addHerbivore(Lapin);
 	}
 	for (int i = 0; i < mQteLoups; i++)//Ajout des loups
@@ -105,7 +105,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			randomCoordonne().getX(),//x
 			randomCoordonne().getY(),//y
 			2,//vitesse
-			4,//sprint
+			5,//sprint
 			randomSex(),//sex
 			0,//nbProgenituremin
 			4,//nbprogenituremax
@@ -118,7 +118,7 @@ void SimulationMainWindow::addVivants(Environnement *environnement)
 			false);
 
 		Loup->setAge(600);
-		Loup->setEnergy(200);
+		//Loup->setEnergy(1500);
 		environnement->addCarnivore(Loup);//Ajout à l'environnement
 	}
 

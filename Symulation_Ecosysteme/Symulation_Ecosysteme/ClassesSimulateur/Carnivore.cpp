@@ -69,7 +69,10 @@ void Carnivore::seekEnergy()
 
 void Carnivore::simulation()
 {
+	bool didAction = false;
+
 	closestPredateur();
+
 	if (!isDead()) {
 		if (m_age < m_ageAdulte) {
 			if (m_proie != nullptr) {
@@ -97,12 +100,16 @@ void Carnivore::simulation()
 				if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
 					m_coordonne) < AWARENESS_CIRCLE) {
 					flee();
+
+					didAction = true;
 				}
 			}
-			else if (m_hp < 0.9*m_hpMax) {
+			if (m_hp < 0.9*m_hpMax && !didAction) {
 				healing();
+
+				didAction = true;
 			}
-			else if (m_energy < 0.1*m_energyMax || m_proie != nullptr) {
+			if ((m_energy < 0.5*m_energyMax || m_proie != nullptr) && !didAction) {
 				if (m_proie == nullptr) {
 					seekEnergy();
 				}
@@ -112,13 +119,19 @@ void Carnivore::simulation()
 
 					if (m_coordonne.getX() == m_proie->getCoordonne().getX() &&
 						m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+						if (!m_proie->isDead()) {
+							m_proie->receiveDamages(m_proie->getHpMax());
+						}
+						
 						replenishEnergy();
+
+						didAction = true;
 					}
 				}
 			}
-
-			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
+			if (((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) && !didAction) {
 				chooseMate();
+
 				if (m_mate != nullptr)//Condition ajouté par Fred
 				{
 					trackMate();
@@ -128,12 +141,14 @@ void Carnivore::simulation()
 
 						m_mate->reproduction();
 					}
+
+					didAction = true;
 				}
 			}
-			else if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female) {
+			if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female && !didAction) {
 				accoucher();
 			}
-			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
+			if (m_sex == Sex::Female && m_enfant.size() != 0 && !didAction) {
 				bool needToFindFood = false;
 
 				for (auto const enfant : m_enfant) {
@@ -147,17 +162,35 @@ void Carnivore::simulation()
 						seekEnergy();
 					}
 
-					for (auto const enfant : m_enfant) {
-						enfant->chooseTarget(m_proie);
-					}
+					if (m_proie != nullptr) {
+						for (auto const enfant : m_enfant) {
+							enfant->chooseTarget(m_proie);
+						}
 
-					trackTarget();
-					if (m_coordonne.getX() == m_proie->getCoordonne().getX(),
-						m_coordonne.getY() == m_proie->getCoordonne().getY()) {
-						replenishEnergy();
+						trackTarget();
+
+						if (m_coordonne.getX() == m_proie->getCoordonne().getX(),
+							m_coordonne.getY() == m_proie->getCoordonne().getY()) {
+							replenishEnergy();
+						}
+
+						didAction = true;
 					}
 				}
 			}
+			if (m_hp < m_hpMax && didAction) {
+				healing();
+
+				didAction = true;
+			}
+			if (!didAction) {
+				wander();
+			}
+			m_age++;
+			if (m_timerReproduction > 0)
+				m_timerReproduction--;
+			if (m_enceinte && m_timerGestation > 0)
+				m_timerGestation--;
 		}
 
 		m_energy -= CONSOMMATION_IDLE;
@@ -183,8 +216,10 @@ void Carnivore::simulation()
 			dying();
 		}
 	}
+
 	setPos(m_coordonne.getX(), m_coordonne.getY());
 
+	setRotation(m_orientation.getDirection());
 }
 
 void Carnivore::chooseTarget()
@@ -207,7 +242,7 @@ void Carnivore::chooseTarget()
 	}
 	else {
 		for (auto const proie : m_environnement->getCarnivores()) {
-			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end()) {
+			if (std::find(m_cible.begin(), m_cible.end(), proie->getEspece()) != m_cible.end() && proie	!=	this) {
 				distance = distanceEntre2Points(this->m_coordonne, proie->getCoordonne());
 
 				if (distance < distanceMin) {
@@ -280,7 +315,7 @@ void Carnivore::chooseTarget()
 	}
 
 	if (closestProie != nullptr) {
-		if (typeid(closestProie) == typeid(Herbivore) || typeid(closestProie) == typeid(Carnivore)) {
+		if (typeid(*closestProie) == typeid(Herbivore) || typeid(*closestProie) == typeid(Carnivore)) {
 			static_cast<Animal*>(closestProie)->getPredateur().push_back(this);
 		}
 	}

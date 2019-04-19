@@ -35,7 +35,7 @@
 // Constantes relatant aux animaux
 #define DEVIATION_MAX 5
 #define DÉCALAGE_ACCOUCHEMENT 0.1
-#define AWARENESS_CIRCLE 30
+#define AWARENESS_CIRCLE 100
 #define DISTANCE_ALPHA 20
 #define CONSOMMATION_DEPLACEMENT 1
 #define CONSOMMATION_IDLE 1

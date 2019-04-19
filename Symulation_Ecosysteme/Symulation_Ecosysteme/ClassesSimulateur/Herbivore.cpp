@@ -78,6 +78,8 @@ void Herbivore::seekEnergy()
 
 void Herbivore::simulation()
 {
+	bool didAction = false;
+
 	closestPredateur();
 
 	if (!isDead()) {
@@ -107,12 +109,16 @@ void Herbivore::simulation()
 				if (distanceEntre2Points(m_closestPredateur->getCoordonne(),
 					m_coordonne) < AWARENESS_CIRCLE) {
 					flee();
+
+					didAction = true;
 				}
 			}
-			else if (m_hp < 0.9*m_hpMax) {
+			if (m_hp < 0.9*m_hpMax && !didAction) {
 				healing();
+
+				didAction = true;
 			}
-			else if (m_energy < 0.1*m_energyMax || m_plante != nullptr) {
+			if ((m_energy < 0.5*m_energyMax || m_plante != nullptr) && !didAction) {
 				if (m_plante == nullptr) {
 					seekEnergy();
 				}
@@ -123,12 +129,14 @@ void Herbivore::simulation()
 					if (m_coordonne.getX() == m_plante->getCoordonne().getX() &&
 						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
 						replenishEnergy();
-
 					}
+
+					didAction = true;
 				}
 			}
-			else if ((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) {
+			if (((!m_aEnfant || m_timerReproduction == 0) && m_sex == Sex::Male) && !didAction) {
 				chooseMate();
+
 				if (m_mate!=nullptr)//Condition ajouté par Fred
 				{
 					trackMate();
@@ -138,12 +146,14 @@ void Herbivore::simulation()
 
 						m_mate->reproduction();
 					}
+
+					didAction = true;
 				}
 			}
-			else if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female) {
+			if (m_timerGestation == 0 && m_enceinte && m_sex == Animal::Sex::Female && !didAction) {
 				accoucher();
 			}
-			else if (m_sex == Sex::Female && m_enfant.size() != 0) {
+			if (m_sex == Sex::Female && m_enfant.size() != 0 && !didAction) {
 				bool needToFindFood = false;
 
 				for (auto const enfant : m_enfant) {
@@ -157,21 +167,28 @@ void Herbivore::simulation()
 						seekEnergy();
 					}
 
-					for (auto const enfant : m_enfant) {
-						enfant->chooseTarget(m_plante);
-					}
+					if (m_plante != nullptr) {
+						for (auto const enfant : m_enfant) {
+							enfant->chooseTarget(m_plante);
+						}
 
-					trackTarget();
-					if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
-						m_coordonne.getY() == m_plante->getCoordonne().getY()) {
-						replenishEnergy();
+						trackTarget();
+
+						if (m_coordonne.getX() == m_plante->getCoordonne().getX(),
+							m_coordonne.getY() == m_plante->getCoordonne().getY()) {
+							replenishEnergy();
+						}
+
+						didAction = true;
 					}
 				}
 			}
-			else if (m_hp < m_hpMax) {
+			if (m_hp < m_hpMax && didAction) {
 				healing();
+
+				didAction = true;
 			}
-			else {
+			if(!didAction) {
 				wander();
 			}
 			m_age++;
@@ -204,8 +221,10 @@ void Herbivore::simulation()
 			dying();
 		}
 	}
+
 	setPos(m_coordonne.getX(), m_coordonne.getY());
 
+	setRotation(m_orientation.getDirection());
 }
 
 void Herbivore::chooseTarget()

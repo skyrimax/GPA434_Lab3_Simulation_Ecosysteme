@@ -117,11 +117,17 @@ bool Animal::isDamaged()
  */
 void Animal::devenirCharogne() {
 
+	Charogne* charogne = nullptr;
+
 	for (auto const & predateur : m_predateurs) {
 		predateur->resetTarget();
 	}
 
-	m_environnement->addCharogne(new Charogne(this));
+	charogne = new Charogne(this);
+
+	m_environnement->addCharogne(charogne);
+
+	m_environnement->addItem(charogne);
 
 	m_toDelete = true;
 }
@@ -187,15 +193,15 @@ void Animal::wander() {
 
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	std::uniform_int_distribution<int> dist(-DEVIATION_MAX, DEVIATION_MAX);
+	std::uniform_real_distribution<double> dist(-DEVIATION_MAX, DEVIATION_MAX);
 
 	m_isSprinting = false;
 
 	angle = m_orientation.getDirection();
 	angle += dist(mt);
 
-	m_coordonne.setX(sin(angle*M_PI / 360));
-	m_coordonne.setY(sin(angle*M_PI / 360));
+	m_orientation.setVX(cos(angle*M_PI / 360));
+	m_orientation.setVY(sin(angle*M_PI / 360));
 	
 
 	this->deplacer(m_vitesse);
@@ -235,7 +241,7 @@ void Animal::deplacer(double vitesse)
 
 			pointCroisement = croisementEntre2Lignes(pointDepart, nextCoordonne);
 
-			if (pointCroisement.getX() != -1 && pointCroisement.getY() != -1) {
+			if (pointCroisement.getX() != -1 || pointCroisement.getY() != -1) {
 				distance -= distanceEntre2Points(pointDepart, pointCroisement);
 
 				if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
@@ -261,7 +267,7 @@ void Animal::deplacer(double vitesse)
 
 		} while (pointCroisement.getX() != -1 && pointCroisement.getY() != -1);
 
-		m_energy -= vitesse;
+		m_energy -= vitesse*CONSOMMATION_DEPLACEMENT;
 	}
 
 	m_coordonne = nextCoordonne;
