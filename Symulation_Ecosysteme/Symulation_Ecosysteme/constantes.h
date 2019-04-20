@@ -33,7 +33,7 @@
 #define COUT_FRUIT 5
 
 // Constantes relatant aux animaux
-#define DEVIATION_MAX 5
+#define DEVIATION_MAX 0
 #define DÉCALAGE_ACCOUCHEMENT 0.1
 #define AWARENESS_CIRCLE 100
 #define DISTANCE_ALPHA 20

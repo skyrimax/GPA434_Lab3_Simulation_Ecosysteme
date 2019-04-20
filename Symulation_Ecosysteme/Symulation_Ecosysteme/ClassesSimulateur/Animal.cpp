@@ -200,8 +200,8 @@ void Animal::wander() {
 	angle = m_orientation.getDirection();
 	angle += dist(mt);
 
-	m_orientation.setVX(cos(angle*M_PI / 360));
-	m_orientation.setVY(sin(angle*M_PI / 360));
+	m_orientation.setVX(cos(angle*M_PI / 180));
+	m_orientation.setVY(sin(angle*M_PI / 180));
 	
 
 	this->deplacer(m_vitesse);
@@ -244,6 +244,49 @@ void Animal::deplacer(double vitesse)
 			if (pointCroisement.getX() != -1 || pointCroisement.getY() != -1) {
 				distance -= distanceEntre2Points(pointDepart, pointCroisement);
 
+				if (m_isSprinting) {
+					if (pointCroisement.getX() == 0 && pointCroisement.getY() == 0) {
+						if (abs(m_orientation.getUnitX()) < abs(m_orientation.getUnitY())) {
+							m_orientation.setVX(1);
+							m_orientation.setVY(0);
+						}
+						else {
+							m_orientation.setVX(0);
+							m_orientation.setVY(1);
+						}
+					}
+					else if (pointCroisement.getX() == 0 && pointCroisement.getY() == HAUTEUR_GRILLE) {
+						if (abs(m_orientation.getUnitX()) < abs(m_orientation.getUnitY())) {
+							m_orientation.setVX(1);
+							m_orientation.setVY(0);
+						}
+						else {
+							m_orientation.setVX(0);
+							m_orientation.setVY(-1);
+						}
+					}
+					else if (pointCroisement.getX() == LARGEUR_GRILLE && pointCroisement.getY() == HAUTEUR_GRILLE) {
+						if (abs(m_orientation.getUnitX()) < abs(m_orientation.getUnitY())) {
+							m_orientation.setVX(-1);
+							m_orientation.setVY(0);
+						}
+						else {
+							m_orientation.setVX(0);
+							m_orientation.setVY(-1);
+						}
+					}
+					else if (pointCroisement.getX() == LARGEUR_GRILLE && pointCroisement.getY() == HAUTEUR_GRILLE) {
+						if (abs(m_orientation.getUnitX()) < abs(m_orientation.getUnitY())) {
+							m_orientation.setVX(-1);
+							m_orientation.setVY(0);
+						}
+						else {
+							m_orientation.setVX(0);
+							m_orientation.setVY(1);
+						}
+					}
+				}
+
 				if (pointCroisement.getX() == 0 || pointCroisement.getX() == LARGEUR_GRILLE) {
 					if (m_isSprinting) {
 						m_orientation.setVX(0);
@@ -252,7 +295,7 @@ void Animal::deplacer(double vitesse)
 						m_orientation.setVX(-m_orientation.getVX());
 					}
 				}
-				else
+				if (pointCroisement.getY() == 0 || pointCroisement.getY() == HAUTEUR_GRILLE)
 				{
 					if (m_isSprinting) {
 						m_orientation.setVY(0);
