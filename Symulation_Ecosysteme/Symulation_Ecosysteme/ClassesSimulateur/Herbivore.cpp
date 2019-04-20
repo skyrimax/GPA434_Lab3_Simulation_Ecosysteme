@@ -1,6 +1,11 @@
-/**
- * Project Untitled
- */
+/*
+Cette classer est dérivé de la classe Animal, elle a des fonctions plus spécifiques,
+car elle se comporte un peu différent que les carnivores. Nous avons deux herbivores, soit
+des lapins et des chevreuils. Cette classer contient la fonction simulation qui va faire
+la simulation pour chaque herbivore selon leur état et leurs besoins. Elle contient aussi
+des fonctions pour trouver et s'orienter vers la plante la plus proche.
+*/
+
 #include "stdafx.h"
 
 #include "Herbivore.h"

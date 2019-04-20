@@ -1,6 +1,10 @@
-/**
- * Project Untitled
- */
+/*
+La classe Vivant va se charger de gérer toutes les fonctions
+qui spnt en commun pour les plantes, les herbivores et les 
+carnivores. Elle contiendra également tous les attributs qui
+leur sont commun, tel que la vie, les coordonnées, l'âge etc...
+*/
+
 #include "stdafx.h"
 
 #include "Vivant.h"
