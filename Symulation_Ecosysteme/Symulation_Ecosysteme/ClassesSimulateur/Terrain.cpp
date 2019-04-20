@@ -1,6 +1,15 @@
-/**
- * Project Untitled
- */
+/*
+La classe Terrain va gérer tout ce qui est en lien au type de terrain
+de chaque case de la grille. C'est celle-ci que l'on va afficher sur le
+QGraphicsView, car il hérite de QGraphicsItem. Une case peut perdre
+ou gagner des ressources, avoir une plante ou non. La différence entre
+les types de terrain se verra par leur coulleur soit :
+	QColor sWaterBackgoundColor pour l'eau
+	QColor sGrassBackgoundColor pour le gazon
+	QColor sEarthBackgoundColor pour la terre
+	QColor sFrontierBackgoundColor pour les frontières
+
+*/
 
 #include "stdafx.h"
 

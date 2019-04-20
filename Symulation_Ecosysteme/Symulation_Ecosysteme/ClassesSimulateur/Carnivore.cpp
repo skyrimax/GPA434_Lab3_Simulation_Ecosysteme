@@ -1,6 +1,9 @@
-/**
- * Project Untitled
- */
+/*
+Cette classer est dérivé de la classe Animal. Cette classer contient la fonction simulation qui va faire
+la simulation pour chaque carnivore selon leur état et leurs besoins. Elle contient aussi
+des fonctions pour trouver et s'orienter vers son herbivore, son carnivore ou le charognard le plus proche.
+*/
+
 #include "stdafx.h"
 
 #include "Carnivore.h"

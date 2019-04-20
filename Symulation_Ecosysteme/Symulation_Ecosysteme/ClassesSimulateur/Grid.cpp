@@ -1,6 +1,9 @@
-/**
- * Project Untitled
- */
+/*
+Le Grid c'est lui qui va générer les cases de notre terrain, cette génération
+est faite à l'aide du Perlin Noise (Voir PerlinNoiseGenerator.cpp). Une case peut
+être soit de la terre, de l'eau, du gazon, une plante ou une frontière (limite 
+de notre environnement).
+*/
 #include "stdafx.h"
 
 #include "Grid.h"

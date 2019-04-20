@@ -1,6 +1,15 @@
-/**
- * Project Untitled
- */
+/*
+Cette classe permet à nos item de se "comporter" comme des animaux, c'est-à-dire
+qu'ils ont de la vie et de l'énergie et ils doivent garder ces deux là au dessus
+d'un certain niveau. De plus, ils doivent se nourrir et donc trouver leur "proie"
+la plus proche, si un mâle se trouve une femelle ils pourront alors procréer. Si
+une femelle à un enfant avec elle,nos animaux ont des phase enfant et adultes, 
+elle devra s'occuper de trouver sa nourriture.  Toutes actions demandent de 
+l'énergie.
+La classe Animal hérite de QGraphicsItem, car c'est à partir d'ici qu'on gère
+la création de nos itemes à afficher, ils seront des flèches.
+*/
+
 #include "stdafx.h"
 
 #include "Animal.h"
